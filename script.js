@@ -3,7 +3,7 @@ const BOT_TOKEN = "8325375947:AAHaYMwHdR3FyvPGP1QhHFsim6ptcNCfAXc";
 const CHAT_ID = "-1003014842866";
 
 function openModal(id) {
-  document.getElementById(id).style.display = "block";
+  document.getElementById(id).style.display = "flex";
 }
 
 function closeModal(id) {
@@ -55,15 +55,16 @@ document.getElementById("joinTeamForm").addEventListener("submit", async (e) => 
   alert("✅ В течение недели администратор свяжется с Вами!\nХорошего дня! ☀️");
   closeModal("joinTeamModal");
 });
-// Открытие увеличенной картинки
+
+// 🔍 Увеличение картинок меню
 document.querySelectorAll('.menu-images img').forEach(img => {
   img.addEventListener('click', () => {
     document.getElementById('zoomedImage').src = img.src;
-    document.getElementById('imageModal').style.display = 'flex';
+    openModal('imageModal');
   });
 });
 
 // Закрытие увеличенной картинки по клику
 document.getElementById('imageModal').addEventListener('click', () => {
-  document.getElementById('imageModal').style.display = 'none';
+  closeModal('imageModal');
 });
