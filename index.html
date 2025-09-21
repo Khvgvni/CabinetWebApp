@@ -9,17 +9,48 @@
 <body>
   <div class="container">
     <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/4ac9ec06c1b492fc5c648cf1b56dc22531dd3d8d/Logo.JPG" alt="Logo" class="logo">
-
-    <button onclick="openForm('table')">🍽 Забронировать стол</button>
-    <button onclick="showInvite()">🎟 Пригласительный</button>
-    <button onclick="showTaxi()">🚕 Такси</button>
-    <button onclick="showMenu()">📖 Меню</button>
-    <button onclick="openForm('team')">👥 Хочу в команду</button>
+    <button onclick="openModal('bookTableModal')">🍽 Забронировать стол</button>
+    <button onclick="openInvite()">🎟 Пригласительный</button>
+    <button onclick="openModal('taxiModal')">🚕 Такси</button>
+    <button onclick="openMenu()">📖 Меню</button>
+    <button onclick="openModal('joinTeamModal')">👥 Хочу в команду</button>
   </div>
 
-  <!-- Модалки -->
-  <div id="modal" class="modal">
-    <div class="modal-content" id="modal-content"></div>
+  <!-- Модалка брони -->
+  <div id="bookTableModal" class="modal">
+    <div class="modal-content">
+      <h2>🍽 Забронировать стол</h2>
+      <form id="bookTableForm">
+        <input type="text" id="name" placeholder="Ваше ФИО" required>
+        <input type="text" id="phone" placeholder="Ваш телефон" required>
+        <button type="submit" class="submit-btn">Отправить</button>
+        <button type="button" class="close-btn" onclick="closeModal('bookTableModal')">Закрыть</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Модалка такси -->
+  <div id="taxiModal" class="modal">
+    <div class="modal-content">
+      <h2>🚕 Такси</h2>
+      <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/Road%20map.jpg" alt="Такси">
+      <a class="submit-btn" href="https://3.redirect.appmetrica.yandex.com/route?end-lat=52.035807&end-lon=113.504328&end-text=Ночной%20клуб%20Кабинет" target="_blank">🚕 Вызвать такси</a>
+      <button type="button" class="close-btn" onclick="closeModal('taxiModal')">Закрыть</button>
+    </div>
+  </div>
+
+  <!-- Модалка в команду -->
+  <div id="joinTeamModal" class="modal">
+    <div class="modal-content">
+      <h2>👥 Хочу в команду</h2>
+      <form id="joinTeamForm">
+        <input type="text" id="teamName" placeholder="Ваше ФИО" required>
+        <input type="text" id="teamPhone" placeholder="Ваш телефон" required>
+        <input type="text" id="teamRole" placeholder="Желаемая должность" required>
+        <button type="submit" class="submit-btn">Отправить</button>
+        <button type="button" class="close-btn" onclick="closeModal('joinTeamModal')">Закрыть</button>
+      </form>
+    </div>
   </div>
 
   <script src="script.js"></script>
