@@ -57,16 +57,16 @@ window.onload = () => {
     closeModal("joinTeamModal");
   });
 
-  // 🔍 Увеличение картинок меню
-  document.querySelectorAll('.menu-images img').forEach(img => {
-    img.addEventListener('click', () => {
-      document.getElementById('zoomedImage').src = img.src;
-      openModal('imageModal');
-    });
+// 🔍 Увеличение картинок меню
+document.querySelectorAll('.menu-images img').forEach(img => {
+  img.addEventListener('click', () => {
+    document.getElementById('zoomedImage').src = img.src; // ✅ подставляем картинку
+    openModal('imageModal');
   });
+});
 
-  // Закрытие увеличенной картинки по клику
-  document.getElementById('imageModal').addEventListener('click', () => {
-    closeModal('imageModal');
-  });
-};
+// Закрытие увеличенной картинки по клику
+document.getElementById('imageModal').addEventListener('click', () => {
+  closeModal('imageModal');
+});
+
