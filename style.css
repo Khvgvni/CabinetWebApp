@@ -1,3 +1,4 @@
+/* Базовый фон */
 body {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", Arial, sans-serif;
   background: #000000;
@@ -22,7 +23,7 @@ body {
   border-radius: 20px;
 }
 
-/* кнопки */
+/* Единый стиль для всех кнопок */
 button,
 .submit-btn,
 .close-btn,
@@ -56,7 +57,7 @@ a.submit-btn:hover {
   transform: scale(1.03);
 }
 
-/* модалки */
+/* Модалки */
 .modal {
   display: none;
   position: fixed;
@@ -67,9 +68,12 @@ a.submit-btn:hover {
   height: 100%;
   background: rgba(0,0,0,0.7);
   backdrop-filter: blur(10px);
+
+  /* центрирование содержимого */
   display: flex;
   justify-content: center;
   align-items: center;
+
   overflow-y: auto;
 }
 
@@ -86,6 +90,7 @@ a.submit-btn:hover {
   margin: auto;
 }
 
+/* Картинки внутри модалок */
 .modal-content img {
   max-width: 100%;
   max-height: 60vh;
@@ -99,6 +104,7 @@ a.submit-btn:hover {
   border-radius: 12px;
 }
 
+/* Поля ввода */
 input {
   width: 90%;
   margin: 12px 0;
