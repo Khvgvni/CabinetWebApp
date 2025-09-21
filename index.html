@@ -2,13 +2,14 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cabinet</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
     <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/4ac9ec06c1b492fc5c648cf1b56dc22531dd3d8d/Logo.JPG" alt="Logo" class="logo">
+
     <button onclick="openModal('bookTableModal')">🍽 Забронировать стол</button>
     <button onclick="openModal('inviteModal')">🎟 Пригласительный</button>
     <button onclick="openModal('taxiModal')">🚕 Такси</button>
@@ -16,14 +17,14 @@
     <button onclick="openModal('joinTeamModal')">👥 Хочу в команду</button>
   </div>
 
-  <!-- 🍽 Бронирование -->
+  <!-- 🍽 Забронировать стол -->
   <div id="bookTableModal" class="modal">
     <div class="modal-content">
       <h2>🍽 Забронировать стол</h2>
       <form id="bookTableForm">
         <input type="text" id="name" placeholder="Ваше ФИО" required>
-        <input type="text" id="phone" placeholder="Ваш телефон" required>
-        <button type="submit" class="submit-btn">Подтвердить</button>
+        <input type="tel" id="phone" placeholder="Ваш телефон" required>
+        <button type="submit" class="submit-btn">✅ Подтвердить</button>
         <button type="button" class="close-btn" onclick="closeModal('bookTableModal')">Закрыть</button>
       </form>
     </div>
@@ -42,46 +43,38 @@
   <div id="taxiModal" class="modal">
     <div class="modal-content">
       <h2>🚕 Такси</h2>
-      <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/68248242d6ba3a80bc1d2c5d86f4c003e4b18cfb/Road%20map.jpg" alt="Такси">
-      <a class="submit-btn" href="https://3.redirect.appmetrica.yandex.com/route?end-lat=52.035807&end-lon=113.504328&end-text=Ночной%20клуб%20Кабинет" target="_blank">Заказать такси</a>
+      <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/68248242d6ba3a80bc1d2c5d86f4c003e4b18cfb/Road%20map.jpg" alt="Схема проезда">
+      <a href="https://3.redirect.appmetrica.yandex.com/route?end-lat=52.035807&end-lon=113.504328&end-text=Ночной+клуб+Кабинет"
+         target="_blank" class="submit-btn">🚕 Заказать такси</a>
       <button type="button" class="close-btn" onclick="closeModal('taxiModal')">Назад</button>
     </div>
   </div>
 
   <!-- 📖 Меню -->
   <div id="menuModal" class="modal">
-    <div class="modal-content scrollable">
+    <div class="modal-content menu-images">
       <h2>📖 Меню</h2>
-      <div class="menu-images">
-        <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu1.png">
-        <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu2.png">
-        <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu3.png">
-        <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu4.png">
-        <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu5.png">
-        <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu6.png">
-        <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu7.png">
-      </div>
+      <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu1.png" alt="menu1">
+      <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu2.png" alt="menu2">
+      <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu3.png" alt="menu3">
+      <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu4.png" alt="menu4">
+      <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu5.png" alt="menu5">
+      <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu6.png" alt="menu6">
+      <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu7.png" alt="menu7">
       <button type="button" class="close-btn" onclick="closeModal('menuModal')">Назад</button>
     </div>
   </div>
 
-  <!-- 👥 Команда -->
+  <!-- 👥 Хочу в команду -->
   <div id="joinTeamModal" class="modal">
     <div class="modal-content">
       <h2>👥 Хочу в команду</h2>
       <form id="joinTeamForm">
         <input type="text" id="teamName" placeholder="Ваше ФИО" required>
-        <input type="text" id="teamPhone" placeholder="Ваш телефон" required>
-        <button type="submit" class="submit-btn">Подтвердить</button>
+        <input type="tel" id="teamPhone" placeholder="Ваш телефон" required>
+        <button type="submit" class="submit-btn">✅ Подтвердить</button>
         <button type="button" class="close-btn" onclick="closeModal('joinTeamModal')">Закрыть</button>
       </form>
-    </div>
-  </div>
-
-  <!-- 🔍 Модалка увеличенной картинки -->
-  <div id="imageModal" class="modal">
-    <div class="modal-content" style="max-width:90%; max-height:90%; padding:0; background:transparent; box-shadow:none;">
-      <img id="zoomedImage" src="" alt="Menu item" style="width:100%; height:auto; border-radius:16px;">
     </div>
   </div>
 
