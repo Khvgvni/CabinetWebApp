@@ -7,74 +7,80 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/4ac9ec06c1b492fc5c648cf1b56dc22531dd3d8d/Logo.JPG" alt="Logo" class="logo">
+  <div class="app">
+    <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/4ac9ec06c1b492fc5c648cf1b56dc22531dd3d8d/Logo.JPG" class="logo">
 
-    <button onclick="openModal('bookTableModal')">🍽 Забронировать стол</button>
-    <button onclick="openModal('inviteModal')">🎟 Пригласительный</button>
-    <button onclick="openModal('taxiModal')">🚕 Такси</button>
-    <button onclick="openModal('menuModal')">📖 Меню</button>
-    <button onclick="openModal('joinTeamModal')">👥 Хочу в команду</button>
+    <button onclick="openModal('bookTableModal')" class="glass-button">🍽️ Забронировать стол</button>
+    <button onclick="openModal('inviteModal')" class="glass-button">🎟️ Пригласительный</button>
+    <button onclick="openModal('taxiModal')" class="glass-button">🚕 Такси</button>
+    <button onclick="openModal('menuModal')" class="glass-button">📖 Меню</button>
+    <button onclick="openModal('joinTeamModal')" class="glass-button">👥 Хочу в команду</button>
   </div>
 
-  <!-- 🍽 Забронировать стол -->
+  <!-- Забронировать стол -->
   <div id="bookTableModal" class="modal">
     <div class="modal-content">
-      <h2>🍽 Забронировать стол</h2>
+      <h2>🍽️ Забронировать стол</h2>
       <form id="bookTableForm">
         <input type="text" id="name" placeholder="Ваше ФИО" required>
         <input type="tel" id="phone" placeholder="Ваш телефон" required>
-        <button type="submit" class="submit-btn">✅ Подтвердить</button>
-        <button type="button" class="close-btn" onclick="closeModal('bookTableModal')">Закрыть</button>
+        <button type="submit" class="glass-button">Подтвердить</button>
       </form>
+      <button class="glass-button" onclick="closeModal('bookTableModal')">Назад</button>
     </div>
   </div>
 
-  <!-- 🎟 Пригласительный -->
+  <!-- Пригласительный -->
   <div id="inviteModal" class="modal">
     <div class="modal-content">
-      <h2>🎟 Пригласительный</h2>
-      <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/e2e130e2873786b32f8784ff7e039253e8a4fea3/Invitation-new.png" alt="Пригласительный">
-      <button type="button" class="close-btn" onclick="closeModal('inviteModal')">Назад</button>
+      <h2>🎟️ Пригласительный</h2>
+      <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/e2e130e2873786b32f8784ff7e039253e8a4fea3/Invitation-new.png" class="invite-img">
+      <button class="glass-button" onclick="closeModal('inviteModal')">Назад</button>
     </div>
   </div>
 
-  <!-- 🚕 Такси -->
+  <!-- Такси -->
   <div id="taxiModal" class="modal">
     <div class="modal-content">
-      <h2>🚕 Такси</h2>
-      <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/68248242d6ba3a80bc1d2c5d86f4c003e4b18cfb/Road%20map.jpg" alt="Схема проезда">
-      <a href="https://3.redirect.appmetrica.yandex.com/route?end-lat=52.035807&end-lon=113.504328&end-text=Ночной+клуб+Кабинет"
-         target="_blank" class="submit-btn">🚕 Заказать такси</a>
-      <button type="button" class="close-btn" onclick="closeModal('taxiModal')">Назад</button>
+      <h2>🚕 Заказать такси</h2>
+      <form id="taxiForm">
+        <input type="text" id="taxiName" placeholder="Ваше ФИО" required>
+        <input type="tel" id="taxiPhone" placeholder="Ваш телефон" required>
+        <input type="text" id="taxiAddress" placeholder="Адрес откуда забрать" required>
+        <button type="submit" class="glass-button">Подтвердить</button>
+      </form>
+      <button class="glass-button" onclick="closeModal('taxiModal')">Назад</button>
     </div>
   </div>
 
-  <!-- 📖 Меню -->
+  <!-- Меню -->
   <div id="menuModal" class="modal">
-    <div class="modal-content menu-images">
+    <div class="modal-content">
       <h2>📖 Меню</h2>
-      <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu1.png" alt="menu1">
-      <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu2.png" alt="menu2">
-      <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu3.png" alt="menu3">
-      <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu4.png" alt="menu4">
-      <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu5.png" alt="menu5">
-      <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu6.png" alt="menu6">
-      <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu7.png" alt="menu7">
-      <button type="button" class="close-btn" onclick="closeModal('menuModal')">Назад</button>
+      <div class="menu-images">
+        <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu1.png" alt="">
+        <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu2.png" alt="">
+        <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu3.png" alt="">
+        <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu4.png" alt="">
+        <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu5.png" alt="">
+        <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu6.png" alt="">
+        <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu7.png" alt="">
+      </div>
+      <button class="glass-button" onclick="closeModal('menuModal')">Назад</button>
     </div>
   </div>
 
-  <!-- 👥 Хочу в команду -->
+  <!-- Хочу в команду -->
   <div id="joinTeamModal" class="modal">
     <div class="modal-content">
       <h2>👥 Хочу в команду</h2>
       <form id="joinTeamForm">
         <input type="text" id="teamName" placeholder="Ваше ФИО" required>
         <input type="tel" id="teamPhone" placeholder="Ваш телефон" required>
-        <button type="submit" class="submit-btn">✅ Подтвердить</button>
-        <button type="button" class="close-btn" onclick="closeModal('joinTeamModal')">Закрыть</button>
+        <input type="text" id="teamRole" placeholder="Желаемая должность" required>
+        <button type="submit" class="glass-button">Подтвердить</button>
       </form>
+      <button class="glass-button" onclick="closeModal('joinTeamModal')">Назад</button>
     </div>
   </div>
 
