@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Cabinet Club</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/4ac9ec06c1b492fc5c648cf1b56dc22531dd3d8d/Logo.JPG" alt="Logo" class="logo">
+
+    <button onclick="openForm('table')">🍽 Забронировать стол</button>
+    <button onclick="showInvite()">🎟 Пригласительный</button>
+    <button onclick="showTaxi()">🚕 Такси</button>
+    <button onclick="showMenu()">📖 Меню</button>
+    <button onclick="openForm('team')">👥 Хочу в команду</button>
+  </div>
+
+  <!-- Модалки -->
+  <div id="modal" class="modal">
+    <div class="modal-content" id="modal-content"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
