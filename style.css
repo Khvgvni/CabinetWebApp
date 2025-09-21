@@ -1,3 +1,4 @@
+/* Базовый фон */
 body {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", Arial, sans-serif;
   background: #000000;
@@ -21,7 +22,7 @@ body {
   border-radius: 20px;
 }
 
-/* Общий стиль для всех кнопок */
+/* Единый стиль кнопок */
 button, .submit-btn, .close-btn, a.submit-btn {
   display: block;
   width: 90%;
@@ -31,14 +32,15 @@ button, .submit-btn, .close-btn, a.submit-btn {
   font-weight: 600;
   border-radius: 20px;
   border: 1px solid rgba(255, 215, 0, 0.4); /* золотая рамка */
-  background: rgba(255, 255, 255, 0.08); /* полупрозрачный фон */
+  background: rgba(255, 255, 255, 0.08); /* стекло */
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  color: #fff;
+  color: #fff !important;
   cursor: pointer;
   transition: all 0.3s ease;
   text-align: center;
   text-decoration: none; /* для ссылок */
+  appearance: none; /* отключаем дефолтные цвета */
 }
 
 button:hover, .submit-btn:hover, .close-btn:hover, a.submit-btn:hover {
@@ -47,6 +49,7 @@ button:hover, .submit-btn:hover, .close-btn:hover, a.submit-btn:hover {
   transform: scale(1.03);
 }
 
+/* Модалки */
 .modal {
   display: none;
   position: fixed;
@@ -57,7 +60,7 @@ button:hover, .submit-btn:hover, .close-btn:hover, a.submit-btn:hover {
   height: 100%;
   background: rgba(0,0,0,0.7);
   backdrop-filter: blur(10px);
-  overflow-y: auto; /* скролл если контент большой */
+  overflow-y: auto;
 }
 
 .modal-content {
@@ -73,9 +76,10 @@ button:hover, .submit-btn:hover, .close-btn:hover, a.submit-btn:hover {
   color: #fff;
 }
 
+/* Картинки в модалках */
 .modal-content img {
   max-width: 100%;
-  max-height: 60vh; /* чтобы не вылезало за экран */
+  max-height: 70vh; /* ограничение высоты */
   border-radius: 16px;
   margin: 10px 0;
   object-fit: contain;
@@ -86,6 +90,7 @@ button:hover, .submit-btn:hover, .close-btn:hover, a.submit-btn:hover {
   border-radius: 12px;
 }
 
+/* Поля ввода */
 input {
   width: 90%;
   margin: 12px 0;
