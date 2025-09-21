@@ -21,25 +21,29 @@ body {
   border-radius: 20px;
 }
 
-button {
+/* Общий стиль для всех кнопок */
+button, .submit-btn, .close-btn, a.submit-btn {
   display: block;
   width: 90%;
   margin: 15px auto;
-  padding: 18px;
+  padding: 16px;
   font-size: 18px;
   font-weight: 600;
   border-radius: 20px;
-  border: 1px solid rgba(255, 215, 0, 0.3);
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 215, 0, 0.4); /* золотая рамка */
+  background: rgba(255, 255, 255, 0.08); /* полупрозрачный фон */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   color: #fff;
   cursor: pointer;
   transition: all 0.3s ease;
+  text-align: center;
+  text-decoration: none; /* для ссылок */
 }
 
-button:hover, .submit-btn:hover, .close-btn:hover {
-  background: rgba(255, 215, 0, 0.2);
+button:hover, .submit-btn:hover, .close-btn:hover, a.submit-btn:hover {
+  background: rgba(255, 215, 0, 0.25); /* золотое свечение */
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.5);
   transform: scale(1.03);
 }
 
@@ -53,15 +57,16 @@ button:hover, .submit-btn:hover, .close-btn:hover {
   height: 100%;
   background: rgba(0,0,0,0.7);
   backdrop-filter: blur(10px);
+  overflow-y: auto; /* скролл если контент большой */
 }
 
 .modal-content {
   background: rgba(20,20,20,0.6);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-radius: 22px;
-  padding: 25px;
-  margin: 10% auto;
+  padding: 20px;
+  margin: 8% auto;
   width: 90%;
   max-width: 420px;
   text-align: center;
@@ -70,12 +75,15 @@ button:hover, .submit-btn:hover, .close-btn:hover {
 
 .modal-content img {
   max-width: 100%;
+  max-height: 60vh; /* чтобы не вылезало за экран */
   border-radius: 16px;
   margin: 10px 0;
+  object-fit: contain;
 }
 
 .menu-images img {
   margin: 10px 0;
+  border-radius: 12px;
 }
 
 input {
@@ -88,18 +96,5 @@ input {
   background: rgba(255,255,255,0.15);
   color: white;
   font-size: 16px;
-}
-
-.submit-btn, .close-btn {
-  margin-top: 10px;
-  padding: 14px;
-  border-radius: 18px;
-  border: 1px solid rgba(255, 215, 0, 0.3);
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  width: 80%;
+  backdrop-filter: blur(8px);
 }
