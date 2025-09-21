@@ -1,6 +1,6 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", Arial, sans-serif;
-  background: linear-gradient(180deg, #0d0d0d, #1a1a1a);
+  background: #000000;
   color: white;
   margin: 0;
   display: flex;
@@ -16,23 +16,21 @@ body {
 
 .logo {
   width: 75%;
-  max-width: 320px;
-  min-width: 160px;
+  max-width: 300px;
   margin-bottom: 35px;
-  border-radius: 24px;
-  filter: drop-shadow(0 0 15px rgba(255,255,255,0.3));
+  border-radius: 20px;
 }
 
 button {
   display: block;
   width: 90%;
-  margin: 18px auto;
+  margin: 15px auto;
   padding: 18px;
   font-size: 18px;
   font-weight: 600;
-  border-radius: 22px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
   color: #fff;
@@ -40,9 +38,9 @@ button {
   transition: all 0.3s ease;
 }
 
-button:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: scale(1.04);
+button:hover, .submit-btn:hover, .close-btn:hover {
+  background: rgba(255, 215, 0, 0.2);
+  transform: scale(1.03);
 }
 
 .modal {
@@ -53,70 +51,55 @@ button:hover {
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(8px);
-  animation: fadeIn 0.3s ease forwards;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(10px);
 }
 
 .modal-content {
-  background: rgba(30,30,30,0.7);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: 26px;
-  padding: 28px;
-  margin: 15% auto;
-  width: 92%;
-  max-width: 450px;
+  background: rgba(20,20,20,0.6);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border-radius: 22px;
+  padding: 25px;
+  margin: 10% auto;
+  width: 90%;
+  max-width: 420px;
+  text-align: center;
   color: #fff;
-  box-shadow: 0 10px 28px rgba(0,0,0,0.35);
-  transform: translateY(60px);
-  animation: slideUp 0.35s ease forwards;
-  font-size: 17px;
 }
 
 .modal-content img {
   max-width: 100%;
-  border-radius: 18px;
-  margin: 15px 0;
+  border-radius: 16px;
+  margin: 10px 0;
+}
+
+.menu-images img {
+  margin: 10px 0;
 }
 
 input {
-  width: 92%;
-  margin: 14px 0;
-  padding: 16px;
+  width: 90%;
+  margin: 12px 0;
+  padding: 14px;
   border-radius: 18px;
   border: none;
   outline: none;
   background: rgba(255,255,255,0.15);
   color: white;
   font-size: 16px;
-  backdrop-filter: blur(10px);
 }
 
-.submit-btn {
-  background: rgba(52, 199, 89, 0.75);
-  border: 1px solid rgba(52, 199, 89, 0.95);
-}
-
-.submit-btn:hover {
-  background: rgba(52, 199, 89, 0.95);
-}
-
-.close-btn {
-  background: rgba(255, 59, 48, 0.75);
-  border: 1px solid rgba(255, 59, 48, 0.95);
-}
-
-.close-btn:hover {
-  background: rgba(255, 59, 48, 0.95);
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideUp {
-  from { transform: translateY(60px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+.submit-btn, .close-btn {
+  margin-top: 10px;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  width: 80%;
 }
