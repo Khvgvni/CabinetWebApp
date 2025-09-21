@@ -55,3 +55,15 @@ document.getElementById("joinTeamForm").addEventListener("submit", async (e) => 
   alert("✅ В течение недели администратор свяжется с Вами!\nХорошего дня! ☀️");
   closeModal("joinTeamModal");
 });
+// Открытие увеличенной картинки
+document.querySelectorAll('.menu-images img').forEach(img => {
+  img.addEventListener('click', () => {
+    document.getElementById('zoomedImage').src = img.src;
+    document.getElementById('imageModal').style.display = 'flex';
+  });
+});
+
+// Закрытие увеличенной картинки по клику
+document.getElementById('imageModal').addEventListener('click', () => {
+  document.getElementById('imageModal').style.display = 'none';
+});
