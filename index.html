@@ -10,44 +10,69 @@
   <div class="container">
     <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/4ac9ec06c1b492fc5c648cf1b56dc22531dd3d8d/Logo.JPG" alt="Logo" class="logo">
     <button onclick="openModal('bookTableModal')">🍽 Забронировать стол</button>
-    <button onclick="openInvite()">🎟 Пригласительный</button>
+    <button onclick="openModal('inviteModal')">🎟 Пригласительный</button>
     <button onclick="openModal('taxiModal')">🚕 Такси</button>
-    <button onclick="openMenu()">📖 Меню</button>
+    <button onclick="openModal('menuModal')">📖 Меню</button>
     <button onclick="openModal('joinTeamModal')">👥 Хочу в команду</button>
   </div>
 
-  <!-- Модалка брони -->
+  <!-- 🍽 Модалка брони -->
   <div id="bookTableModal" class="modal">
     <div class="modal-content">
       <h2>🍽 Забронировать стол</h2>
       <form id="bookTableForm">
         <input type="text" id="name" placeholder="Ваше ФИО" required>
         <input type="text" id="phone" placeholder="Ваш телефон" required>
-        <button type="submit" class="submit-btn">Отправить</button>
+        <button type="submit" class="submit-btn">Подтвердить</button>
         <button type="button" class="close-btn" onclick="closeModal('bookTableModal')">Закрыть</button>
       </form>
     </div>
   </div>
 
-  <!-- Модалка такси -->
-  <div id="taxiModal" class="modal">
+  <!-- 🎟 Модалка пригласительного -->
+  <div id="inviteModal" class="modal">
     <div class="modal-content">
-      <h2>🚕 Такси</h2>
-      <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/Road%20map.jpg" alt="Такси">
-      <a class="submit-btn" href="https://3.redirect.appmetrica.yandex.com/route?end-lat=52.035807&end-lon=113.504328&end-text=Ночной%20клуб%20Кабинет" target="_blank">🚕 Вызвать такси</a>
-      <button type="button" class="close-btn" onclick="closeModal('taxiModal')">Закрыть</button>
+      <h2>🎟 Пригласительный</h2>
+      <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/e2e130e2873786b32f8784ff7e039253e8a4fea3/Invitation-new.png" alt="Пригласительный">
+      <button type="button" class="close-btn" onclick="closeModal('inviteModal')">Назад</button>
     </div>
   </div>
 
-  <!-- Модалка в команду -->
+  <!-- 🚕 Модалка такси -->
+  <div id="taxiModal" class="modal">
+    <div class="modal-content">
+      <h2>🚕 Такси</h2>
+      <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/68248242d6ba3a80bc1d2c5d86f4c003e4b18cfb/Road%20map.jpg" alt="Такси">
+      <a class="submit-btn" href="https://3.redirect.appmetrica.yandex.com/route?end-lat=52.035807&end-lon=113.504328&end-text=Ночной%20клуб%20Кабинет" target="_blank">Заказать такси</a>
+      <button type="button" class="close-btn" onclick="closeModal('taxiModal')">Назад</button>
+    </div>
+  </div>
+
+  <!-- 📖 Модалка меню -->
+  <div id="menuModal" class="modal">
+    <div class="modal-content scrollable">
+      <h2>📖 Меню</h2>
+      <div class="menu-images">
+        <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu1.png">
+        <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu2.png">
+        <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu3.png">
+        <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu4.png">
+        <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu5.png">
+        <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu6.png">
+        <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/main/menu7.png">
+      </div>
+      <button type="button" class="close-btn" onclick="closeModal('menuModal')">Назад</button>
+    </div>
+  </div>
+
+  <!-- 👥 Модалка команды -->
   <div id="joinTeamModal" class="modal">
     <div class="modal-content">
       <h2>👥 Хочу в команду</h2>
       <form id="joinTeamForm">
         <input type="text" id="teamName" placeholder="Ваше ФИО" required>
         <input type="text" id="teamPhone" placeholder="Ваш телефон" required>
-        <input type="text" id="teamRole" placeholder="Желаемая должность" required>
-        <button type="submit" class="submit-btn">Отправить</button>
+        <button type="submit" class="submit-btn">Подтвердить</button>
         <button type="button" class="close-btn" onclick="closeModal('joinTeamModal')">Закрыть</button>
       </form>
     </div>
