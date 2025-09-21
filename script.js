@@ -37,6 +37,7 @@ document.getElementById("bookTableForm").addEventListener("submit", async (e) =>
   });
 
   document.getElementById("bookTableForm").reset();
+  // ✅ Сообщение для брони
   alert("✅ Ваша заявка принята!\nВ ближайшее время администратор свяжется с Вами!\nХорошего дня! ☀️");
   closeModal("bookTableModal");
 });
@@ -61,6 +62,7 @@ document.getElementById("joinTeamForm").addEventListener("submit", async (e) => 
   });
 
   document.getElementById("joinTeamForm").reset();
+  // ✅ Сообщение для команды
   alert("✅ Администратор свяжется с вами в течение недели!\nХорошего вам дня 🌸");
   closeModal("joinTeamModal");
 });
