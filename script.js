@@ -26,7 +26,7 @@ function openForm(type) {
 function showInvite() {
   document.getElementById("modal-content").innerHTML = `
     <h3>🎟 Ваш пригласительный</h3>
-    <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/e2e130e2873786b32f8784ff7e039253e8a4fea3/Invitation-new.png" width="100%">
+    <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/e2e130e2873786b32f8784ff7e039253e8a4fea3/Invitation-new.png">
     <button class="close-btn" onclick="closeModal()">Закрыть</button>`;
   document.getElementById("modal").style.display = "block";
 }
@@ -35,7 +35,7 @@ function showTaxi() {
   const url = `https://3.redirect.appmetrica.yandex.com/route?end-lat=52.035807&end-lon=113.504328`;
   document.getElementById("modal-content").innerHTML = `
     <h3>🚕 Такси</h3>
-    <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/68248242d6ba3a80bc1d2c5d86f4c003e4b18cfb/Road%20map.jpg" width="100%">
+    <img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/68248242d6ba3a80bc1d2c5d86f4c003e4b18cfb/Road%20map.jpg">
     <a href="${url}" target="_blank"><button class="submit-btn">Вызвать такси</button></a>
     <button class="close-btn" onclick="closeModal()">Закрыть</button>`;
   document.getElementById("modal").style.display = "block";
@@ -43,7 +43,7 @@ function showTaxi() {
 
 function showMenu() {
   const images = [1,2,3,4,5,6,7].map(i => 
-    `<img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/4ac9ec06c1b492fc5c648cf1b56dc22531dd3d8d/menu${i}.png" width="100%" style="margin:10px 0">`
+    `<img src="https://raw.githubusercontent.com/Khvgvni/Cabinet/4ac9ec06c1b492fc5c648cf1b56dc22531dd3d8d/menu${i}.png" style="margin:10px 0">`
   ).join("");
   document.getElementById("modal-content").innerHTML = `
     <h3>📖 Меню</h3>
