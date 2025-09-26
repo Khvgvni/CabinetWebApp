@@ -2,7 +2,6 @@
 function openModal(id) {
   document.getElementById(id).style.display = "flex";
 }
-
 function closeModal(id) {
   document.getElementById(id).style.display = "none";
 }
@@ -17,41 +16,32 @@ const menuImages = [
   "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/menu6.png",
   "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/menu7.png"
 ];
-
 function renderMenu() {
   const container = document.getElementById("menuContainer");
   container.innerHTML = "";
-
   menuImages.forEach(src => {
     const img = document.createElement("img");
     img.src = src;
     img.className = "menu-img";
     container.appendChild(img);
   });
-
-  // Кнопка "Назад"
   const backBtn = document.createElement("button");
   backBtn.className = "glass-button";
   backBtn.innerText = "⬅️ Назад";
   backBtn.onclick = () => closeModal("menuModal");
   container.appendChild(backBtn);
 }
-
 document.addEventListener("DOMContentLoaded", renderMenu);
 
 // ---------- Отправка форм ----------
 async function sendMessage(message) {
-  const BOT_TOKEN = "8325375947:AAHaYMwHdR3FyvPGP1QhHFsim6ptcNCfAXc"; // замени при необходимости
-  const CHAT_ID = "-1003014842866";
+  const BOT_TOKEN = "ТВОЙ_ТОКЕН";
+  const CHAT_ID = "ТВОЙ_CHAT_ID";
 
   await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      chat_id: CHAT_ID,
-      text: message,
-      parse_mode: "HTML"
-    })
+    body: JSON.stringify({ chat_id: CHAT_ID, text: message, parse_mode: "HTML" })
   });
 }
 
@@ -60,11 +50,9 @@ document.getElementById("bookTableForm").addEventListener("submit", async (e) =>
   e.preventDefault();
   const name = document.getElementById("name").value;
   const phone = document.getElementById("phone").value;
-
   const msg = `🍽️ Бронь стола:\nФИО: ${name}\nТелефон: ${phone}`;
   await sendMessage(msg);
-
-  alert("✅ Ваша заявка принята! В ближайшее время администратор свяжется с Вами! Хорошего дня! ☀️");
+  alert("✅ Ваша заявка принята! Администратор скоро свяжется с вами.");
   closeModal("bookTableModal");
 });
 
@@ -74,24 +62,46 @@ document.getElementById("taxiForm").addEventListener("submit", async (e) => {
   const name = document.getElementById("taxiName").value;
   const phone = document.getElementById("taxiPhone").value;
   const address = document.getElementById("taxiAddress").value;
-
-  const msg = `🚕 Заявка на такси:\nФИО: ${name}\nТелефон: ${phone}\nАдрес: ${address}`;
+  const msg = `🚕 Такси:\nФИО: ${name}\nТелефон: ${phone}\nАдрес: ${address}`;
   await sendMessage(msg);
-
-  alert("✅ Ваша заявка на такси принята! В ближайшее время администратор свяжется с Вами 🚕");
+  alert("✅ Заявка на такси принята!");
   closeModal("taxiModal");
 });
 
-// 👥 Хочу в команду
+// 👥 Команда
 document.getElementById("joinTeamForm").addEventListener("submit", async (e) => {
   e.preventDefault();
   const name = document.getElementById("teamName").value;
   const phone = document.getElementById("teamPhone").value;
   const role = document.getElementById("teamRole").value;
-
-  const msg = `👥 Новая заявка в команду:\nФИО: ${name}\nТелефон: ${phone}\nЖелаемая должность: ${role}`;
+  const msg = `👥 Новая заявка:\nФИО: ${name}\nТелефон: ${phone}\nЖелаемая должность: ${role}`;
   await sendMessage(msg);
-
-  alert("✅ В течение недели администратор свяжется с вами! Хорошего дня! ☀️");
+  alert("✅ Администратор свяжется с вами в течение недели!");
   closeModal("joinTeamModal");
 });
+
+// ---------- Клубная карта ----------
+function renderCard() {
+  const cardImg = document.querySelector("#cardModal img");
+  const userCard = localStorage.getItem("userCard") || "default";
+
+  let cardSrc = "card.png"; // заглушка
+  if (userCard === "black") cardSrc = "card_black.png";
+  if (userCard === "silver") cardSrc = "card_silver.png";
+  if (userCard === "gold") cardSrc = "card_gold.png";
+
+  cardImg.src = cardSrc;
+}
+
+// функция для установки карты пользователю
+function setUserCard(type) {
+  if (["black", "silver", "gold"].includes(type)) {
+    localStorage.setItem("userCard", type);
+  } else {
+    localStorage.setItem("userCard", "default");
+  }
+  renderCard();
+}
+
+// запускаем при открытии модалки карты
+document.querySelector("[onclick=\"openModal('cardModal')\"]").addEventListener("click", renderCard);
