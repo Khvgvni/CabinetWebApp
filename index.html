@@ -53,7 +53,7 @@
     </div>
   </div>
 
-  <!-- 🔹 Модалка: Вызвать такси -->
+  <!-- 🔹 Модалка: Такси -->
   <div id="taxiModal" class="modal">
     <div class="modal-content">
       <h2>Вызвать такси</h2>
@@ -76,13 +76,10 @@
     <div class="modal-content">
       <h2>Меню</h2>
       <div class="modal-body" id="menuContainer"></div>
-      <div class="modal-footer">
-        <button class="glass-button" onclick="closeModal('menuModal')">Закрыть</button>
-      </div>
     </div>
   </div>
 
-  <!-- 🔹 Модалка: Хочу в команду -->
+  <!-- 🔹 Модалка: Команда -->
   <div id="joinTeamModal" class="modal">
     <div class="modal-content">
       <h2>Хочу в команду</h2>
@@ -114,20 +111,16 @@
     </div>
   </div>
 
-  <!-- 🔹 Модалка: Афиша -->
+  <!-- 🔹 Афиша -->
   <div id="posterModal" class="modal">
     <div class="modal-content">
       <h2>Афиша</h2>
-      <div class="modal-body">
-        <p>Скоро здесь будут афиши мероприятий 🎉</p>
-      </div>
-      <div class="modal-footer">
-        <button class="glass-button" onclick="closeModal('posterModal')">Закрыть</button>
-      </div>
+      <div class="modal-body"><p>Скоро здесь будут афиши 🎉</p></div>
+      <div class="modal-footer"><button class="glass-button" onclick="closeModal('posterModal')">Закрыть</button></div>
     </div>
   </div>
 
-  <!-- 🔹 Модалка: Карта -->
+  <!-- 🔹 Карта -->
   <div id="cardModal" class="modal">
     <div class="modal-content">
       <h2>Клубная карта</h2>
@@ -139,41 +132,32 @@
           <button class="glass-button" onclick="setUserCard('gold')">Gold</button>
         </div>
       </div>
-      <div class="modal-footer">
-        <button class="glass-button" onclick="closeModal('cardModal')">Закрыть</button>
-      </div>
+      <div class="modal-footer"><button class="glass-button" onclick="closeModal('cardModal')">Закрыть</button></div>
     </div>
   </div>
 
-  <!-- 🔹 Модалка: Подарки -->
+  <!-- 🔹 Подарки -->
   <div id="giftsModal" class="modal">
     <div class="modal-content">
       <h2>Подарки</h2>
-      <div class="modal-body">
-        <p>Тут будут акции и специальные предложения 🎁</p>
-      </div>
-      <div class="modal-footer">
-        <button class="glass-button" onclick="closeModal('giftsModal')">Закрыть</button>
-      </div>
+      <div class="modal-body"><p>Здесь будут акции 🎁</p></div>
+      <div class="modal-footer"><button class="glass-button" onclick="closeModal('giftsModal')">Закрыть</button></div>
     </div>
   </div>
 
-  <!-- 🔹 Модалка: Профиль -->
+  <!-- 🔹 Профиль -->
   <div id="profileModal" class="modal">
     <div class="modal-content">
-      <h2>Ваш профиль</h2>
+      <h2>Профиль</h2>
       <div class="modal-body">
         <p>ФИО: Иван Иванов</p>
         <p>Телефон: +7 999 123-45-67</p>
         <p>Email: example@mail.ru</p>
       </div>
-      <div class="modal-footer">
-        <button class="glass-button" onclick="closeModal('profileModal')">Закрыть</button>
-      </div>
+      <div class="modal-footer"><button class="glass-button" onclick="closeModal('profileModal')">Закрыть</button></div>
     </div>
   </div>
 
-  <!-- Подключение JS -->
   <script src="script.js"></script>
 </body>
 </html>
