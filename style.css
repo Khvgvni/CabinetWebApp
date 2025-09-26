@@ -32,9 +32,12 @@ body {
 }
 
 /* ---------- Лого ---------- */
-.logo-container { margin: 20px 0; }
-.logo { width: 180px; }
-
+.logo-container { 
+  margin: 40px 0 30px 0; /* сверху 40px, снизу 30px */
+}
+.logo { 
+  width: 240px; /* было 180px → стало больше */
+}
 /* ---------- Кнопки ---------- */
 .main-buttons {
   display: flex;
@@ -169,9 +172,21 @@ input[type="email"]:focus {
 
 /* ---------- Адаптивность ---------- */
 @media (max-width: 768px) {
-  .logo { width: 120px; }
-  .glass-button { font-size: 16px; padding: 10px 15px; }
-  .main-buttons { margin: 10px; gap: 10px; }
+  .logo { 
+    width: 180px; /* было 120px → стало крупнее */
+  }
+  .logo-container { 
+    margin: 30px 0 25px 0; /* добавили больше воздуха снизу */
+  }
+
+  .glass-button { 
+    font-size: 16px; 
+    padding: 10px 15px; 
+  }
+  .main-buttons { 
+    margin: 10px; 
+    gap: 10px; 
+  }
 
   .bottom-nav {
     flex-wrap: wrap;
@@ -189,15 +204,34 @@ input[type="email"]:focus {
     max-width: none;
     max-height: 85vh;
   }
-  .modal-body { padding: 10px; }
+  .modal-body { 
+    padding: 10px; 
+  }
 }
 
 @media (max-width: 480px) {
-  .logo { width: 100px; }
-  .glass-button { font-size: 14px; padding: 8px 12px; }
-  .bottom-nav button { font-size: 14px; padding: 8px 10px; }
-  h2 { font-size: 18px; }
-  input[type="text"], input[type="tel"], input[type="email"] {
+  .logo { 
+    width: 140px; /* было 100px → увеличил */
+  }
+  .logo-container { 
+    margin: 25px 0 20px 0; /* кнопки чуть ниже */
+  }
+
+  .glass-button { 
+    font-size: 14px; 
+    padding: 8px 12px; 
+  }
+  .bottom-nav button { 
+    font-size: 14px; 
+    padding: 8px 10px; 
+  }
+
+  h2 { 
+    font-size: 18px; 
+  }
+  input[type="text"], 
+  input[type="tel"], 
+  input[type="email"] {
     font-size: 15px;
     padding: 12px 14px;
   }
