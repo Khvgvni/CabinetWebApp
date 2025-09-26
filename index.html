@@ -25,6 +25,7 @@
     <button class="glass-button" onclick="openModal('taxiModal')">Вызвать такси</button>
     <button class="glass-button" onclick="openModal('menuModal')">Меню</button>
     <button class="glass-button" onclick="openModal('joinTeamModal')">Хочу в команду</button>
+     <button class="glass-button" onclick="openModal('inviteModal')">Получить пригласительный</button>
   </div>
 
   <!-- Нижнее меню -->
@@ -100,6 +101,20 @@
     </div>
   </div>
 
+  <!-- Модалка для пригласительного -->
+<div id="inviteModal" class="modal">
+  <div class="modal-content">
+    <h2>Ваш пригласительный</h2>
+    <div class="modal-body">
+      <img src="https://raw.githubusercontent.com/Khvgvni/CabinetVladikWebApp/f7b2c7ac22aeba2b3959aab47474e9b03930b7d6/Invintation.png" 
+           alt="Пригласительный" class="menu-img">
+    </div>
+    <div class="modal-footer">
+      <button class="glass-button" onclick="closeModal('inviteModal')">Закрыть</button>
+    </div>
+  </div>
+</div>
+  
   <!-- Афиша -->
   <div id="afishaModal" class="modal">
     <div class="modal-content">
