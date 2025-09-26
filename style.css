@@ -1,42 +1,114 @@
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-  background-color: #000;
+  background: url("Background.png") no-repeat center center fixed;
+  background-size: cover;
   color: white;
-  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .app {
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
 }
 
-.logo {
-  width: 200px;
-  margin: 20px auto;
-  display: block;
-  border-radius: 20px;
-  box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+/* -------- Заставка -------- */
+#preloader {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  transition: opacity 1s ease;
+}
+#preloader.hide { opacity: 0; pointer-events: none; }
+.loader img {
+  width: 220px;
+  opacity: 0;
+  animation: fadeInLogo 2.5s ease forwards, shine 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8));
 }
 
+/* Анимации */
+@keyframes fadeInLogo {
+  0% { opacity: 0; transform: scale(0.8); filter: blur(8px); }
+  70% { opacity: 1; transform: scale(1.05); filter: blur(0); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes shine {
+  0% { filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8)); }
+  50% { filter: drop-shadow(0 0 30px rgba(255, 215, 0, 1)); }
+  100% { filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8)); }
+}
+
+/* -------- Лого -------- */
+.logo-container { text-align: center; margin-top: 15px; }
+.logo { width: 160px; }
+
+/* -------- Центральные кнопки -------- */
+.main-buttons {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 60px;
+}
 .glass-button {
-  margin: 10px;
-  padding: 15px 25px;
-  border: none;
+  width: 80%;
+  max-width: 300px;
+  padding: 15px;
   border-radius: 15px;
+  border: 1px solid rgba(212,175,55,0.6);
   background: rgba(255, 255, 255, 0.05);
-  color: gold;
-  font-size: 18px;
+  backdrop-filter: blur(12px);
+  color: #d4af37;
+  font-size: 16px;
   font-weight: bold;
-  backdrop-filter: blur(10px);
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
 }
-
 .glass-button:hover {
-  background: rgba(255, 215, 0, 0.2);
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+  background: rgba(212,175,55,0.15);
+  box-shadow: 0 0 20px rgba(212,175,55,0.8);
+  transform: translateY(-2px);
 }
 
+/* -------- Нижнее меню -------- */
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(12px);
+  padding: 10px 0;
+  border-top: 1px solid rgba(212,175,55,0.3);
+}
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.nav-item img {
+  width: 26px; height: 26px; margin-bottom: 4px; opacity: 0.9;
+}
+.nav-item.active { color: #d4af37; }
+.nav-item.active img { filter: drop-shadow(0 0 6px #d4af37); opacity: 1; }
+
+/* -------- Модалки -------- */
 .modal {
   display: none;
   position: fixed;
@@ -46,61 +118,38 @@ body {
   align-items: center;
   z-index: 1000;
 }
-
 .modal-content {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 20px;
   padding: 20px;
   width: 90%;
   max-width: 500px;
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  box-shadow: 0 0 20px rgba(212,175,55,0.5);
   backdrop-filter: blur(15px);
   text-align: center;
 }
-
-.modal-content h2 {
-  margin-bottom: 20px;
-  color: gold;
-}
-
+.modal-content h2 { margin-bottom: 20px; color: #d4af37; }
 input {
-  display: block;
-  width: 90%;
-  margin: 10px auto;
-  padding: 12px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 215, 0, 0.3);
+  display: block; width: 90%; margin: 10px auto;
+  padding: 12px; border-radius: 12px;
+  border: 1px solid rgba(212,175,55,0.3);
   background: rgba(0,0,0,0.4);
-  color: white;
-  font-size: 16px;
+  color: white; font-size: 16px;
 }
-
 input:focus {
   outline: none;
-  border-color: gold;
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  border-color: #d4af37;
+  box-shadow: 0 0 10px rgba(212,175,55,0.5);
 }
 
-.invite-img {
-  width: 100%;
-  border-radius: 15px;
-  margin-bottom: 20px;
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-}
-
-/* Секция меню */
+/* Секция меню / афиши */
 .menu-scroll {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  padding: 10px;
-  overflow-y: auto;
-  max-height: 75vh;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 20px; padding: 10px; overflow-y: auto; max-height: 75vh;
 }
-
 .menu-img {
   max-width: 95%;
   border-radius: 15px;
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+  box-shadow: 0 0 20px rgba(212,175,55,0.5);
 }
+
