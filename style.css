@@ -7,7 +7,7 @@ body {
   text-align: center;
 }
 
-/* Прелоадер */
+/* ---------- Прелоадер ---------- */
 #preloader {
   position: fixed;
   top: 0; left: 0;
@@ -31,18 +31,19 @@ body {
   100% { transform: scale(1); opacity: 1; }
 }
 
-/* Лого */
+/* ---------- Лого ---------- */
 .logo-container { margin: 20px 0; }
 .logo { width: 180px; }
 
-/* Главные кнопки */
+/* ---------- Кнопки ---------- */
 .main-buttons {
   display: flex;
   flex-direction: column;
   gap: 15px;
   margin: 20px;
 }
-.glass-button {
+.glass-button, 
+.bottom-nav button {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 215, 0, 0.5);
   border-radius: 15px;
@@ -52,11 +53,22 @@ body {
   font-weight: bold;
   backdrop-filter: blur(10px);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
+  transform: scale(1);
+  box-shadow: 0 0 0 rgba(255, 215, 0, 0);
 }
-.glass-button:hover { background: rgba(255, 215, 0, 0.2); }
+.glass-button:hover, 
+.bottom-nav button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+}
+.glass-button:active, 
+.bottom-nav button:active {
+  transform: scale(0.95);
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+}
 
-/* Нижнее меню */
+/* ---------- Нижнее меню ---------- */
 .bottom-nav {
   position: fixed;
   bottom: 0; left: 0;
@@ -67,20 +79,8 @@ body {
   padding: 15px 0;
   backdrop-filter: blur(10px);
 }
-.bottom-nav button {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 215, 0, 0.4);
-  border-radius: 12px;
-  color: #ffd700;
-  font-size: 18px;
-  font-weight: bold;
-  padding: 12px 20px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-.bottom-nav button:hover { background: rgba(255, 215, 0, 0.15); }
 
-/* Модалки */
+/* ---------- Модалки ---------- */
 .modal {
   display: none;
   position: fixed;
@@ -90,6 +90,7 @@ body {
   background: rgba(0,0,0,0.8);
   justify-content: center;
   align-items: center;
+  animation: fadeInBg 0.3s ease forwards;
 }
 .modal-content {
   background: rgba(255, 255, 255, 0.1);
@@ -103,6 +104,10 @@ body {
   display: flex;
   flex-direction: column;
   max-height: 80vh;
+
+  opacity: 0;
+  transform: translateY(50px);
+  animation: slideUp 0.4s ease forwards;
 }
 .modal-content h2 {
   color: #ffd700;
@@ -118,24 +123,51 @@ body {
   border-top: 1px solid rgba(255,215,0,0.3);
   background: rgba(0,0,0,0.3);
 }
-.modal-footer .glass-button {
-  width: 100%;
+.modal-footer .glass-button { width: 100%; }
+
+@keyframes fadeInBg {
+  from { background: rgba(0,0,0,0); }
+  to   { background: rgba(0,0,0,0.8); }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(50px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Скролл */
+/* ---------- Поля форм ---------- */
+input[type="text"], input[type="tel"], input[type="email"] {
+  width: 100%;
+  padding: 14px 16px;
+  margin: 10px 0;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 16px;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+input[type="text"]:focus, 
+input[type="tel"]:focus, 
+input[type="email"]:focus {
+  outline: none;
+  border-color: #ffd700;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+}
+
+/* ---------- Скролл ---------- */
 .modal-body::-webkit-scrollbar { width: 6px; }
 .modal-body::-webkit-scrollbar-thumb {
   background: rgba(255, 215, 0, 0.6);
   border-radius: 6px;
 }
-
 .menu-img {
   width: 100%;
   margin: 10px 0;
   border-radius: 10px;
 }
 
-/* 📱 Адаптивность */
+/* ---------- Адаптивность ---------- */
 @media (max-width: 768px) {
   .logo { width: 120px; }
   .glass-button { font-size: 16px; padding: 10px 15px; }
@@ -165,4 +197,8 @@ body {
   .glass-button { font-size: 14px; padding: 8px 12px; }
   .bottom-nav button { font-size: 14px; padding: 8px 10px; }
   h2 { font-size: 18px; }
+  input[type="text"], input[type="tel"], input[type="email"] {
+    font-size: 15px;
+    padding: 12px 14px;
+  }
 }
