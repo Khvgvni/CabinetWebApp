@@ -97,6 +97,7 @@ body {
   max-width: 500px;
   color: #fff;
   backdrop-filter: blur(15px);
+
   display: flex;
   flex-direction: column;
   max-height: 80vh;
@@ -113,6 +114,7 @@ body {
 .modal-footer {
   padding: 15px;
   border-top: 1px solid rgba(255,215,0,0.3);
+  background: rgba(0,0,0,0.3);
 }
 .modal-footer .glass-button {
   width: 100%;
