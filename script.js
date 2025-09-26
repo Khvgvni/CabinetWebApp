@@ -1,9 +1,24 @@
 // ---------- Управление модалками ----------
 function openModal(id) {
-  document.getElementById(id).style.display = "flex";
+  const modal = document.getElementById(id);
+  if (!modal) return;
+
+  modal.style.display = "flex";
+
+  // Перезапуск анимации контента
+  const content = modal.querySelector(".modal-content");
+  if (content) {
+    content.style.animation = "none"; // сброс анимации
+    void content.offsetHeight;        // форсируем reflow
+    content.style.animation = "";     // возвращаем анимацию
+  }
 }
+
 function closeModal(id) {
-  document.getElementById(id).style.display = "none";
+  const modal = document.getElementById(id);
+  if (!modal) return;
+
+  modal.style.display = "none";
 }
 
 // ---------- Динамическая генерация меню ----------
@@ -19,6 +34,8 @@ const menuImages = [
 
 function renderMenu() {
   const container = document.getElementById("menuContainer");
+  if (!container) return;
+
   container.innerHTML = "";
 
   menuImages.forEach(src => {
@@ -27,91 +44,70 @@ function renderMenu() {
     img.className = "menu-img";
     container.appendChild(img);
   });
+
+  // Кнопка "Назад"
+  const backBtn = document.createElement("button");
+  backBtn.className = "glass-button";
+  backBtn.innerText = "⬅️ Назад";
+  backBtn.onclick = () => closeModal("menuModal");
+  container.appendChild(backBtn);
 }
 
 document.addEventListener("DOMContentLoaded", renderMenu);
 
 // ---------- Отправка форм ----------
 async function sendMessage(message) {
-  const BOT_TOKEN = "8325375947:AAHaYMwHdR3FyvPGP1QhHFsim6ptcNCfAXc";   // замени на свой
-  const CHAT_ID = "-1003014842866";   // замени на свой
+  const BOT_TOKEN = "8325375947:AAHaYMwHdR3FyvPGP1QhHFsim6ptcNCfAXc"; // замени при необходимости
+  const CHAT_ID = "-1003014842866";
 
   await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ chat_id: CHAT_ID, text: message, parse_mode: "HTML" })
+    body: JSON.stringify({
+      chat_id: CHAT_ID,
+      text: message,
+      parse_mode: "HTML"
+    })
   });
 }
 
 // 🍽️ Забронировать стол
-document.getElementById("bookTableForm").addEventListener("submit", async (e) => {
+document.getElementById("bookTableForm")?.addEventListener("submit", async (e) => {
   e.preventDefault();
   const name = document.getElementById("name").value;
   const phone = document.getElementById("phone").value;
-  await sendMessage(`Бронь стола:\nФИО: ${name}\nТелефон: ${phone}`);
-  alert("✅ Ваша заявка принята! Администратор скоро свяжется с вами.");
+
+  const msg = `🍽️ Бронь стола:\nФИО: ${name}\nТелефон: ${phone}`;
+  await sendMessage(msg);
+
+  alert("✅ Ваша заявка принята! В ближайшее время администратор свяжется с Вами! Хорошего дня! ☀️");
   closeModal("bookTableModal");
 });
 
 // 🚕 Такси
-document.getElementById("taxiForm").addEventListener("submit", async (e) => {
+document.getElementById("taxiForm")?.addEventListener("submit", async (e) => {
   e.preventDefault();
   const name = document.getElementById("taxiName").value;
   const phone = document.getElementById("taxiPhone").value;
   const address = document.getElementById("taxiAddress").value;
-  await sendMessage(`Такси:\nФИО: ${name}\nТелефон: ${phone}\nАдрес: ${address}`);
-  alert("✅ Заявка на такси принята!");
+
+  const msg = `🚕 Заявка на такси:\nФИО: ${name}\nТелефон: ${phone}\nАдрес: ${address}`;
+  await sendMessage(msg);
+
+  alert("✅ Ваша заявка на такси принята! В ближайшее время администратор свяжется с Вами 🚕");
   closeModal("taxiModal");
 });
 
-// 👥 Команда
-document.getElementById("joinTeamForm").addEventListener("submit", async (e) => {
+// 👥 Хочу в команду
+document.getElementById("joinTeamForm")?.addEventListener("submit", async (e) => {
   e.preventDefault();
   const name = document.getElementById("teamName").value;
   const phone = document.getElementById("teamPhone").value;
   const role = document.getElementById("teamRole").value;
-  await sendMessage(`Заявка в команду:\nФИО: ${name}\nТелефон: ${phone}\nДолжность: ${role}`);
-  alert("✅ Администратор свяжется с вами в течение недели!");
+
+  const msg = `👥 Новая заявка в команду:\nФИО: ${name}\nТелефон: ${phone}\nЖелаемая должность: ${role}`;
+  await sendMessage(msg);
+
+  alert("✅ В течение недели администратор свяжется с вами! Хорошего дня! ☀️");
   closeModal("joinTeamModal");
 });
-
-// ---------- Клубная карта ----------
-function renderCard() {
-  const cardImg = document.getElementById("userCardImg");
-  const userCard = localStorage.getItem("userCard") || "default";
-
-  let cardSrc = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card.png";
-  if (userCard === "black") cardSrc = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card_black.png";
-  if (userCard === "silver") cardSrc = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card_silver.png";
-  if (userCard === "gold") cardSrc = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card_gold.png";
-
-  cardImg.src = cardSrc;
-}
-
-function setUserCard(type) {
-  if (["black","silver","gold"].includes(type)) {
-    localStorage.setItem("userCard", type);
-  } else {
-    localStorage.setItem("userCard", "default");
-  }
-  renderCard();
-}
-
-document.querySelector("[onclick=\"openModal('cardModal')\"]").addEventListener("click", renderCard);
-
-window.addEventListener("load", () => {
-  const preloader = document.getElementById("preloader");
-  setTimeout(() => {
-    preloader.classList.add("hide");
-    setTimeout(() => preloader.style.display = "none", 1000);
-  }, 2000); // 2 секунды задержки
-});
-
-// fallback: убираем через 4 сек даже если load не сработал
-setTimeout(() => {
-  const preloader = document.getElementById("preloader");
-  if (preloader) {
-    preloader.classList.add("hide");
-    setTimeout(() => preloader.remove(), 1000);
-  }
-}, 4000);
