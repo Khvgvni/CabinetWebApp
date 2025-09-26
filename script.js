@@ -99,11 +99,12 @@ function setUserCard(type) {
 
 document.querySelector("[onclick=\"openModal('cardModal')\"]").addEventListener("click", renderCard);
 
-// ---------- Прелоадер ----------
 window.addEventListener("load", () => {
   const preloader = document.getElementById("preloader");
-  preloader.classList.add("hide");
-  setTimeout(() => preloader.remove(), 1000);
+  setTimeout(() => {
+    preloader.classList.add("hide");
+    setTimeout(() => preloader.style.display = "none", 1000);
+  }, 2000); // 2 секунды задержки
 });
 
 // fallback: убираем через 4 сек даже если load не сработал
