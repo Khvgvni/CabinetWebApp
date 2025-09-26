@@ -134,3 +134,67 @@ body {
   margin: 10px 0;
   border-radius: 10px;
 }
+
+/* 📱 Адаптивность */
+@media (max-width: 768px) {
+  .logo {
+    width: 120px;
+  }
+
+  .glass-button {
+    font-size: 16px;
+    padding: 10px 15px;
+  }
+
+  .main-buttons {
+    margin: 10px;
+    gap: 10px;
+  }
+
+  .bottom-nav {
+    flex-wrap: wrap; /* чтобы кнопки переносились */
+    padding: 10px 0;
+  }
+
+  .bottom-nav button {
+    font-size: 16px;
+    padding: 10px 12px;
+    margin: 5px;
+    flex: 1; /* чтобы кнопки растягивались равномерно */
+  }
+
+  .modal-content {
+    width: 95%;
+    max-width: none;
+    max-height: 85vh;
+  }
+
+  .modal-body {
+    padding: 10px;
+  }
+
+  .menu-img {
+    border-radius: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .glass-button {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .bottom-nav button {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  .logo {
+    width: 100px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+}
+
