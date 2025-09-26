@@ -25,7 +25,6 @@
     <button class="glass-button" onclick="openModal('taxiModal')">Вызвать такси</button>
     <button class="glass-button" onclick="openModal('menuModal')">Меню</button>
     <button class="glass-button" onclick="openModal('joinTeamModal')">Хочу в команду</button>
-    <!-- 🔥 Новая кнопка -->
     <button class="glass-button" onclick="openModal('inviteModal')">Получить пригласительный</button>
   </div>
 
@@ -37,7 +36,7 @@
     <button onclick="openModal('profileModal')">Профиль</button>
   </div>
 
-  <!-- Модалка для пригласительного -->
+  <!-- Модалки (пригласительный как пример) -->
   <div id="inviteModal" class="modal">
     <div class="modal-content">
       <h2>Ваш пригласительный</h2>
@@ -48,6 +47,14 @@
       <div class="modal-footer">
         <button class="glass-button" onclick="closeModal('inviteModal')">Закрыть</button>
       </div>
+    </div>
+  </div>
+
+  <!-- Контейнер для меню -->
+  <div id="menuModal" class="modal">
+    <div class="modal-content">
+      <h2>Меню</h2>
+      <div class="modal-body" id="menuContainer"></div>
     </div>
   </div>
 
