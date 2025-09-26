@@ -115,10 +115,10 @@ window.addEventListener("load", () => {
 });
 
 // fallback: убираем через 4 сек даже если load не сработал
-window.addEventListener("load", () => {
+setTimeout(() => {
   const preloader = document.getElementById("preloader");
-  setTimeout(() => {
+  if (preloader) {
     preloader.classList.add("hide");
-    setTimeout(() => preloader.style.display = "none", 1000);
-  }, 2000); // заставка держится 2 секунды
-});
+    setTimeout(() => preloader.remove(), 1000);
+  }
+}, 4000);
