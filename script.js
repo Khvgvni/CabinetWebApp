@@ -3,23 +3,16 @@ function openModal(id) {
   const modal = document.getElementById(id);
   if (!modal) return;
 
-  modal.style.display = "flex";
-
-  // Перезапуск анимации контента
-  const content = modal.querySelector(".modal-content");
-  if (content) {
-    content.style.animation = "none"; // сброс анимации
-    void content.offsetHeight;        // форсируем reflow
-    content.style.animation = "";     // возвращаем анимацию
-  }
+  modal.classList.add("show");
 }
 
 function closeModal(id) {
   const modal = document.getElementById(id);
   if (!modal) return;
 
-  modal.style.display = "none";
+  modal.classList.remove("show");
 }
+
 
 // ---------- Динамическая генерация меню ----------
 const menuImages = [
