@@ -7,12 +7,12 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<!-- Заставка -->
-<div id="preloader">
-  <div class="loader">
-    <img src="https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/Logo-removebg-preview.png" alt="logo">
+  <!-- Заставка -->
+  <div id="preloader">
+    <div class="loader">
+      <img src="https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/Logo-removebg-preview.png" alt="logo">
+    </div>
   </div>
-</div>
 
   <!-- Лого сверху -->
   <div class="logo-container">
@@ -35,7 +35,9 @@
     <button onclick="openModal('profileModal')">Профиль</button>
   </div>
 
-  <!-- 🍽️ Забронировать стол -->
+  <!-- Модалки -->
+
+  <!-- Бронь -->
   <div id="bookTableModal" class="modal">
     <div class="modal-content">
       <h2>Забронировать стол</h2>
@@ -47,12 +49,12 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="glass-button" onclick="closeModal('bookTableModal')">Назад</button>
+        <button class="glass-button" onclick="closeModal('bookTableModal')">Назад</button>
       </div>
     </div>
   </div>
 
-  <!-- 🚕 Такси -->
+  <!-- Такси -->
   <div id="taxiModal" class="modal">
     <div class="modal-content">
       <h2>Вызвать такси</h2>
@@ -65,24 +67,22 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="glass-button" onclick="closeModal('taxiModal')">Назад</button>
+        <button class="glass-button" onclick="closeModal('taxiModal')">Назад</button>
       </div>
     </div>
   </div>
 
-<!-- 📖 Меню -->
-<div id="menuModal" class="modal">
-  <div class="modal-content">
-    <div class="modal-body">
-      <div id="menuContainer"></div>
-    </div>
-    <div class="modal-footer">
-      <button class="glass-button" onclick="closeModal('menuModal')">Назад</button>
+  <!-- Меню -->
+  <div id="menuModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-body" id="menuContainer"></div>
+      <div class="modal-footer">
+        <button class="glass-button" onclick="closeModal('menuModal')">Назад</button>
+      </div>
     </div>
   </div>
-</div>
 
-  <!-- 👥 Хочу в команду -->
+  <!-- Команда -->
   <div id="joinTeamModal" class="modal">
     <div class="modal-content">
       <h2>Хочу в команду</h2>
@@ -95,12 +95,12 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="glass-button" onclick="closeModal('joinTeamModal')">Назад</button>
+        <button class="glass-button" onclick="closeModal('joinTeamModal')">Назад</button>
       </div>
     </div>
   </div>
 
-  <!-- 📸 Афиша -->
+  <!-- Афиша -->
   <div id="afishaModal" class="modal">
     <div class="modal-content">
       <div class="modal-body">
@@ -114,7 +114,7 @@
     </div>
   </div>
 
-  <!-- 🎟️ Карта -->
+  <!-- Карта -->
   <div id="cardModal" class="modal">
     <div class="modal-content">
       <h2>Клубная карта</h2>
@@ -127,7 +127,7 @@
     </div>
   </div>
 
-  <!-- 🎁 Подарки -->
+  <!-- Подарки -->
   <div id="giftsModal" class="modal">
     <div class="modal-content">
       <h2>Подарки</h2>
@@ -140,7 +140,7 @@
     </div>
   </div>
 
-  <!-- 👤 Профиль -->
+  <!-- Профиль -->
   <div id="profileModal" class="modal">
     <div class="modal-content">
       <h2>Профиль</h2>
@@ -156,20 +156,5 @@
   </div>
 
   <script src="script.js"></script>
-  <script>
-    // Прелоадер
-    window.addEventListener("load", () => {
-      const preloader = document.getElementById("preloader");
-      preloader.classList.add("hide");
-      setTimeout(() => preloader.remove(), 1000);
-    });
-    setTimeout(() => {
-      const preloader = document.getElementById("preloader");
-      if (preloader) {
-        preloader.classList.add("hide");
-        setTimeout(() => preloader.remove(), 1000);
-      }
-    }, 4000);
-  </script>
 </body>
 </html>
