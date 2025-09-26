@@ -25,11 +25,6 @@ function renderMenu() {
     img.className = "menu-img";
     container.appendChild(img);
   });
-  const backBtn = document.createElement("button");
-  backBtn.className = "glass-button";
-  backBtn.innerText = "⬅️ Назад";
-  backBtn.onclick = () => closeModal("menuModal");
-  container.appendChild(backBtn);
 }
 document.addEventListener("DOMContentLoaded", renderMenu);
 
@@ -37,7 +32,6 @@ document.addEventListener("DOMContentLoaded", renderMenu);
 async function sendMessage(message) {
   const BOT_TOKEN = "ТВОЙ_ТОКЕН";
   const CHAT_ID = "ТВОЙ_CHAT_ID";
-
   await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -50,8 +44,7 @@ document.getElementById("bookTableForm").addEventListener("submit", async (e) =>
   e.preventDefault();
   const name = document.getElementById("name").value;
   const phone = document.getElementById("phone").value;
-  const msg = `🍽️ Бронь стола:\nФИО: ${name}\nТелефон: ${phone}`;
-  await sendMessage(msg);
+  await sendMessage(`Бронь стола:\nФИО: ${name}\nТелефон: ${phone}`);
   alert("✅ Ваша заявка принята! Администратор скоро свяжется с вами.");
   closeModal("bookTableModal");
 });
@@ -62,8 +55,7 @@ document.getElementById("taxiForm").addEventListener("submit", async (e) => {
   const name = document.getElementById("taxiName").value;
   const phone = document.getElementById("taxiPhone").value;
   const address = document.getElementById("taxiAddress").value;
-  const msg = `🚕 Такси:\nФИО: ${name}\nТелефон: ${phone}\nАдрес: ${address}`;
-  await sendMessage(msg);
+  await sendMessage(`Такси:\nФИО: ${name}\nТелефон: ${phone}\nАдрес: ${address}`);
   alert("✅ Заявка на такси принята!");
   closeModal("taxiModal");
 });
@@ -74,34 +66,27 @@ document.getElementById("joinTeamForm").addEventListener("submit", async (e) => 
   const name = document.getElementById("teamName").value;
   const phone = document.getElementById("teamPhone").value;
   const role = document.getElementById("teamRole").value;
-  const msg = `👥 Новая заявка:\nФИО: ${name}\nТелефон: ${phone}\nЖелаемая должность: ${role}`;
-  await sendMessage(msg);
+  await sendMessage(`Заявка в команду:\nФИО: ${name}\nТелефон: ${phone}\nДолжность: ${role}`);
   alert("✅ Администратор свяжется с вами в течение недели!");
   closeModal("joinTeamModal");
 });
 
 // ---------- Клубная карта ----------
 function renderCard() {
-  const cardImg = document.querySelector("#cardModal img");
+  const cardImg = document.getElementById("userCardImg");
   const userCard = localStorage.getItem("userCard") || "default";
-
-  let cardSrc = "card.png"; // заглушка
-  if (userCard === "black") cardSrc = "card_black.png";
-  if (userCard === "silver") cardSrc = "card_silver.png";
-  if (userCard === "gold") cardSrc = "card_gold.png";
-
+  let cardSrc = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card.png";
+  if (userCard === "black") cardSrc = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card_black.png";
+  if (userCard === "silver") cardSrc = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card_silver.png";
+  if (userCard === "gold") cardSrc = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card_gold.png";
   cardImg.src = cardSrc;
 }
-
-// функция для установки карты пользователю
 function setUserCard(type) {
-  if (["black", "silver", "gold"].includes(type)) {
+  if (["black","silver","gold"].includes(type)) {
     localStorage.setItem("userCard", type);
   } else {
     localStorage.setItem("userCard", "default");
   }
   renderCard();
 }
-
-// запускаем при открытии модалки карты
 document.querySelector("[onclick=\"openModal('cardModal')\"]").addEventListener("click", renderCard);
