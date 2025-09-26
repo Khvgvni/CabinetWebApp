@@ -39,11 +39,13 @@
   <div id="bookTableModal" class="modal">
     <div class="modal-content">
       <h2>Забронировать стол</h2>
-      <form id="bookTableForm">
-        <input type="text" id="name" placeholder="Ваше имя" required>
-        <input type="tel" id="phone" placeholder="Телефон" required>
-        <button type="submit" class="glass-button">Отправить</button>
-      </form>
+      <div class="modal-body">
+        <form id="bookTableForm">
+          <input type="text" id="name" placeholder="Ваше имя" required>
+          <input type="tel" id="phone" placeholder="Телефон" required>
+          <button type="submit" class="glass-button">Отправить</button>
+        </form>
+      </div>
       <div class="modal-footer">
         <button type="button" class="glass-button" onclick="closeModal('bookTableModal')">Назад</button>
       </div>
@@ -54,12 +56,14 @@
   <div id="taxiModal" class="modal">
     <div class="modal-content">
       <h2>Вызвать такси</h2>
-      <form id="taxiForm">
-        <input type="text" id="taxiName" placeholder="Ваше имя" required>
-        <input type="tel" id="taxiPhone" placeholder="Телефон" required>
-        <input type="text" id="taxiAddress" placeholder="Адрес" required>
-        <button type="submit" class="glass-button">Отправить</button>
-      </form>
+      <div class="modal-body">
+        <form id="taxiForm">
+          <input type="text" id="taxiName" placeholder="Ваше имя" required>
+          <input type="tel" id="taxiPhone" placeholder="Телефон" required>
+          <input type="text" id="taxiAddress" placeholder="Адрес" required>
+          <button type="submit" class="glass-button">Отправить</button>
+        </form>
+      </div>
       <div class="modal-footer">
         <button type="button" class="glass-button" onclick="closeModal('taxiModal')">Назад</button>
       </div>
@@ -68,8 +72,8 @@
 
   <!-- 📖 Меню -->
   <div id="menuModal" class="modal">
-    <div class="modal-content modal-scroll">
-      <div id="menuContainer" class="modal-body"></div>
+    <div class="modal-content">
+      <div class="modal-body" id="menuContainer"></div>
       <div class="modal-footer">
         <button class="glass-button" onclick="closeModal('menuModal')">Назад</button>
       </div>
@@ -80,12 +84,14 @@
   <div id="joinTeamModal" class="modal">
     <div class="modal-content">
       <h2>Хочу в команду</h2>
-      <form id="joinTeamForm">
-        <input type="text" id="teamName" placeholder="Ваше имя" required>
-        <input type="tel" id="teamPhone" placeholder="Телефон" required>
-        <input type="text" id="teamRole" placeholder="Желаемая должность" required>
-        <button type="submit" class="glass-button">Отправить</button>
-      </form>
+      <div class="modal-body">
+        <form id="joinTeamForm">
+          <input type="text" id="teamName" placeholder="Ваше имя" required>
+          <input type="tel" id="teamPhone" placeholder="Телефон" required>
+          <input type="text" id="teamRole" placeholder="Желаемая должность" required>
+          <button type="submit" class="glass-button">Отправить</button>
+        </form>
+      </div>
       <div class="modal-footer">
         <button type="button" class="glass-button" onclick="closeModal('joinTeamModal')">Назад</button>
       </div>
@@ -94,7 +100,7 @@
 
   <!-- 📸 Афиша -->
   <div id="afishaModal" class="modal">
-    <div class="modal-content modal-scroll">
+    <div class="modal-content">
       <div class="modal-body">
         <h2>Афиша</h2>
         <img src="https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/event1.png" alt="Афиша" class="menu-img">
@@ -110,7 +116,9 @@
   <div id="cardModal" class="modal">
     <div class="modal-content">
       <h2>Клубная карта</h2>
-      <img src="https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card.png" alt="Карта" class="menu-img" id="userCardImg">
+      <div class="modal-body">
+        <img src="https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card.png" alt="Карта" class="menu-img" id="userCardImg">
+      </div>
       <div class="modal-footer">
         <button class="glass-button" onclick="closeModal('cardModal')">Назад</button>
       </div>
@@ -121,7 +129,9 @@
   <div id="giftsModal" class="modal">
     <div class="modal-content">
       <h2>Подарки</h2>
-      <p>Информация об акциях появится здесь</p>
+      <div class="modal-body">
+        <p>Информация об акциях появится здесь</p>
+      </div>
       <div class="modal-footer">
         <button class="glass-button" onclick="closeModal('giftsModal')">Назад</button>
       </div>
@@ -132,9 +142,11 @@
   <div id="profileModal" class="modal">
     <div class="modal-content">
       <h2>Профиль</h2>
-      <p><b>ФИО:</b> Иван Иванов</p>
-      <p><b>Телефон:</b> +7 999 123-45-67</p>
-      <p><b>Email:</b> test@example.com</p>
+      <div class="modal-body">
+        <p><b>ФИО:</b> Иван Иванов</p>
+        <p><b>Телефон:</b> +7 999 123-45-67</p>
+        <p><b>Email:</b> test@example.com</p>
+      </div>
       <div class="modal-footer">
         <button class="glass-button" onclick="closeModal('profileModal')">Назад</button>
       </div>
