@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", renderMenu);
 // ---------- Отправка форм ----------
 async function sendMessage(message) {
   const BOT_TOKEN = "8325375947:AAHaYMwHdR3FyvPGP1QhHFsim6ptcNCfAXc";   // замени на свой
-  const CHAT_ID = "1003014842866";   // замени на свой
+  const CHAT_ID = "-1003014842866";   // замени на свой
 
   await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
     method: "POST",
