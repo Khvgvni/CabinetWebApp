@@ -1,16 +1,9 @@
 // ---------- Управление модалками ----------
 function openModal(id) {
-  const modal = document.getElementById(id);
-  if (!modal) return;
-
-  modal.classList.add("show");
+  document.getElementById(id).style.display = "flex";
 }
-
 function closeModal(id) {
-  const modal = document.getElementById(id);
-  if (!modal) return;
-
-  modal.classList.remove("show");
+  document.getElementById(id).style.display = "none";
 }
 
 // ---------- Динамическая генерация меню ----------
@@ -41,7 +34,7 @@ document.addEventListener("DOMContentLoaded", renderMenu);
 // ---------- Отправка форм ----------
 async function sendMessage(message) {
   const BOT_TOKEN = "8259299108:AAEGFbhRHAd0Zjy4yX6z2MA27QnoZas0LvI";   // замени на свой
-  const CHAT_ID = "-1003014842866";   // замени на свой
+  const CHAT_ID = "1003014842866";   // замени на свой
 
   await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
     method: "POST",
