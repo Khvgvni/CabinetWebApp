@@ -173,29 +173,29 @@ input[type="email"]:focus {
 /* ---------- Адаптивность ---------- */
 @media (max-width: 768px) {
   .logo { 
-    width: 180px; /* было 120px → стало крупнее */
+    width: 220px; /* было 180px → стало больше */
   }
   .logo-container { 
-    margin: 30px 0 25px 0; /* добавили больше воздуха снизу */
+    margin: 35px 0 30px 0; /* ещё больше воздуха снизу */
   }
 
   .glass-button { 
-    font-size: 16px; 
-    padding: 10px 15px; 
+    font-size: 18px; /* текст больше */
+    padding: 14px 18px; /* кнопка выше и шире */
   }
   .main-buttons { 
-    margin: 10px; 
-    gap: 10px; 
+    margin: 15px; 
+    gap: 12px; 
   }
 
   .bottom-nav {
     flex-wrap: wrap;
-    padding: 10px 0;
+    padding: 12px 0;
   }
   .bottom-nav button {
-    font-size: 16px;
-    padding: 10px 12px;
-    margin: 5px;
+    font-size: 18px; /* текст больше */
+    padding: 12px 14px;
+    margin: 6px;
     flex: 1;
   }
 
@@ -205,34 +205,35 @@ input[type="email"]:focus {
     max-height: 85vh;
   }
   .modal-body { 
-    padding: 10px; 
+    padding: 12px; 
   }
 }
 
 @media (max-width: 480px) {
   .logo { 
-    width: 140px; /* было 100px → увеличил */
+    width: 160px; /* было 140px → стало больше */
   }
   .logo-container { 
-    margin: 25px 0 20px 0; /* кнопки чуть ниже */
+    margin: 28px 0 25px 0; 
   }
 
   .glass-button { 
-    font-size: 14px; 
-    padding: 8px 12px; 
+    font-size: 16px; 
+    padding: 12px 16px; 
   }
   .bottom-nav button { 
-    font-size: 14px; 
-    padding: 8px 10px; 
+    font-size: 16px; 
+    padding: 10px 12px; 
   }
 
   h2 { 
-    font-size: 18px; 
+    font-size: 20px; 
   }
   input[type="text"], 
   input[type="tel"], 
   input[type="email"] {
-    font-size: 15px;
-    padding: 12px 14px;
+    font-size: 16px;
+    padding: 14px 16px;
   }
 }
+
