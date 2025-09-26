@@ -16,9 +16,11 @@ const menuImages = [
   "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/menu6.png",
   "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/menu7.png"
 ];
+
 function renderMenu() {
   const container = document.getElementById("menuContainer");
   container.innerHTML = "";
+
   menuImages.forEach(src => {
     const img = document.createElement("img");
     img.src = src;
@@ -26,12 +28,14 @@ function renderMenu() {
     container.appendChild(img);
   });
 }
+
 document.addEventListener("DOMContentLoaded", renderMenu);
 
 // ---------- Отправка форм ----------
 async function sendMessage(message) {
-  const BOT_TOKEN = "ТВОЙ_ТОКЕН";
-  const CHAT_ID = "ТВОЙ_CHAT_ID";
+  const BOT_TOKEN = "ТВОЙ_ТОКЕН";   // замени на свой
+  const CHAT_ID = "ТВОЙ_CHAT_ID";   // замени на свой
+
   await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -75,12 +79,15 @@ document.getElementById("joinTeamForm").addEventListener("submit", async (e) => 
 function renderCard() {
   const cardImg = document.getElementById("userCardImg");
   const userCard = localStorage.getItem("userCard") || "default";
+
   let cardSrc = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card.png";
   if (userCard === "black") cardSrc = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card_black.png";
   if (userCard === "silver") cardSrc = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card_silver.png";
   if (userCard === "gold") cardSrc = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card_gold.png";
+
   cardImg.src = cardSrc;
 }
+
 function setUserCard(type) {
   if (["black","silver","gold"].includes(type)) {
     localStorage.setItem("userCard", type);
@@ -89,4 +96,21 @@ function setUserCard(type) {
   }
   renderCard();
 }
+
 document.querySelector("[onclick=\"openModal('cardModal')\"]").addEventListener("click", renderCard);
+
+// ---------- Прелоадер ----------
+window.addEventListener("load", () => {
+  const preloader = document.getElementById("preloader");
+  preloader.classList.add("hide");
+  setTimeout(() => preloader.remove(), 1000);
+});
+
+// fallback: убираем через 4 сек даже если load не сработал
+setTimeout(() => {
+  const preloader = document.getElementById("preloader");
+  if (preloader) {
+    preloader.classList.add("hide");
+    setTimeout(() => preloader.remove(), 1000);
+  }
+}, 4000);
