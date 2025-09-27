@@ -112,29 +112,27 @@ img{ display:block; max-width:100%; }
 .modal .modal-content {
   width: 100%;
   max-width: 700px;
-  max-height: 90vh;
+  max-height: 90vh;      /* ограничиваем высоту модалки */
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding: 18px;
   border-radius: 22px 22px 0 0;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   box-shadow: var(--shadow);
   animation: slideUp .25s ease;
-  margin-top: auto; /* снизу */
+  margin-top: auto;
+  overflow: hidden;       /* чтобы скролл был именно в body */
 }
 
-/* Тело модалки — скролл */
+/* Тело модалки скроллится */
 .modal .modal-body {
   flex: 1;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* плавный скролл iOS */
   padding: 12px;
-  -webkit-overflow-scrolling: touch;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 12px;
+  gap: 16px;
 }
 
 .modal .modal-footer{
@@ -189,14 +187,13 @@ textarea{ resize: vertical; min-height: 112px; }
   gap: 16px;
   width: 100%;
 }
-.menu-img{
-  max-width: 90%;
-  max-height: 70vh;
+
+.menu-img {
+  width: 100%;
+  height: auto;
   object-fit: contain;
-  margin: 0 auto;
-  border-radius: 16px;
+  border-radius: 12px;
   border: 1px solid rgba(255,255,255,.12);
-  background: rgba(255,255,255,.04);
 }
 
 @media (min-width: 768px){
