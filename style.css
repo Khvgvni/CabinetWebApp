@@ -70,7 +70,7 @@ img{ display:block; }
   display:inline-flex; align-items:center; justify-content:center;
   gap:10px; width:100%;
   appearance:none; border:none; outline:none; cursor:pointer;
-  padding: 14px 16px; min-height: 52px; border-radius: var(--radius);
+  padding: 16px 20px; min-height: 56px; border-radius: var(--radius);
   background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -94,7 +94,8 @@ img{ display:block; }
 }
 .nav-btn{
   appearance:none; border:none; outline:none; cursor:pointer;
-  border-radius: 14px; padding: 12px 10px; min-height: 44px;
+  border-radius: 14px; padding: 14px 16px; min-height: 48px;
+  font-size: 15px; 
   color: var(--text);
   background: rgba(255,255,255,.06);
   border: 1px solid var(--glass-border);
