@@ -102,12 +102,13 @@ img{ display:block; max-width:100%; }
   display: none;
   align-items: center;
   justify-content: center;
-  padding: 18px;
+  padding: 0;
   z-index: 900;
   background: rgba(0,0,0,.65);
   backdrop-filter: blur(4px);
 }
 
+/* Контент модалки */
 .modal .modal-content {
   width: 100%;
   max-width: 700px;
@@ -116,12 +117,12 @@ img{ display:block; max-width:100%; }
   flex-direction: column;
   gap: 14px;
   padding: 18px;
-  border-radius: 22px 22px 0 0; /* сверху скругление, снизу прямое */
+  border-radius: 22px 22px 0 0;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   box-shadow: var(--shadow);
   animation: slideUp .25s ease;
-  margin-top: auto; /* всегда снизу на мобилке */
+  margin-top: auto; /* снизу */
 }
 
 /* Анимация снизу */
@@ -130,8 +131,11 @@ img{ display:block; max-width:100%; }
   to { transform: translateY(0); opacity: 1; }
 }
 
-/* На десктопе вернуть по центру */
+/* Десктоп */
 @media (min-width: 768px) {
+  .modal {
+    padding: 18px;
+  }
   .modal .modal-content {
     border-radius: 22px;
     margin: auto;
@@ -139,7 +143,6 @@ img{ display:block; max-width:100%; }
   }
 }
 
-/* Анимация появления */
 @keyframes popup{
   from{ transform: translateY(6px) scale(.98); opacity: 0; }
   to{ transform: translateY(0) scale(1); opacity: 1; }
@@ -170,7 +173,6 @@ textarea{ resize: vertical; min-height: 112px; }
   background: rgba(255,255,255,.04);
 }
 
-/* Responsive */
 @media (min-width: 768px){
   .menu-img{ border-radius: 18px; }
 }
