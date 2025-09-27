@@ -1,72 +1,36 @@
-/* ====== Base ====== */
-*{ box-sizing: border-box; margin:0; padding:0; }
-html, body{ height: 100%; }
 body{
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, sans-serif;
-  color: #fff;
+  font-family: system-ui, sans-serif;
+  margin:0;
+  color:#fff;
   background: url("https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/Background.png") no-repeat center center fixed;
   background-size: cover;
 }
-
-/* ====== Logo ====== */
-.logo-container{ display:flex; justify-content:center; padding: 24px 0; }
-.logo{ width: 140px; filter: drop-shadow(0 4px 16px rgba(0,0,0,.4)); }
-
-/* ====== Buttons ====== */
+.logo-container{ display:flex; justify-content:center; padding:24px 0; }
+.logo{ width:140px; filter: drop-shadow(0 4px 16px rgba(0,0,0,.4)); }
 .glass-button{
-  display:inline-flex; align-items:center; justify-content:center;
-  padding: 14px 16px;
-  min-height: 48px;
-  width:100%;
-  appearance:none; border:none; cursor:pointer;
-  border-radius: 16px;
-  background: rgba(255,255,255,.08);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,.18);
-  color:#fff; font-weight:600; font-size:16px;
-  transition: transform .12s ease;
-}
-.glass-button:hover{ transform: translateY(-1px); }
-.glass-button:active{ transform: translateY(1px); }
-.glass-button.primary{ background: rgba(76,175,80,.25); }
-.glass-button.full{ width:100%; }
-
-.main-buttons-vertical{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:18px;
-  padding: 20px 16px 120px;
-}
-.main-buttons-vertical .glass-button{ max-width:320px; }
-
-/* ====== Bottom Nav ====== */
-.bottom-nav{
-  position: fixed; bottom:0; left:0; right:0;
-  display:grid; grid-template-columns: repeat(4,1fr);
-  gap:8px; padding: 10px;
-  background: rgba(0,0,0,.4);
-  backdrop-filter: blur(10px);
-}
-.nav-btn{
-  border:none; border-radius: 12px;
-  padding: 10px; min-height: 44px;
-  background: rgba(255,255,255,.08);
+  display:inline-flex; justify-content:center; align-items:center;
+  padding:14px 16px; min-height:48px;
+  border:none; border-radius:16px;
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(12px);
   color:#fff; font-weight:600;
 }
-
-/* ====== Toast ====== */
-#toast{
-  position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
-  display:flex; flex-direction:column; align-items:center; gap:6px;
-  z-index: 2000;
+.glass-button.primary{ background:rgba(76,175,80,.25); }
+.main-buttons-vertical{
+  display:flex; flex-direction:column; align-items:center;
+  gap:18px; padding:20px 16px 120px;
 }
-.toast-msg{
-  background: rgba(46,125,50,.9);
-  color:#fff; padding: 12px 18px;
-  border-radius: 14px; font-weight:600; font-size:15px;
-  box-shadow:0 6px 18px rgba(0,0,0,.35);
-  animation: fadein .3s ease, fadeout .4s ease 2.4s forwards;
+.main-buttons-vertical .glass-button{ max-width:320px; width:100%; }
+.bottom-nav{
+  position:fixed; bottom:0; left:0; right:0;
+  display:grid; grid-template-columns:repeat(4,1fr);
+  gap:8px; padding:10px;
+  background:rgba(0,0,0,.4); backdrop-filter:blur(10px);
 }
-@keyframes fadein{ from{opacity:0; transform:translateY(12px);} to{opacity:1; transform:translateY(0);} }
-@keyframes fadeout{ to{opacity:0; transform:translateY(12px);} }
+.nav-btn{ border:none; border-radius:12px; padding:10px; background:rgba(255,255,255,.08); color:#fff; }
+.modal{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,.7); }
+.modal .modal-content{ background:rgba(0,0,0,.8); border-radius:16px; padding:20px; max-width:400px; width:90%; color:#fff; }
+.form{ display:flex; flex-direction:column; gap:12px; }
+input{ padding:12px; border-radius:12px; border:none; }
+#toast{ position:fixed; bottom:80px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; gap:6px; }
+.toast-msg{ background:rgba(46,125,50,.9); padding:12px 18px; border-radius:14px; font-weight:600; }
