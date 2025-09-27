@@ -33,33 +33,30 @@ img{ display:block; max-width:100%; }
 }
 #preloader.hide{ opacity:0; visibility:hidden; }
 #preloader .loader{
-  display:flex; flex-direction:column; gap:12px; align-items:center;
+  display:flex; flex-direction:column; gap:16px; align-items:center;
   padding: 20px 24px;
   border-radius: 20px;
   background: var(--glass-bg);
   border:1px solid var(--glass-border);
   box-shadow: var(--shadow);
 }
-#preloader img{ width: 88px; height:auto; animation: pulse 1.6s infinite; }
+#preloader img{ width: 160px; height:auto; animation: pulse 1.4s infinite ease-in-out; }
 
 @keyframes pulse {
-  0%, 100% { filter: drop-shadow(0 0 12px #4CAF50); }
-  50% { filter: drop-shadow(0 0 28px #A5D6A7); }
+  0%, 100% { filter: drop-shadow(0 0 20px #4CAF50); transform: scale(1); }
+  50% { filter: drop-shadow(0 0 40px #A5D6A7); transform: scale(1.1); }
 }
 
 /* ====== Logo ====== */
 .logo-container{ display:flex; justify-content:center; padding: 28px 16px 8px; }
 .logo{ width: 120px; opacity:.95; filter: drop-shadow(0 6px 28px rgba(0,0,0,.35)); }
 
-/* ====== Main Buttons Grid ====== */
-.main-buttons {
-  display: flex;
+/* ====== Main Buttons (в колонку) ====== */
+.main-buttons{
+  display:flex;
   flex-direction: column;
   gap: 14px;
   padding: 8px 16px 96px;
-}
-@media (min-width: 768px){
-  .main-buttons{ grid-template-columns: repeat(3, minmax(0,1fr)); max-width: 900px; margin: 0 auto; }
 }
 
 /* ====== Glass Button ====== */
@@ -96,72 +93,4 @@ img{ display:block; max-width:100%; }
   background: rgba(255,255,255,.06);
   border: 1px solid var(--glass-border);
   font-weight: 700;
-}
-
-/* ====== Modal ====== */
-.modal{
-  position: fixed; inset:0; display:none; align-items:center; justify-content:center;
-  padding: 18px; z-index: 900;
-  background: radial-gradient(900px 600px at 50% 100%, rgba(0,0,0,.55), rgba(0,0,0,.75));
-  backdrop-filter: blur(4px);
-}
-.modal .modal-content{
-  width: min(700px, 100%);
-  max-height: min(88vh, 900px);
-  display:flex; flex-direction:column;
-  gap: 14px; padding: 18px;
-  border-radius: 22px;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--shadow);
-  animation: popup .22s ease;
-}
-.modal h2{ margin:0; font-size: 20px; font-weight: 800; letter-spacing:.3px; }
-.modal .modal-body{
-  overflow: auto; padding: 12px;
-  display:flex; justify-content:center; align-items:center;
-}
-.modal .modal-footer{
-  display:flex; gap: 10px;
-}
-.modal .modal-footer.sticky{
-  position: sticky; bottom: 0;
-  padding-top: 6px;
-  background: linear-gradient(180deg, transparent, rgba(0,0,0,.35) 40%);
-}
-
-/* Анимация появления */
-@keyframes popup{
-  from{ transform: translateY(6px) scale(.98); opacity: 0; }
-  to{ transform: translateY(0) scale(1); opacity: 1; }
-}
-
-/* ====== Forms ====== */
-.form{ display:flex; flex-direction:column; gap:12px; }
-input, select, textarea{
-  width: 100%; padding: 14px 16px; min-height: 48px;
-  border-radius: var(--radius);
-  background: rgba(255,255,255,.06);
-  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-  border: 1px solid var(--glass-border);
-  color: var(--text); font-size:16px;
-}
-input::placeholder, textarea::placeholder{ color: var(--muted); }
-textarea{ resize: vertical; min-height: 112px; }
-
-/* ====== Images / Menu ====== */
-#menuContainer{ display:grid; gap:12px; }
-.menu-img{
-  max-width: 90%;
-  max-height: 70vh;
-  object-fit: contain;
-  margin: 0 auto;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,.12);
-  background: rgba(255,255,255,.04);
-}
-
-/* Responsive */
-@media (min-width: 768px){
-  .menu-img{ border-radius: 18px; }
 }
