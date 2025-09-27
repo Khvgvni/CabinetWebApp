@@ -3,7 +3,6 @@ function openModal(id) {
   const modal = document.getElementById(id);
   if (!modal) return;
   modal.style.display = "flex";
-  // перезапуск анимации (на случай повтора)
   modal.classList.remove("animate");
   void modal.offsetWidth;
   modal.classList.add("animate");
@@ -53,9 +52,8 @@ function openInvitation() {
 
 // ---------- Отправка форм ----------
 async function sendMessage(message) {
-  // ВНИМАНИЕ: хранить токен в клиентском коде небезопасно. Для продакшна вынесите в бэкенд.
-  const BOT_TOKEN = "8259299108:AAEGFbhRHAd0Zjy4yX6z2MA27QnoZas0LvI";   // замените на свой при необходимости
-  const CHAT_ID = "-1003014842866";                                     // замените на свой
+  const BOT_TOKEN = "YOUR_BOT_TOKEN";
+  const CHAT_ID = "YOUR_CHAT_ID";
 
   try {
     const resp = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
@@ -92,10 +90,8 @@ function setUserCard(type) {
 
 // ---------- Инициализация ----------
 window.addEventListener("DOMContentLoaded", () => {
-  // меню рендерим заранее
   renderMenu();
 
-  // формы
   const bookForm = document.getElementById("bookTableForm");
   if (bookForm) bookForm.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -128,7 +124,6 @@ window.addEventListener("DOMContentLoaded", () => {
     closeModal("joinTeamModal");
   });
 
-  // карта — подгружаем при открытии
   const cardOpenBtn = document.querySelector("[onclick=\"openModal('cardModal')\"]");
   if (cardOpenBtn) cardOpenBtn.addEventListener("click", renderCard);
 });
@@ -142,7 +137,6 @@ window.addEventListener("load", () => {
     setTimeout(() => (preloader.style.display = "none"), 1000);
   }, 1200);
 });
-// fallback: убираем через 4 сек даже если load не сработал
 setTimeout(() => {
   const preloader = document.getElementById("preloader");
   if (preloader) {
