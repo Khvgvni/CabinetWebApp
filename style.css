@@ -4,8 +4,8 @@
   --glass-border: rgba(255,255,255,0.16);
   --text: #ecf4ee;
   --muted: #b6c6bc;
-  --accent: #4CAF50;
-  --accent-2: #A5D6A7;
+  --accent: #FFD700; 
+  --accent-2: #FFC107;
   --danger: #ff5c5c;
   --shadow: 0 10px 30px rgba(0,0,0,.35);
   --radius: 18px;
@@ -81,7 +81,8 @@ img{ display:block; }
 }
 .glass-button:hover{ transform: translateY(-1px); }
 .glass-button:active{ transform: translateY(0); box-shadow: 0 4px 14px rgba(0,0,0,.25); }
-.glass-button.primary{ background: linear-gradient(180deg, rgba(76,175,80,.25), rgba(76,175,80,.12)); border-color: rgba(165,214,167,.35); }
+.glass-button.primary{ background: linear-gradient(180deg, rgba(255,215,0,.25), rgba(255,193,7,.12));
+  border-color: rgba(255,215,0,.35); }
 .glass-button.full{ width:100%; }
 
 /* ====== Bottom Nav ====== */
