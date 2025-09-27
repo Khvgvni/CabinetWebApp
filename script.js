@@ -25,6 +25,7 @@ const menuImages = [
 function renderMenu() {
   const container = document.getElementById("menuContainer");
   container.innerHTML = "";
+
   menuImages.forEach(src => {
     const img = document.createElement("img");
     img.src = src;
@@ -32,7 +33,7 @@ function renderMenu() {
     container.appendChild(img);
   });
 
-   // добавляем кнопку "Назад" прямо в конец меню
+  // кнопка "Назад"
   const backBtn = document.createElement("button");
   backBtn.className = "glass-button";
   backBtn.innerText = "Назад";
@@ -44,7 +45,7 @@ document.addEventListener("DOMContentLoaded", renderMenu);
 // ---------- Пригласительный ----------
 function openInvitation() {
   const container = document.getElementById("invitationContainer");
-  container.innerHTML = ""; // очищаем, чтобы каждый раз загружалось заново
+  container.innerHTML = "";
   const img = document.createElement("img");
   img.src = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/Invitation-new.png";
   img.className = "menu-img";
