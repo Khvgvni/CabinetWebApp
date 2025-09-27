@@ -21,7 +21,7 @@ body{
   background-size: cover;
 }
 
-img{ display:block; max-width:100%; }
+img{ display:block; }
 
 /* ====== Preloader ====== */
 #preloader{
@@ -49,8 +49,9 @@ img{ display:block; max-width:100%; }
 
 /* ====== Logo ====== */
 .logo-container{ display:flex; justify-content:center; padding: 28px 16px 8px; }
-.logo {
-  width: 180px !important;  /* увеличенный размер */
+.logo{
+  width: 200px !important;   /* увеличенный размер */
+  max-width: none !important;
   height: auto;
   opacity:.95;
   filter: drop-shadow(0 6px 28px rgba(0,0,0,.35));
@@ -113,31 +114,32 @@ img{ display:block; max-width:100%; }
   backdrop-filter: blur(4px);
 }
 
-/* Контент модалки */
 .modal .modal-content {
   width: 100%;
   max-width: 700px;
-  max-height: 90vh;      /* ограничиваем высоту модалки */
+  max-height: 90vh;
   display: flex;
   flex-direction: column;
+  gap: 14px;
+  padding: 18px;
   border-radius: 22px 22px 0 0;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   box-shadow: var(--shadow);
   animation: slideUp .25s ease;
   margin-top: auto;
-  overflow: hidden;       /* чтобы скролл был именно в body */
+  overflow: hidden;
 }
 
-/* Тело модалки скроллится */
 .modal .modal-body {
   flex: 1;
   overflow-y: auto;
-  -webkit-overflow-scrolling: touch; /* плавный скролл iOS */
+  -webkit-overflow-scrolling: touch;
   padding: 12px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  align-items: center;
+  gap: 12px;
 }
 
 .modal .modal-footer{
@@ -149,27 +151,22 @@ img{ display:block; max-width:100%; }
   background: linear-gradient(180deg, transparent, rgba(0,0,0,.35) 40%);
 }
 
-/* Анимация снизу */
+/* Анимации */
 @keyframes slideUp {
   from { transform: translateY(100%); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
-
-/* Десктоп */
+@keyframes popup{
+  from{ transform: translateY(6px) scale(.98); opacity: 0; }
+  to{ transform: translateY(0) scale(1); opacity: 1; }
+}
 @media (min-width: 768px) {
-  .modal {
-    padding: 18px;
-  }
+  .modal { padding: 18px; }
   .modal .modal-content {
     border-radius: 22px;
     margin: auto;
     animation: popup .22s ease;
   }
-}
-
-@keyframes popup{
-  from{ transform: translateY(6px) scale(.98); opacity: 0; }
-  to{ transform: translateY(0) scale(1); opacity: 1; }
 }
 
 /* ====== Forms ====== */
@@ -186,21 +183,21 @@ input::placeholder, textarea::placeholder{ color: var(--muted); }
 textarea{ resize: vertical; min-height: 112px; }
 
 /* ====== Images / Menu & Invitation ====== */
-#menuContainer {
-  display: flex;
+#menuContainer{
+  display:flex;
   flex-direction: column;
-  gap: 16px;
-  width: 100%;
+  gap:12px;
+  width:100%;
 }
-
-.menu-img {
+.menu-img{
   width: 100%;
   height: auto;
+  max-height: 80vh;
   object-fit: contain;
-  border-radius: 12px;
+  border-radius: 16px;
   border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
 }
-
 @media (min-width: 768px){
   .menu-img{ border-radius: 18px; }
 }
