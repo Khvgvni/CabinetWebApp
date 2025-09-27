@@ -119,6 +119,7 @@ window.addEventListener("load", () => {
     setTimeout(() => preloader.style.display = "none", 1000);
   }, 2000); // задержка 2 сек
 });
+
 // fallback: убираем через 4 сек даже если load не сработал
 setTimeout(() => {
   const preloader = document.getElementById("preloader");
