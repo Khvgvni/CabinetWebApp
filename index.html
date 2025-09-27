@@ -20,13 +20,13 @@
     <img src="https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/Logo-removebg-preview.png" alt="Logo" class="logo" />
   </div>
 
-  <!-- Главные кнопки (вертикально) -->
-  <div class="main-buttons-vertical">
-    <button class="glass-button primary full" onclick="openModal('bookTableModal')">Забронировать стол</button>
-    <button class="glass-button full" onclick="openModal('taxiModal')">Вызвать такси</button>
-    <button class="glass-button full" onclick="openModal('menuModal')">Меню</button>
-    <button class="glass-button full" onclick="openModal('joinTeamModal')">Хочу в команду</button>
-    <button class="glass-button full" onclick="openInvitation()">Получить пригласительный</button>
+  <!-- Главные кнопки -->
+  <div class="main-buttons">
+    <button class="glass-button primary" onclick="openModal('bookTableModal')">Забронировать стол</button>
+    <button class="glass-button" onclick="openModal('taxiModal')">Вызвать такси</button>
+    <button class="glass-button" onclick="openModal('menuModal')">Меню</button>
+    <button class="glass-button" onclick="openModal('joinTeamModal')">Хочу в команду</button>
+    <button class="glass-button" onclick="openInvitation()">Получить пригласительный</button>
   </div>
 
   <!-- Нижняя навигация -->
@@ -37,7 +37,9 @@
     <button class="nav-btn" onclick="openModal('profileModal')">Профиль</button>
   </nav>
 
-  <!-- ====== Модалки ====== -->
+  <!-- ========== Модальные окна ========== -->
+
+  <!-- Бронь стола -->
   <div id="bookTableModal" class="modal">
     <div class="modal-content animate">
       <h2>Забронировать стол</h2>
@@ -49,11 +51,12 @@
         </form>
       </div>
       <div class="modal-footer sticky">
-        <button class="glass-button" onclick="closeModal('bookTableModal')">Назад</button>
+        <button class="glass-button full" onclick="closeModal('bookTableModal')">Назад</button>
       </div>
     </div>
   </div>
 
+  <!-- Такси -->
   <div id="taxiModal" class="modal">
     <div class="modal-content animate">
       <h2>Вызвать такси</h2>
@@ -66,11 +69,12 @@
         </form>
       </div>
       <div class="modal-footer sticky">
-        <button class="glass-button" onclick="closeModal('taxiModal')">Назад</button>
+        <button class="glass-button full" onclick="closeModal('taxiModal')">Назад</button>
       </div>
     </div>
   </div>
 
+  <!-- Меню -->
   <div id="menuModal" class="modal">
     <div class="modal-content animate">
       <h2>Меню</h2>
@@ -81,6 +85,7 @@
     </div>
   </div>
 
+  <!-- Хочу в команду -->
   <div id="joinTeamModal" class="modal">
     <div class="modal-content animate">
       <h2>Хочу в команду</h2>
@@ -93,31 +98,38 @@
         </form>
       </div>
       <div class="modal-footer sticky">
-        <button class="glass-button" onclick="closeModal('joinTeamModal')">Назад</button>
+        <button class="glass-button full" onclick="closeModal('joinTeamModal')">Назад</button>
       </div>
     </div>
   </div>
 
+  <!-- Пригласительный -->
   <div id="invitationModal" class="modal">
     <div class="modal-content animate">
       <h2>Пригласительный</h2>
-      <div class="modal-body"><div id="invitationContainer"></div></div>
+      <div class="modal-body">
+        <div id="invitationContainer"></div>
+      </div>
       <div class="modal-footer sticky">
-        <button class="glass-button" onclick="closeModal('invitationModal')">Назад</button>
+        <button class="glass-button full" onclick="closeModal('invitationModal')">Назад</button>
       </div>
     </div>
   </div>
 
+  <!-- Афиша -->
   <div id="posterModal" class="modal">
     <div class="modal-content animate">
       <h2>Афиша</h2>
-      <div class="modal-body"><p>Скоро тут будет афиша 📌</p></div>
+      <div class="modal-body">
+        <p>Скоро тут будет афиша 📌</p>
+      </div>
       <div class="modal-footer sticky">
-        <button class="glass-button" onclick="closeModal('posterModal')">Назад</button>
+        <button class="glass-button full" onclick="closeModal('posterModal')">Назад</button>
       </div>
     </div>
   </div>
 
+  <!-- Карта -->
   <div id="cardModal" class="modal">
     <div class="modal-content animate">
       <h2>Клубная карта</h2>
@@ -125,21 +137,23 @@
         <img id="userCardImg" src="" alt="Карта" class="menu-img" />
       </div>
       <div class="modal-footer sticky">
-        <button class="glass-button" onclick="closeModal('cardModal')">Назад</button>
+        <button class="glass-button full" onclick="closeModal('cardModal')">Назад</button>
       </div>
     </div>
   </div>
 
+  <!-- Подарки -->
   <div id="giftsModal" class="modal">
     <div class="modal-content animate">
       <h2>Подарки</h2>
       <div class="modal-body"><p>Здесь будут акции 🎁</p></div>
       <div class="modal-footer sticky">
-        <button class="glass-button" onclick="closeModal('giftsModal')">Назад</button>
+        <button class="glass-button full" onclick="closeModal('giftsModal')">Назад</button>
       </div>
     </div>
   </div>
 
+  <!-- Профиль -->
   <div id="profileModal" class="modal">
     <div class="modal-content animate">
       <h2>Профиль</h2>
@@ -149,13 +163,10 @@
         <p><b>Email:</b> test@mail.ru</p>
       </div>
       <div class="modal-footer sticky">
-        <button class="glass-button" onclick="closeModal('profileModal')">Назад</button>
+        <button class="glass-button full" onclick="closeModal('profileModal')">Назад</button>
       </div>
     </div>
   </div>
-
-  <!-- Toast уведомления -->
-  <div id="toast"></div>
 
   <script src="script.js"></script>
 </body>
