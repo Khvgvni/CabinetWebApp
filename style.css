@@ -58,7 +58,6 @@ img{ display:block; max-width:100%; }
   gap: 14px;
   padding: 8px 16px 96px;
 }
-
 @media (min-width: 768px){
   .main-buttons{ grid-template-columns: repeat(3, minmax(0,1fr)); max-width: 900px; margin: 0 auto; }
 }
