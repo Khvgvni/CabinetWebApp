@@ -52,12 +52,13 @@ img{ display:block; max-width:100%; }
 .logo{ width: 120px; opacity:.95; filter: drop-shadow(0 6px 28px rgba(0,0,0,.35)); }
 
 /* ====== Main Buttons Grid ====== */
-.main-buttons{
-  display:grid;
-  grid-template-columns: repeat(2, minmax(0,1fr));
-  gap: 12px;
-  padding: 8px 16px 96px; /* отступ под нижнюю навигацию */
+.main-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 8px 16px 96px;
 }
+
 @media (min-width: 768px){
   .main-buttons{ grid-template-columns: repeat(3, minmax(0,1fr)); max-width: 900px; margin: 0 auto; }
 }
