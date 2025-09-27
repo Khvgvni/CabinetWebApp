@@ -37,8 +37,122 @@
     <button class="nav-btn" onclick="openModal('profileModal')">Профиль</button>
   </nav>
 
-  <!-- Здесь модалки (оставляем как в предыдущих версиях) -->
-  <!-- ... -->
+  <!-- ====== Модалки ====== -->
+  <div id="bookTableModal" class="modal">
+    <div class="modal-content animate">
+      <h2>Забронировать стол</h2>
+      <div class="modal-body">
+        <form id="bookTableForm" class="form">
+          <input type="text" id="name" placeholder="Ваше имя" required />
+          <input type="tel" id="phone" placeholder="Телефон" required />
+          <button type="submit" class="glass-button primary full">Отправить</button>
+        </form>
+      </div>
+      <div class="modal-footer sticky">
+        <button class="glass-button" onclick="closeModal('bookTableModal')">Назад</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="taxiModal" class="modal">
+    <div class="modal-content animate">
+      <h2>Вызвать такси</h2>
+      <div class="modal-body">
+        <form id="taxiForm" class="form">
+          <input type="text" id="taxiName" placeholder="Ваше имя" required />
+          <input type="tel" id="taxiPhone" placeholder="Телефон" required />
+          <input type="text" id="taxiAddress" placeholder="Адрес" required />
+          <button type="submit" class="glass-button primary full">Отправить</button>
+        </form>
+      </div>
+      <div class="modal-footer sticky">
+        <button class="glass-button" onclick="closeModal('taxiModal')">Назад</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="menuModal" class="modal">
+    <div class="modal-content animate">
+      <h2>Меню</h2>
+      <div class="modal-body" id="menuContainer"></div>
+      <div class="modal-footer sticky">
+        <button class="glass-button full" onclick="closeModal('menuModal')">Назад</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="joinTeamModal" class="modal">
+    <div class="modal-content animate">
+      <h2>Хочу в команду</h2>
+      <div class="modal-body">
+        <form id="joinTeamForm" class="form">
+          <input type="text" id="teamName" placeholder="Ваше имя" required />
+          <input type="tel" id="teamPhone" placeholder="Телефон" required />
+          <input type="text" id="teamRole" placeholder="Желаемая должность" required />
+          <button type="submit" class="glass-button primary full">Отправить</button>
+        </form>
+      </div>
+      <div class="modal-footer sticky">
+        <button class="glass-button" onclick="closeModal('joinTeamModal')">Назад</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="invitationModal" class="modal">
+    <div class="modal-content animate">
+      <h2>Пригласительный</h2>
+      <div class="modal-body"><div id="invitationContainer"></div></div>
+      <div class="modal-footer sticky">
+        <button class="glass-button" onclick="closeModal('invitationModal')">Назад</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="posterModal" class="modal">
+    <div class="modal-content animate">
+      <h2>Афиша</h2>
+      <div class="modal-body"><p>Скоро тут будет афиша 📌</p></div>
+      <div class="modal-footer sticky">
+        <button class="glass-button" onclick="closeModal('posterModal')">Назад</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="cardModal" class="modal">
+    <div class="modal-content animate">
+      <h2>Клубная карта</h2>
+      <div class="modal-body">
+        <img id="userCardImg" src="" alt="Карта" class="menu-img" />
+      </div>
+      <div class="modal-footer sticky">
+        <button class="glass-button" onclick="closeModal('cardModal')">Назад</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="giftsModal" class="modal">
+    <div class="modal-content animate">
+      <h2>Подарки</h2>
+      <div class="modal-body"><p>Здесь будут акции 🎁</p></div>
+      <div class="modal-footer sticky">
+        <button class="glass-button" onclick="closeModal('giftsModal')">Назад</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="profileModal" class="modal">
+    <div class="modal-content animate">
+      <h2>Профиль</h2>
+      <div class="modal-body">
+        <p><b>ФИО:</b> Иван Иванов</p>
+        <p><b>Телефон:</b> +7 900 000-00-00</p>
+        <p><b>Email:</b> test@mail.ru</p>
+      </div>
+      <div class="modal-footer sticky">
+        <button class="glass-button" onclick="closeModal('profileModal')">Назад</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Toast уведомления -->
   <div id="toast"></div>
