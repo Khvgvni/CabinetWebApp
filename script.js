@@ -31,6 +31,13 @@ function renderMenu() {
     img.className = "menu-img";
     container.appendChild(img);
   });
+
+   // добавляем кнопку "Назад" прямо в конец меню
+  const backBtn = document.createElement("button");
+  backBtn.className = "glass-button";
+  backBtn.innerText = "Назад";
+  backBtn.onclick = () => closeModal("menuModal");
+  container.appendChild(backBtn);
 }
 document.addEventListener("DOMContentLoaded", renderMenu);
 
@@ -128,11 +135,3 @@ setTimeout(() => {
     setTimeout(() => preloader.remove(), 1000);
   }
 }, 4000);
-
- // добавляем кнопку "Назад" прямо в конец меню
-  const backBtn = document.createElement("button");
-  backBtn.className = "glass-button";
-  backBtn.innerText = "Назад";
-  backBtn.onclick = () => closeModal("menuModal");
-  container.appendChild(backBtn);
-}
