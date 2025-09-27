@@ -135,7 +135,7 @@ window.addEventListener("load", () => {
   setTimeout(() => {
     preloader.classList.add("hide");
     setTimeout(() => (preloader.style.display = "none"), 1000);
-  }, 1200);
+  }, 1500);
 });
 setTimeout(() => {
   const preloader = document.getElementById("preloader");
