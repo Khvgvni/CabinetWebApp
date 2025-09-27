@@ -88,7 +88,7 @@ img{ display:block; }
 .bottom-nav{
   position: fixed; left:0; right:0; bottom:0; z-index: 500;
   display:grid; grid-template-columns: repeat(4, 1fr);
-  gap:8px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  gap:2px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
   background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.35) 40%);
   backdrop-filter: blur(10px);
 }
