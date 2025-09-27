@@ -92,14 +92,25 @@ img{ display:block; }
   background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.35) 40%);
   backdrop-filter: blur(10px);
 }
-.nav-btn{
-  appearance:none; border:none; outline:none; cursor:pointer;
-  border-radius: 14px; padding: 14px 16px; min-height: 48px;
-  font-size: 15px; 
+.nav-btn {
+  appearance: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 14px;
+  padding: 14px 16px;
+  min-height: 48px;
+  font-size: 15px;
+  font-weight: 700;
   color: var(--text);
   background: rgba(255,255,255,.06);
   border: 1px solid var(--glass-border);
-  font-weight: 700;
+
+  /* Центровка текста */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 /* ====== Modal ====== */
