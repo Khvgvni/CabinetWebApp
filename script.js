@@ -1,7 +1,12 @@
 // ---------- Управление модалками ----------
 function openModal(id) {
-  document.getElementById(id).style.display = "flex";
+  const modal = document.getElementById(id);
+  modal.style.display = "flex";
+  modal.classList.remove("animate"); // сброс анимации
+  void modal.offsetWidth; // хак: перезапуск анимации
+  modal.classList.add("animate");
 }
+
 function closeModal(id) {
   document.getElementById(id).style.display = "none";
 }
