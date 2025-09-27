@@ -49,7 +49,12 @@ img{ display:block; max-width:100%; }
 
 /* ====== Logo ====== */
 .logo-container{ display:flex; justify-content:center; padding: 28px 16px 8px; }
-.logo{ width: 200px;!important; opacity:.95; filter: drop-shadow(0 6px 28px rgba(0,0,0,.35)); }
+.logo {
+  width: 180px !important;  /* увеличенный размер */
+  height: auto;
+  opacity:.95;
+  filter: drop-shadow(0 6px 28px rgba(0,0,0,.35));
+}
 
 /* ====== Main Buttons (в колонку) ====== */
 .main-buttons{
