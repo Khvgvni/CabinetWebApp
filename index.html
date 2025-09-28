@@ -35,6 +35,7 @@
     <button class="nav-btn" onclick="openModal('cardModal')">Карта</button>
     <button class="nav-btn" onclick="openModal('giftsModal')">Подарки</button>
     <button class="nav-btn" onclick="openModal('profileModal')">Профиль</button>
+    <button class="nav-btn" onclick="openModal('adminModal')">Админ</button>
   </nav>
 
   <!-- ================== Модальные окна ================== -->
@@ -152,6 +153,67 @@
       </div>
     </div>
   </div>
+
+  <!-- Админ-панель -->
+<div id="adminModal" class="modal" aria-hidden="true">
+  <div class="modal-content animate">
+    <h2>Админ-панель</h2>
+    <div class="modal-body">
+
+      <!-- Логин -->
+      <div id="adminLogin">
+        <input type="password" id="adminPassword" placeholder="Пароль администратора" />
+        <button class="glass-button primary full" onclick="adminLogin()">Войти</button>
+      </div>
+
+      <!-- Панель -->
+      <div id="adminPanel" style="display:none;">
+        <div class="tabs">
+          <button class="tab-btn active" onclick="openTab('bannersTab')">Афиши</button>
+          <button class="tab-btn" onclick="openTab('postsTab')">Посты</button>
+          <button class="tab-btn" onclick="openTab('usersTab')">Пользователи</button>
+        </div>
+
+        <div class="tab-content" id="bannersTab">
+          <h3>Загрузить афишу</h3>
+          <input type="file" id="bannerFile" accept="image/*" />
+          <button class="glass-button full" onclick="uploadBanner()">Загрузить</button>
+          <h3>Список афиш</h3>
+          <div id="bannersList"></div>
+        </div>
+
+        <div class="tab-content" id="postsTab" style="display:none;">
+          <h3>Создать пост</h3>
+          <input type="text" id="postTitle" placeholder="Заголовок" />
+          <textarea id="postBody" placeholder="Текст"></textarea>
+          <input type="file" id="postImage" accept="image/*" />
+          <button class="glass-button full" onclick="createPost()">Опубликовать</button>
+          <h3>Список постов</h3>
+          <div id="postsList"></div>
+        </div>
+
+        <div class="tab-content" id="usersTab" style="display:none;">
+          <h3>Статус пользователя</h3>
+          <input type="text" id="userName" placeholder="Имя (необязательно)" />
+          <input type="tel" id="userPhone" placeholder="Телефон" />
+          <select id="userStatus">
+            <option value="Default">Default</option>
+            <option value="Black">Black</option>
+            <option value="Silver">Silver</option>
+            <option value="Gold">Gold</option>
+          </select>
+          <button class="glass-button full" onclick="setUserStatus()">Сохранить статус</button>
+          <h3>Пользователи</h3>
+          <div id="usersList"></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="modal-footer sticky">
+      <button class="glass-button full" onclick="closeModal('adminModal')">Назад</button>
+    </div>
+  </div>
+</div>
 
   <!-- Профиль -->
   <div id="profileModal" class="modal" aria-hidden="true">
