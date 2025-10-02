@@ -63,7 +63,7 @@ function openInvitation() {
 // ---------- Отправка форм ----------
 async function sendMessage(message) {
   try {
-    const resp = await fetch("http://158.160.198.56:3000/api/cabinet/send", {
+    const resp = await fetch("https://api.cabinetbot.cabinet75.ru/api/cabinet/send", {
       method: "POST",
       headers: { 
         "Content-Type": "application/json",
@@ -76,7 +76,6 @@ async function sendMessage(message) {
     console.warn("Proxy error:", err);
   }
 }
-
 // ---------- Клубная карта ----------
 function renderCard() {
   const cardImg = document.getElementById("userCardImg");
