@@ -156,7 +156,7 @@ setTimeout(() => {
 }, 4000);
 
 // ======= Админ-панель: базовый конфиг =======
-const API_BASE = "http://158.160.198.56:3000"; // или твой домен https://mydomain.ru
+const API_BASE = "https://api.cabinetbot.cabinet75.ru"; // или твой домен https://mydomain.ru
 function adminToken() { return sessionStorage.getItem("adm_token") || ""; }
 
 // Вкладки
