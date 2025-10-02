@@ -30,6 +30,7 @@ const menuImages = [
   "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/menu5.png",
   "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/menu6.png",
   "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/menu7.png"
+  "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/menu8.png"
 ];
 
 function renderMenu() {
