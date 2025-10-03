@@ -39,8 +39,7 @@ const menuImages = [
   "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/menu4.png",
   "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/menu5.png",
   "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/menu6.png",
-  "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/menu7.png",
-  "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/menu8.png"
+  "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/menu7.png"
 ];
 function renderMenu() {
   const container = document.getElementById("menuContainer");
