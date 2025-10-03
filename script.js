@@ -1,3 +1,7 @@
+// ======= Админ-панель: базовый конфиг =======
+const API_BASE = "https://api.cabinetbot.cabinet75.ru";
+function adminToken() { return sessionStorage.getItem("adm_token") || ""; }
+
 // ---------- Управление модалками ----------
 function openModal(id) {
   // Закрываем все открытые модалки перед открытием новой
@@ -13,7 +17,7 @@ function openModal(id) {
   modal.setAttribute("aria-hidden", "false");
   document.documentElement.style.overflow = "hidden"; // фикс скролла фона
 
-  // спец-обработка для карты: всегда подгружаем картинку при открытии
+  // спец-обработка для карты
   if (id === "cardModal") renderCard();
 
   // перезапуск анимации
@@ -79,7 +83,7 @@ function openInvitation() {
 // ---------- Отправка форм ----------
 async function sendMessage(message) {
   try {
-    const resp = await fetch("https://api.cabinetbot.cabinet75.ru/api/cabinet/send", {
+    const resp = await fetch(`${API_BASE}/api/cabinet/send`, {
       method: "POST",
       headers: { 
         "Content-Type": "application/json",
@@ -207,11 +211,7 @@ setTimeout(() => {
   }
 }, 4000);
 
-// ======= Админ-панель: базовый конфиг =======
-const API_BASE = "https://api.cabinetbot.cabinet75.ru";
-function adminToken() { return sessionStorage.getItem("adm_token") || ""; }
-
-// Вкладки
+// ---------- Вкладки ----------
 function openTab(id) {
   document.querySelectorAll(".tab-content").forEach(el => el.style.display = "none");
   document.querySelectorAll(".tab-btn").forEach(el => el.classList.remove("active"));
@@ -222,7 +222,7 @@ function openTab(id) {
   if (id === "usersTab") loadUsers();
 }
 
-// Массовая рассылка
+// ---------- Массовая рассылка ----------
 async function sendBroadcast() {
   const text = document.getElementById("broadcastText").value.trim();
   const status = document.getElementById("broadcastStatus").value;
@@ -250,7 +250,7 @@ async function sendBroadcast() {
   }
 }
 
-// Логин админа
+// ---------- Логин админа ----------
 async function adminLogin() {
   const password = document.getElementById("adminPassword").value.trim();
   const resp = await fetch(`${API_BASE}/api/admin/login`, {
@@ -266,7 +266,7 @@ async function adminLogin() {
   openTab('bannersTab');
 }
 
-// Афиши
+// ---------- Афиши ----------
 async function uploadBanner() {
   const f = document.getElementById("bannerFile").files[0];
   if (!f) return alert("Выберите файл");
@@ -294,7 +294,7 @@ async function loadBanners() {
   } else list.innerHTML = "<p>Нет афиш</p>";
 }
 
-// Посты
+// ---------- Посты ----------
 async function createPost() {
   const title = document.getElementById("postTitle").value.trim();
   const body = document.getElementById("postBody").value.trim();
@@ -327,7 +327,7 @@ async function loadPosts() {
   } else list.innerHTML = "<p>Нет постов</p>";
 }
 
-// Пользователи
+// ---------- Пользователи ----------
 async function setUserStatus() {
   const name = document.getElementById("userName").value.trim();
   const phone = document.getElementById("userPhone").value.trim();
