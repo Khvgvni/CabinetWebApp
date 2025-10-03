@@ -186,6 +186,38 @@ function openTab(id) {
   if (id === "usersTab") loadUsers();
 }
 
+// ---------- Массовая рассылка ----------
+async function sendBroadcast() {
+  const text = document.getElementById("broadcastText").value.trim();
+  const status = document.getElementById("broadcastStatus").value;
+  const phones = document.getElementById("broadcastPhones").value.trim();
+
+  if (!text) {
+    return alert("Введите текст сообщения");
+  }
+
+  try {
+    const resp = await fetch(`${API_BASE}/api/admin/broadcast`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${adminToken()}`
+      },
+      body: JSON.stringify({ text, status, phones })
+    });
+
+    const data = await resp.json();
+    if (!data.ok) {
+      return alert(data.error || "Ошибка отправки");
+    }
+
+    alert(`✅ Сообщение отправлено (${data.count || 0} получателей)`);
+  } catch (err) {
+    console.error("Broadcast error:", err);
+    alert("Ошибка сети при отправке рассылки");
+  }
+}
+
 // Логин админа
 async function adminLogin() {
   const password = document.getElementById("adminPassword").value.trim();
