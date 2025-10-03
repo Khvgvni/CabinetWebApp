@@ -1,4 +1,3 @@
-// ---------- Управление модалками ----------
 function openModal(id) {
   // Закрываем все открытые модалки перед открытием новой
   document.querySelectorAll(".modal").forEach(m => {
@@ -13,15 +12,19 @@ function openModal(id) {
   modal.setAttribute("aria-hidden", "false");
   document.documentElement.style.overflow = "hidden"; // фикс скролла фона
 
-  // спец-обработка для карты: всегда подгружаем картинку при открытии
+  // спец-обработка для карты
   if (id === "cardModal") renderCard();
+
+  // спец-обработка для профиля
+  if (id === "profileModal") {
+    loadProfile(localStorage.getItem("userPhone") || "+79000000000");
+  }
 
   // перезапуск анимации
   modal.classList.remove("animate");
   void modal.offsetWidth;
   modal.classList.add("animate");
 }
-
 function closeModal(id) {
   const modal = document.getElementById(id);
   if (modal) {
