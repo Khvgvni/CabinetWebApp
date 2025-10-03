@@ -330,3 +330,22 @@ async function loadUsers() {
     });
   } else list.innerHTML = "<p>Нет пользователей</p>";
 }
+
+// ---------- Профиль ----------
+async function loadProfile(phone) {
+  try {
+    const resp = await fetch(`${API_BASE}/api/profile?phone=${encodeURIComponent(phone)}`);
+    const data = await resp.json();
+    if (!data.ok) {
+      return alert(data.error || "Ошибка загрузки профиля");
+    }
+
+    const user = data.user || {};
+    document.getElementById("profileName").innerText = user.name || "Без имени";
+    document.getElementById("profilePhone").innerText = user.phone || "-";
+    document.getElementById("profileStatus").innerText = user.status || "Default";
+  } catch (err) {
+    console.error("Profile error:", err);
+  }
+}
+
