@@ -361,7 +361,3 @@ async function loadUsers() {
     });
   } else list.innerHTML = "<p>Нет пользователей</p>";
 }
-
-// ======= Админ-панель: базовый конфиг =======
-const API_BASE = "https://api.cabinetbot.cabinet75.ru";
-function adminToken() { return sessionStorage.getItem("adm_token") || ""; }
