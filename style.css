@@ -265,3 +265,12 @@ textarea{ resize: vertical; min-height: 112px; }
   padding: 12px;
   margin-bottom: 10px;
 }
+
+/* Приоритет модальных окон */
+#adminModal {
+  z-index: 11000 !important; /* админка всегда сверху */
+}
+
+#profileModal {
+  z-index: 10000; /* профиль ниже админки */
+}
