@@ -13,13 +13,9 @@ function openModal(id) {
   modal.setAttribute("aria-hidden", "false");
   document.documentElement.style.overflow = "hidden"; // фикс скролла фона
 
-  // спец-обработка для карты
+  // спец-обработка
   if (id === "cardModal") renderCard();
-
-  // спец-обработка для профиля
-  if (id === "profileModal") {
-    loadProfile(localStorage.getItem("userPhone") || "+79000000000");
-  }
+  if (id === "profileModal") loadProfile(); // ✅ загрузка профиля
 
   // перезапуск анимации
   modal.classList.remove("animate");
@@ -88,7 +84,7 @@ async function sendMessage(message) {
       method: "POST",
       headers: { 
         "Content-Type": "application/json",
-        "X-App-Secret": "superlong_random_secret_32chars"
+        "X-App-Secret": "superlong_random_secret_32chars" 
       },
       body: JSON.stringify({ text: message })
     });
@@ -120,20 +116,32 @@ function setUserCard(type) {
 }
 
 // ---------- Профиль ----------
-async function loadProfile(phone) {
+const API_BASE = "https://api.cabinetbot.cabinet75.ru";
+
+async function loadProfile() {
+  const phone = localStorage.getItem("userPhone"); // сохраняем телефон при первой регистрации
+  if (!phone) {
+    document.querySelector("#profileModal .modal-body").innerHTML = "<p>Нет данных. Зарегистрируйтесь через бота 📲</p>";
+    return;
+  }
+
   try {
     const resp = await fetch(`${API_BASE}/api/user/status?phone=${encodeURIComponent(phone)}`);
     const data = await resp.json();
-    if (!data.ok) return;
-
-    const user = data.user || {};
-    document.querySelector("#profileModal .modal-body").innerHTML = `
-      <p><b>ФИО:</b> ${user.name || "Не указано"}</p>
-      <p><b>Телефон:</b> ${user.phone || phone}</p>
-      <p><b>Статус:</b> ${user.status || "Default"}</p>
-    `;
-  } catch (err) {
-    console.error("Profile load error:", err);
+    if (data.ok && data.user) {
+      const u = data.user;
+      document.querySelector("#profileModal .modal-body").innerHTML = `
+        <p><b>ФИО:</b> ${u.name || "—"}</p>
+        <p><b>Телефон:</b> ${u.phone || "—"}</p>
+        <p><b>Email:</b> ${u.email || "—"}</p>
+        <p><b>Статус:</b> ${u.status || "Default"}</p>
+      `;
+    } else {
+      document.querySelector("#profileModal .modal-body").innerHTML = "<p>Данные не найдены.</p>";
+    }
+  } catch (e) {
+    console.error("Profile error:", e);
+    document.querySelector("#profileModal .modal-body").innerHTML = "<p>Ошибка загрузки профиля</p>";
   }
 }
 
@@ -146,8 +154,9 @@ window.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     const name = document.getElementById("name")?.value || "";
     const phone = document.getElementById("phone")?.value || "";
+    localStorage.setItem("userPhone", phone); // ✅ сохраняем телефон
     await sendMessage(`Бронь стола:\nФИО: ${name}\nТелефон: ${phone}`);
-    alert("✅ Ваша заявка принята! Администратор скоро свяжется с вами.");
+    alert("✅ Ваша заявка принята!");
     closeModal("bookTableModal");
   });
 
@@ -157,6 +166,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const name = document.getElementById("taxiName")?.value || "";
     const phone = document.getElementById("taxiPhone")?.value || "";
     const address = document.getElementById("taxiAddress")?.value || "";
+    localStorage.setItem("userPhone", phone);
     await sendMessage(`Такси:\nФИО: ${name}\nТелефон: ${phone}\nАдрес: ${address}`);
     alert("✅ Заявка на такси принята!");
     closeModal("taxiModal");
@@ -168,8 +178,9 @@ window.addEventListener("DOMContentLoaded", () => {
     const name = document.getElementById("teamName")?.value || "";
     const phone = document.getElementById("teamPhone")?.value || "";
     const role = document.getElementById("teamRole")?.value || "";
+    localStorage.setItem("userPhone", phone);
     await sendMessage(`Заявка в команду:\nФИО: ${name}\nТелефон: ${phone}\nДолжность: ${role}`);
-    alert("✅ Администратор свяжется с вами в течение недели!");
+    alert("✅ Администратор свяжется с вами!");
     closeModal("joinTeamModal");
   });
 });
@@ -192,130 +203,3 @@ setTimeout(() => {
     setTimeout(() => preloader.remove(), 1000);
   }
 }, 4000);
-
-// ======= Админ-панель: базовый конфиг =======
-const API_BASE = "https://api.cabinetbot.cabinet75.ru";
-function adminToken() { return sessionStorage.getItem("adm_token") || ""; }
-
-// Вкладки
-function openTab(id) {
-  document.querySelectorAll(".tab-content").forEach(el => el.style.display = "none");
-  document.querySelectorAll(".tab-btn").forEach(el => el.classList.remove("active"));
-  document.getElementById(id).style.display = "block";
-  document.querySelector(`.tab-btn[onclick="openTab('${id}')"]`).classList.add("active");
-  if (id === "bannersTab") loadBanners();
-  if (id === "postsTab") loadPosts();
-  if (id === "usersTab") loadUsers();
-}
-
-// Логин админа
-async function adminLogin() {
-  const password = document.getElementById("adminPassword").value.trim();
-  const resp = await fetch(`${API_BASE}/api/admin/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ password })
-  });
-  const data = await resp.json();
-  if (!data.ok) return alert(data.error || "Ошибка входа");
-  sessionStorage.setItem("adm_token", data.token);
-  document.getElementById("adminLogin").style.display = "none";
-  document.getElementById("adminPanel").style.display = "block";
-  openTab('bannersTab');
-}
-
-// Афиши
-async function uploadBanner() {
-  const f = document.getElementById("bannerFile").files[0];
-  if (!f) return alert("Выберите файл");
-  const fd = new FormData(); fd.append("image", f);
-  const resp = await fetch(`${API_BASE}/api/admin/banners`, {
-    method: "POST",
-    headers: { "Authorization": `Bearer ${adminToken()}` },
-    body: fd
-  });
-  const data = await resp.json();
-  if (!data.ok) return alert(data.error || "Ошибка загрузки");
-  alert("Афиша загружена!"); loadBanners();
-}
-async function loadBanners() {
-  const resp = await fetch(`${API_BASE}/api/banners`);
-  const data = await resp.json();
-  const list = document.getElementById("bannersList");
-  list.innerHTML = "";
-  if (data.ok && data.items.length) {
-    data.items.forEach(b => {
-      const img = document.createElement("img");
-      img.src = `${API_BASE}${b.image_url}`;
-      list.appendChild(img);
-    });
-  } else list.innerHTML = "<p>Нет афиш</p>";
-}
-
-// Посты
-async function createPost() {
-  const title = document.getElementById("postTitle").value.trim();
-  const body = document.getElementById("postBody").value.trim();
-  const f = document.getElementById("postImage").files[0];
-  if (!title) return alert("Введите заголовок");
-  const fd = new FormData();
-  fd.append("title", title); fd.append("body", body);
-  if (f) fd.append("image", f);
-  const resp = await fetch(`${API_BASE}/api/admin/posts`, {
-    method: "POST",
-    headers: { "Authorization": `Bearer ${adminToken()}` },
-    body: fd
-  });
-  const data = await resp.json();
-  if (!data.ok) return alert(data.error || "Ошибка публикации");
-  alert("Пост опубликован!"); loadPosts();
-}
-async function loadPosts() {
-  const resp = await fetch(`${API_BASE}/api/posts`);
-  const data = await resp.json();
-  const list = document.getElementById("postsList");
-  list.innerHTML = "";
-  if (data.ok && data.items.length) {
-    data.items.forEach(p => {
-      const card = document.createElement("div");
-      card.className = "post-card";
-      card.innerHTML = `<h4>${p.title}</h4><p>${p.body || ""}</p>${p.image_url ? `<img src="${API_BASE}${p.image_url}" />` : ""}`;
-      list.appendChild(card);
-    });
-  } else list.innerHTML = "<p>Нет постов</p>";
-}
-
-// Пользователи
-async function setUserStatus() {
-  const name = document.getElementById("userName").value.trim();
-  const phone = document.getElementById("userPhone").value.trim();
-  const status = document.getElementById("userStatus").value;
-  if (!phone) return alert("Укажите телефон");
-  const resp = await fetch(`${API_BASE}/api/admin/user/status`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${adminToken()}`
-    },
-    body: JSON.stringify({ name, phone, status })
-  });
-  const data = await resp.json();
-  if (!data.ok) return alert(data.error || "Ошибка сохранения");
-  alert("Статус сохранён!"); loadUsers();
-}
-async function loadUsers() {
-  const resp = await fetch(`${API_BASE}/api/users`, {
-    headers: { "Authorization": `Bearer ${adminToken()}` }
-  });
-  const data = await resp.json();
-  const list = document.getElementById("usersList");
-  list.innerHTML = "";
-  if (data.ok && data.items.length) {
-    data.items.forEach(u => {
-      const card = document.createElement("div");
-      card.className = "user-card";
-      card.innerHTML = `<strong>${u.name || "Без имени"}</strong><br>Тел: ${u.phone}<br>Статус: ${u.status}`;
-      list.appendChild(card);
-    });
-  } else list.innerHTML = "<p>Нет пользователей</p>";
-}
