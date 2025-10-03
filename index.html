@@ -239,27 +239,24 @@
       Профиль
       <!-- Замочек для входа в админку -->
       <span id="adminLock" onclick="openModal('adminModal')" style="cursor:pointer;" title="Админ-панель">
-        <svg xmlns="http://www.w3.org/2000/svg" 
-             width="22" height="22" 
-             fill="currentColor" 
-             viewBox="0 0 24 24">
-          <path d="M12 17a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm6-7h-1V7a5 5 
-                   0 0 0-10 0v3H6a2 2 0 0 0-2 2v8a2 2 0 0 
-                   0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 
-                   0-2-2zm-7 0H9V7a3 3 0 0 1 6 0v3h-2z"/>
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 17a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm6-7h-1V7a5 
+                   5 0 0 0-10 0v3H6a2 2 0 0 
+                   0 2 2v8a2 2 0 0 0 2 2h12a2 
+                   2 0 0 0 2-2v-8a2 2 0 0 
+                   0-2-2zm-7 0H9V7a3 3 0 0 
+                   1 6 0v3h-2z"/>
         </svg>
       </span>
     </h2>
     <div class="modal-body">
-      <p><b>ФИО:</b> Иван Иванов</p>
-      <p><b>Телефон:</b> +7 900 000-00-00</p>
-      <p><b>Email:</b> test@mail.ru</p>
+      <p><b>ФИО:</b> <span id="profileName">—</span></p>
+      <p><b>Телефон:</b> <span id="profilePhone">—</span></p>
+      <p><b>Статус:</b> <span id="profileStatus">—</span></p>
     </div>
     <div class="modal-footer sticky">
       <button class="glass-button full" onclick="closeModal('profileModal')">Назад</button>
     </div>
   </div>
 </div>
-
-<script src="script.js"></script>
 
