@@ -13,9 +13,11 @@ function openModal(id) {
   modal.setAttribute("aria-hidden", "false");
   document.documentElement.style.overflow = "hidden"; // фикс скролла фона
 
-  // спец-обработка
+  // спец-обработка для карты
   if (id === "cardModal") renderCard();
-  if (id === "profileModal") loadProfile(); // ✅ загрузка профиля
+
+  // спец-обработка для профиля
+  if (id === "profileModal") loadProfile();
 
   // перезапуск анимации
   modal.classList.remove("animate");
@@ -84,7 +86,7 @@ async function sendMessage(message) {
       method: "POST",
       headers: { 
         "Content-Type": "application/json",
-        "X-App-Secret": "superlong_random_secret_32chars" 
+        "X-App-Secret": "superlong_random_secret_32chars"
       },
       body: JSON.stringify({ text: message })
     });
@@ -116,32 +118,31 @@ function setUserCard(type) {
 }
 
 // ---------- Профиль ----------
-const API_BASE = "https://api.cabinetbot.cabinet75.ru";
-
 async function loadProfile() {
-  const phone = localStorage.getItem("userPhone"); // сохраняем телефон при первой регистрации
-  if (!phone) {
-    document.querySelector("#profileModal .modal-body").innerHTML = "<p>Нет данных. Зарегистрируйтесь через бота 📲</p>";
+  const tg = window.Telegram?.WebApp;
+  const userId = tg?.initDataUnsafe?.user?.id;
+
+  if (!userId) {
+    document.querySelector("#profileModal .modal-body").innerHTML = `<p>Не удалось определить пользователя через Telegram</p>`;
     return;
   }
 
   try {
-    const resp = await fetch(`${API_BASE}/api/user/status?phone=${encodeURIComponent(phone)}`);
+    const resp = await fetch(`${API_BASE}/api/user/status?id=${userId}`);
     const data = await resp.json();
+
     if (data.ok && data.user) {
-      const u = data.user;
       document.querySelector("#profileModal .modal-body").innerHTML = `
-        <p><b>ФИО:</b> ${u.name || "—"}</p>
-        <p><b>Телефон:</b> ${u.phone || "—"}</p>
-        <p><b>Email:</b> ${u.email || "—"}</p>
-        <p><b>Статус:</b> ${u.status || "Default"}</p>
+        <p><b>ФИО:</b> ${data.user.name || "—"}</p>
+        <p><b>Телефон:</b> ${data.user.phone || "—"}</p>
+        <p><b>Статус:</b> ${data.user.status || "Default"}</p>
       `;
     } else {
-      document.querySelector("#profileModal .modal-body").innerHTML = "<p>Данные не найдены.</p>";
+      document.querySelector("#profileModal .modal-body").innerHTML = `<p>Нет данных, зарегистрируйтесь в боте.</p>`;
     }
   } catch (e) {
-    console.error("Profile error:", e);
-    document.querySelector("#profileModal .modal-body").innerHTML = "<p>Ошибка загрузки профиля</p>";
+    console.error("Ошибка загрузки профиля:", e);
+    document.querySelector("#profileModal .modal-body").innerHTML = `<p>Ошибка загрузки профиля</p>`;
   }
 }
 
@@ -154,9 +155,8 @@ window.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     const name = document.getElementById("name")?.value || "";
     const phone = document.getElementById("phone")?.value || "";
-    localStorage.setItem("userPhone", phone); // ✅ сохраняем телефон
     await sendMessage(`Бронь стола:\nФИО: ${name}\nТелефон: ${phone}`);
-    alert("✅ Ваша заявка принята!");
+    alert("✅ Ваша заявка принята! Администратор скоро свяжется с вами.");
     closeModal("bookTableModal");
   });
 
@@ -166,7 +166,6 @@ window.addEventListener("DOMContentLoaded", () => {
     const name = document.getElementById("taxiName")?.value || "";
     const phone = document.getElementById("taxiPhone")?.value || "";
     const address = document.getElementById("taxiAddress")?.value || "";
-    localStorage.setItem("userPhone", phone);
     await sendMessage(`Такси:\nФИО: ${name}\nТелефон: ${phone}\nАдрес: ${address}`);
     alert("✅ Заявка на такси принята!");
     closeModal("taxiModal");
@@ -178,9 +177,8 @@ window.addEventListener("DOMContentLoaded", () => {
     const name = document.getElementById("teamName")?.value || "";
     const phone = document.getElementById("teamPhone")?.value || "";
     const role = document.getElementById("teamRole")?.value || "";
-    localStorage.setItem("userPhone", phone);
     await sendMessage(`Заявка в команду:\nФИО: ${name}\nТелефон: ${phone}\nДолжность: ${role}`);
-    alert("✅ Администратор свяжется с вами!");
+    alert("✅ Администратор свяжется с вами в течение недели!");
     closeModal("joinTeamModal");
   });
 });
@@ -203,3 +201,7 @@ setTimeout(() => {
     setTimeout(() => preloader.remove(), 1000);
   }
 }, 4000);
+
+// ======= Админ-панель: базовый конфиг =======
+const API_BASE = "https://api.cabinetbot.cabinet75.ru";
+function adminToken() { return sessionStorage.getItem("adm_token") || ""; }
