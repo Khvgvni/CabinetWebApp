@@ -1,3 +1,4 @@
+// ---------- Управление модалками ----------
 function openModal(id) {
   // Закрываем все открытые модалки перед открытием новой
   document.querySelectorAll(".modal").forEach(m => {
@@ -25,6 +26,7 @@ function openModal(id) {
   void modal.offsetWidth;
   modal.classList.add("animate");
 }
+
 function closeModal(id) {
   const modal = document.getElementById(id);
   if (modal) {
@@ -86,7 +88,7 @@ async function sendMessage(message) {
       method: "POST",
       headers: { 
         "Content-Type": "application/json",
-        "X-App-Secret": "superlong_random_secret_32chars" // тот же, что в .env
+        "X-App-Secret": "superlong_random_secret_32chars"
       },
       body: JSON.stringify({ text: message })
     });
@@ -95,6 +97,7 @@ async function sendMessage(message) {
     console.warn("Proxy error:", err);
   }
 }
+
 // ---------- Клубная карта ----------
 function renderCard() {
   const cardImg = document.getElementById("userCardImg");
@@ -116,6 +119,24 @@ function setUserCard(type) {
   renderCard();
 }
 
+// ---------- Профиль ----------
+async function loadProfile(phone) {
+  try {
+    const resp = await fetch(`${API_BASE}/api/user/status?phone=${encodeURIComponent(phone)}`);
+    const data = await resp.json();
+    if (!data.ok) return;
+
+    const user = data.user || {};
+    document.querySelector("#profileModal .modal-body").innerHTML = `
+      <p><b>ФИО:</b> ${user.name || "Не указано"}</p>
+      <p><b>Телефон:</b> ${user.phone || phone}</p>
+      <p><b>Статус:</b> ${user.status || "Default"}</p>
+    `;
+  } catch (err) {
+    console.error("Profile load error:", err);
+  }
+}
+
 // ---------- Инициализация ----------
 window.addEventListener("DOMContentLoaded", () => {
   renderMenu();
@@ -131,7 +152,6 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   const taxiForm = document.getElementById("taxiForm");
-  if (taxiForm) bookForm?.addEventListener; // no-op safety
   if (taxiForm) taxiForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const name = document.getElementById("taxiName")?.value || "";
@@ -164,7 +184,6 @@ window.addEventListener("load", () => {
     setTimeout(() => (preloader.style.display = "none"), 1000);
   }, 1500);
 });
-// fallback на случай, если событие load не сработало
 setTimeout(() => {
   const preloader = document.getElementById("preloader");
   if (preloader && preloader.style.display !== "none") {
@@ -175,7 +194,7 @@ setTimeout(() => {
 }, 4000);
 
 // ======= Админ-панель: базовый конфиг =======
-const API_BASE = "https://api.cabinetbot.cabinet75.ru"; // или твой домен https://mydomain.ru
+const API_BASE = "https://api.cabinetbot.cabinet75.ru";
 function adminToken() { return sessionStorage.getItem("adm_token") || ""; }
 
 // Вкладки
@@ -187,38 +206,6 @@ function openTab(id) {
   if (id === "bannersTab") loadBanners();
   if (id === "postsTab") loadPosts();
   if (id === "usersTab") loadUsers();
-}
-
-// ---------- Массовая рассылка ----------
-async function sendBroadcast() {
-  const text = document.getElementById("broadcastText").value.trim();
-  const status = document.getElementById("broadcastStatus").value;
-  const phones = document.getElementById("broadcastPhones").value.trim();
-
-  if (!text) {
-    return alert("Введите текст сообщения");
-  }
-
-  try {
-    const resp = await fetch(`${API_BASE}/api/admin/broadcast`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${adminToken()}`
-      },
-      body: JSON.stringify({ text, status, phones })
-    });
-
-    const data = await resp.json();
-    if (!data.ok) {
-      return alert(data.error || "Ошибка отправки");
-    }
-
-    alert(`✅ Сообщение отправлено (${data.count || 0} получателей)`);
-  } catch (err) {
-    console.error("Broadcast error:", err);
-    alert("Ошибка сети при отправке рассылки");
-  }
 }
 
 // Логин админа
@@ -234,7 +221,6 @@ async function adminLogin() {
   sessionStorage.setItem("adm_token", data.token);
   document.getElementById("adminLogin").style.display = "none";
   document.getElementById("adminPanel").style.display = "block";
-  // по умолчанию откроем первую вкладку и подгрузим данные
   openTab('bannersTab');
 }
 
@@ -333,22 +319,3 @@ async function loadUsers() {
     });
   } else list.innerHTML = "<p>Нет пользователей</p>";
 }
-
-// ---------- Профиль ----------
-async function loadProfile(phone) {
-  try {
-    const resp = await fetch(`${API_BASE}/api/profile?phone=${encodeURIComponent(phone)}`);
-    const data = await resp.json();
-    if (!data.ok) {
-      return alert(data.error || "Ошибка загрузки профиля");
-    }
-
-    const user = data.user || {};
-    document.getElementById("profileName").innerText = user.name || "Без имени";
-    document.getElementById("profilePhone").innerText = user.phone || "-";
-    document.getElementById("profileStatus").innerText = user.status || "Default";
-  } catch (err) {
-    console.error("Profile error:", err);
-  }
-}
-
