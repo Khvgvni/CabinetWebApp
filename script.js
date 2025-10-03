@@ -202,6 +202,13 @@ setTimeout(() => {
   }
 }, 4000);
 
+// ---------- Привязка загрузки профиля ----------
+document.querySelector(".nav-btn[onclick=\"openModal('profileModal')\"]")
+  ?.addEventListener("click", () => {
+    loadProfile();
+    openModal('profileModal');
+  });
+
 // ======= Админ-панель: базовый конфиг =======
 const API_BASE = "https://api.cabinetbot.cabinet75.ru";
 function adminToken() { return sessionStorage.getItem("adm_token") || ""; }
