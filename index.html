@@ -153,7 +153,7 @@
     </div>
   </div>
 
-  <!-- Админ-панель -->
+<!-- Админ-панель -->
 <div id="adminModal" class="modal" aria-hidden="true">
   <div class="modal-content animate">
     <h2>Админ-панель</h2>
@@ -171,6 +171,7 @@
           <button class="tab-btn active" onclick="openTab('bannersTab')">Афиши</button>
           <button class="tab-btn" onclick="openTab('postsTab')">Посты</button>
           <button class="tab-btn" onclick="openTab('usersTab')">Пользователи</button>
+          <button class="tab-btn" onclick="openTab('broadcastTab')">Рассылка</button>
         </div>
 
         <div class="tab-content" id="bannersTab">
@@ -204,6 +205,23 @@
           <button class="glass-button full" onclick="setUserStatus()">Сохранить статус</button>
           <h3>Пользователи</h3>
           <div id="usersList"></div>
+        </div>
+
+        <!-- Новая вкладка: Рассылка -->
+        <div class="tab-content" id="broadcastTab" style="display:none;">
+          <h3>Массовая рассылка</h3>
+          <textarea id="broadcastText" placeholder="Текст сообщения" style="width:100%;height:100px;"></textarea>
+          <h4>Отправить по статусу</h4>
+          <select id="broadcastStatus">
+            <option value="">-- не выбран --</option>
+            <option value="Black">Black</option>
+            <option value="Silver">Silver</option>
+            <option value="Gold">Gold</option>
+            <option value="Default">Default</option>
+          </select>
+          <h4>ИЛИ по телефонам (через запятую)</h4>
+          <input type="text" id="broadcastPhones" placeholder="+79998887766, +79995554433" style="width:100%;" />
+          <button class="glass-button primary full" onclick="sendBroadcast()">Отправить</button>
         </div>
       </div>
 
@@ -243,7 +261,5 @@
   </div>
 </div>
 
-  <script src="script.js"></script>
+<script src="script.js"></script>
 
-</body>
-</html>
