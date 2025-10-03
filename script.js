@@ -1,24 +1,40 @@
 // ---------- Управление модалками ----------
 function openModal(id) {
+  // Закрываем все открытые модалки перед открытием новой
+  document.querySelectorAll(".modal").forEach(m => {
+    m.style.display = "none";
+    m.setAttribute("aria-hidden", "true");
+  });
+
   const modal = document.getElementById(id);
   if (!modal) return;
+
   modal.style.display = "flex";
   modal.setAttribute("aria-hidden", "false");
   document.documentElement.style.overflow = "hidden"; // фикс скролла фона
+
   // спец-обработка для карты: всегда подгружаем картинку при открытии
   if (id === "cardModal") renderCard();
+
   // перезапуск анимации
   modal.classList.remove("animate");
   void modal.offsetWidth;
   modal.classList.add("animate");
 }
+
 function closeModal(id) {
   const modal = document.getElementById(id);
   if (modal) {
     modal.style.display = "none";
     modal.setAttribute("aria-hidden", "true");
   }
-  document.documentElement.style.overflow = ""; // вернуть скролл
+
+  // Если все модалки закрыты — вернуть скролл
+  const anyOpen = Array.from(document.querySelectorAll(".modal"))
+    .some(m => m.style.display === "flex");
+  if (!anyOpen) {
+    document.documentElement.style.overflow = "";
+  }
 }
 
 // ---------- Динамическая генерация меню ----------
