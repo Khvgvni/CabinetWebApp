@@ -114,6 +114,23 @@ img{ display:block; }
   text-align: center;
 }
 
+#adminIcon {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  color: #fff; /* Белый по умолчанию */
+  z-index: 1000;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+#adminIcon:hover {
+  transform: scale(1.1);
+  color: #4CAF50; /* зелёный акцент при наведении */
+}
+
 /* ====== Modal ====== */
 .modal {
   position: fixed;
