@@ -131,6 +131,7 @@ async function loadProfile() {
   try {
     const resp = await fetch(`${API_BASE}/api/user/status?id=${userId}`);
     const data = await resp.json();
+    console.log("TG DATA:", window.Telegram?.WebApp?.initDataUnsafe);
 
     if (data.ok && data.user) {
       document.querySelector("#profileModal .modal-body").innerHTML = `
