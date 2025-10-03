@@ -131,14 +131,11 @@ async function loadProfile() {
   try {
     const resp = await fetch(`${API_BASE}/api/user/status?id=${userId}`);
     const data = await resp.json();
-    console.log("TG DATA:", window.Telegram?.WebApp?.initDataUnsafe);
 
     if (data.ok && data.user) {
-      document.querySelector("#profileModal .modal-body").innerHTML = `
-        <p><b>ФИО:</b> ${data.user.name || "—"}</p>
-        <p><b>Телефон:</b> ${data.user.phone || "—"}</p>
-        <p><b>Статус:</b> ${data.user.status || "Default"}</p>
-      `;
+      document.getElementById("profileName").textContent = data.user.name || "—";
+      document.getElementById("profilePhone").textContent = data.user.phone || "—";
+      document.getElementById("profileStatus").textContent = data.user.status || "Default";
     } else {
       document.querySelector("#profileModal .modal-body").innerHTML = `<p>Нет данных, зарегистрируйтесь в боте.</p>`;
     }
