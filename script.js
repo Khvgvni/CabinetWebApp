@@ -1,47 +1,37 @@
-// ======= Админ-панель: базовый конфиг =======
-const API_BASE = "https://api.cabinetbot.cabinet75.ru";
-function adminToken() { return sessionStorage.getItem("adm_token") || ""; }
+// ========== Конфиг ==========
+const API_BASE = "https://api.cabinetbot.cabinet75.ru"; // твой сервер
+function adminToken() {
+  return sessionStorage.getItem("adm_token") || "";
+}
 
-// ---------- Управление модалками ----------
+// ========== Управление модалками ==========
 function openModal(id) {
-  // Закрываем все открытые модалки перед открытием новой
   document.querySelectorAll(".modal").forEach(m => {
     m.style.display = "none";
     m.setAttribute("aria-hidden", "true");
   });
-
   const modal = document.getElementById(id);
   if (!modal) return;
-
   modal.style.display = "flex";
   modal.setAttribute("aria-hidden", "false");
-  document.documentElement.style.overflow = "hidden"; // фикс скролла фона
-
-  // спец-обработка для карты
+  document.documentElement.style.overflow = "hidden";
   if (id === "cardModal") renderCard();
-
-  // перезапуск анимации
   modal.classList.remove("animate");
   void modal.offsetWidth;
   modal.classList.add("animate");
 }
-
 function closeModal(id) {
   const modal = document.getElementById(id);
   if (modal) {
     modal.style.display = "none";
     modal.setAttribute("aria-hidden", "true");
   }
-
-  // Если все модалки закрыты — вернуть скролл
   const anyOpen = Array.from(document.querySelectorAll(".modal"))
     .some(m => m.style.display === "flex");
-  if (!anyOpen) {
-    document.documentElement.style.overflow = "";
-  }
+  if (!anyOpen) document.documentElement.style.overflow = "";
 }
 
-// ---------- Динамическая генерация меню ----------
+// ========== Динамическое меню ==========
 const menuImages = [
   "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/menu1.png",
   "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/menu2.png",
@@ -52,7 +42,6 @@ const menuImages = [
   "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/menu7.png",
   "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/menu8.png"
 ];
-
 function renderMenu() {
   const container = document.getElementById("menuContainer");
   if (!container) return;
@@ -66,7 +55,7 @@ function renderMenu() {
   });
 }
 
-// ---------- Пригласительный ----------
+// ========== Пригласительный ==========
 function openInvitation() {
   const container = document.getElementById("invitationContainer");
   if (container) {
@@ -80,12 +69,12 @@ function openInvitation() {
   openModal("invitationModal");
 }
 
-// ---------- Отправка форм ----------
+// ========== Отправка форм ==========
 async function sendMessage(message) {
   try {
     const resp = await fetch(`${API_BASE}/api/cabinet/send`, {
       method: "POST",
-      headers: { 
+      headers: {
         "Content-Type": "application/json",
         "X-App-Secret": "superlong_random_secret_32chars"
       },
@@ -97,20 +86,19 @@ async function sendMessage(message) {
   }
 }
 
-// ---------- Клубная карта ----------
+// ========== Клубная карта ==========
 function renderCard() {
   const cardImg = document.getElementById("userCardImg");
   if (!cardImg) return;
-
   const userCard = localStorage.getItem("userCard") || "default";
   let cardSrc = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card.png";
-  if (userCard === "black")  cardSrc = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card_black.png";
+  if (userCard === "black") cardSrc = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card_black.png";
   if (userCard === "silver") cardSrc = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card_silver.png";
-  if (userCard === "gold")   cardSrc = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card_gold.png";
+  if (userCard === "gold") cardSrc = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card_gold.png";
   cardImg.src = cardSrc;
 }
 function setUserCard(type) {
-  if (["black","silver","gold"].includes(type)) {
+  if (["black", "silver", "gold"].includes(type)) {
     localStorage.setItem("userCard", type);
   } else {
     localStorage.setItem("userCard", "default");
@@ -118,49 +106,55 @@ function setUserCard(type) {
   renderCard();
 }
 
-// ---------- Профиль ----------
+// ========== Профиль ==========
 async function loadProfile() {
   const tg = window.Telegram?.WebApp;
   const userId = tg?.initDataUnsafe?.user?.id;
 
   if (!userId) {
-    document.querySelector("#profileModal .modal-body").innerHTML = `<p>Не удалось определить пользователя через Telegram</p>`;
+    document.querySelector("#profileModal .modal-body").innerHTML =
+      `<p>Не удалось определить пользователя через Telegram</p>`;
     return;
   }
 
   try {
     const resp = await fetch(`${API_BASE}/api/user/status?id=${userId}`);
     const data = await resp.json();
-
     if (data.ok && data.user) {
-      document.getElementById("profileName").textContent = data.user.name || "—";
-      document.getElementById("profilePhone").textContent = data.user.phone || "—";
-      document.getElementById("profileStatus").textContent = data.user.status || "Default";
+      document.querySelector("#profileModal .modal-body").innerHTML = `
+        <p><b>ФИО:</b> ${data.user.name || "—"}</p>
+        <p><b>Телефон:</b> ${data.user.phone || "—"}</p>
+        <p><b>Статус:</b> ${data.user.status || "Default"}</p>
+      `;
     } else {
-      document.querySelector("#profileModal .modal-body").innerHTML = `<p>Нет данных, зарегистрируйтесь в боте.</p>`;
+      document.querySelector("#profileModal .modal-body").innerHTML =
+        `<p>Нет данных, зарегистрируйтесь в боте.</p>`;
     }
   } catch (e) {
     console.error("Ошибка загрузки профиля:", e);
-    document.querySelector("#profileModal .modal-body").innerHTML = `<p>Ошибка загрузки профиля</p>`;
+    document.querySelector("#profileModal .modal-body").innerHTML =
+      `<p>Ошибка загрузки профиля</p>`;
   }
 }
 
-// ---------- Инициализация ----------
+// ========== Init ==========
 window.addEventListener("DOMContentLoaded", () => {
   renderMenu();
 
+  // Бронь стола
   const bookForm = document.getElementById("bookTableForm");
-  if (bookForm) bookForm.addEventListener("submit", async (e) => {
+  if (bookForm) bookForm.addEventListener("submit", async e => {
     e.preventDefault();
     const name = document.getElementById("name")?.value || "";
     const phone = document.getElementById("phone")?.value || "";
     await sendMessage(`Бронь стола:\nФИО: ${name}\nТелефон: ${phone}`);
-    alert("✅ Ваша заявка принята! Администратор скоро свяжется с вами.");
+    alert("✅ Ваша заявка принята!");
     closeModal("bookTableModal");
   });
 
+  // Такси
   const taxiForm = document.getElementById("taxiForm");
-  if (taxiForm) taxiForm.addEventListener("submit", async (e) => {
+  if (taxiForm) taxiForm.addEventListener("submit", async e => {
     e.preventDefault();
     const name = document.getElementById("taxiName")?.value || "";
     const phone = document.getElementById("taxiPhone")?.value || "";
@@ -170,8 +164,9 @@ window.addEventListener("DOMContentLoaded", () => {
     closeModal("taxiModal");
   });
 
+  // Команда
   const teamForm = document.getElementById("joinTeamForm");
-  if (teamForm) teamForm.addEventListener("submit", async (e) => {
+  if (teamForm) teamForm.addEventListener("submit", async e => {
     e.preventDefault();
     const name = document.getElementById("teamName")?.value || "";
     const phone = document.getElementById("teamPhone")?.value || "";
@@ -181,7 +176,7 @@ window.addEventListener("DOMContentLoaded", () => {
     closeModal("joinTeamModal");
   });
 
-  // привязка кнопки "Профиль"
+  // Профиль
   document.querySelector(".nav-btn[onclick=\"openModal('profileModal')\"]")
     ?.addEventListener("click", () => {
       loadProfile();
@@ -189,7 +184,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// ---------- Прелоадер ----------
+// ========== Прелоадер ==========
 window.addEventListener("load", () => {
   const preloader = document.getElementById("preloader");
   if (!preloader) return;
@@ -199,7 +194,6 @@ window.addEventListener("load", () => {
     setTimeout(() => (preloader.style.display = "none"), 1000);
   }, 1500);
 });
-// fallback
 setTimeout(() => {
   const preloader = document.getElementById("preloader");
   if (preloader && preloader.style.display !== "none") {
@@ -209,7 +203,7 @@ setTimeout(() => {
   }
 }, 4000);
 
-// ---------- Вкладки ----------
+// ========== Админка ==========
 function openTab(id) {
   document.querySelectorAll(".tab-content").forEach(el => el.style.display = "none");
   document.querySelectorAll(".tab-btn").forEach(el => el.classList.remove("active"));
@@ -220,35 +214,7 @@ function openTab(id) {
   if (id === "usersTab") loadUsers();
 }
 
-// ---------- Массовая рассылка ----------
-async function sendBroadcast() {
-  const text = document.getElementById("broadcastText").value.trim();
-  const status = document.getElementById("broadcastStatus").value;
-  const phones = document.getElementById("broadcastPhones").value.trim();
-
-  if (!text) return alert("Введите текст сообщения");
-
-  try {
-    const resp = await fetch(`${API_BASE}/api/admin/broadcast`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${adminToken()}`
-      },
-      body: JSON.stringify({ text, status, phones })
-    });
-
-    const data = await resp.json();
-    if (!data.ok) return alert(data.error || "Ошибка отправки");
-
-    alert(`✅ Сообщение отправлено (${data.count || 0} получателей)`);
-  } catch (err) {
-    console.error("Broadcast error:", err);
-    alert("Ошибка сети при отправке рассылки");
-  }
-}
-
-// ---------- Логин админа ----------
+// --- Логин админа ---
 async function adminLogin() {
   const password = document.getElementById("adminPassword").value.trim();
   const resp = await fetch(`${API_BASE}/api/admin/login`, {
@@ -264,11 +230,12 @@ async function adminLogin() {
   openTab('bannersTab');
 }
 
-// ---------- Афиши ----------
+// --- Афиши ---
 async function uploadBanner() {
   const f = document.getElementById("bannerFile").files[0];
   if (!f) return alert("Выберите файл");
-  const fd = new FormData(); fd.append("image", f);
+  const fd = new FormData();
+  fd.append("image", f);
   const resp = await fetch(`${API_BASE}/api/admin/banners`, {
     method: "POST",
     headers: { "Authorization": `Bearer ${adminToken()}` },
@@ -276,7 +243,8 @@ async function uploadBanner() {
   });
   const data = await resp.json();
   if (!data.ok) return alert(data.error || "Ошибка загрузки");
-  alert("Афиша загружена!"); loadBanners();
+  alert("Афиша загружена!");
+  loadBanners();
 }
 async function loadBanners() {
   const resp = await fetch(`${API_BASE}/api/banners`);
@@ -292,14 +260,15 @@ async function loadBanners() {
   } else list.innerHTML = "<p>Нет афиш</p>";
 }
 
-// ---------- Посты ----------
+// --- Посты ---
 async function createPost() {
   const title = document.getElementById("postTitle").value.trim();
   const body = document.getElementById("postBody").value.trim();
   const f = document.getElementById("postImage").files[0];
   if (!title) return alert("Введите заголовок");
   const fd = new FormData();
-  fd.append("title", title); fd.append("body", body);
+  fd.append("title", title);
+  fd.append("body", body);
   if (f) fd.append("image", f);
   const resp = await fetch(`${API_BASE}/api/admin/posts`, {
     method: "POST",
@@ -308,7 +277,8 @@ async function createPost() {
   });
   const data = await resp.json();
   if (!data.ok) return alert(data.error || "Ошибка публикации");
-  alert("Пост опубликован!"); loadPosts();
+  alert("Пост опубликован!");
+  loadPosts();
 }
 async function loadPosts() {
   const resp = await fetch(`${API_BASE}/api/posts`);
@@ -325,23 +295,25 @@ async function loadPosts() {
   } else list.innerHTML = "<p>Нет постов</p>";
 }
 
-// ---------- Пользователи ----------
+// --- Пользователи ---
 async function setUserStatus() {
   const name = document.getElementById("userName").value.trim();
   const phone = document.getElementById("userPhone").value.trim();
   const status = document.getElementById("userStatus").value;
-  if (!phone) return alert("Укажите телефон");
+  const telegram_id = prompt("Введите Telegram ID пользователя:");
+  if (!telegram_id) return alert("Telegram ID обязателен");
   const resp = await fetch(`${API_BASE}/api/admin/user/status`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       "Authorization": `Bearer ${adminToken()}`
     },
-    body: JSON.stringify({ name, phone, status })
+    body: JSON.stringify({ name, phone, status, telegram_id })
   });
   const data = await resp.json();
   if (!data.ok) return alert(data.error || "Ошибка сохранения");
-  alert("Статус сохранён!"); loadUsers();
+  alert("Статус сохранён!");
+  loadUsers();
 }
 async function loadUsers() {
   const resp = await fetch(`${API_BASE}/api/users`, {
@@ -354,8 +326,31 @@ async function loadUsers() {
     data.items.forEach(u => {
       const card = document.createElement("div");
       card.className = "user-card";
-      card.innerHTML = `<strong>${u.name || "Без имени"}</strong><br>Тел: ${u.phone}<br>Статус: ${u.status}`;
+      card.innerHTML = `<strong>${u.name || "Без имени"}</strong><br>Тел: ${u.phone}<br>ID: ${u.telegram_id}<br>Статус: ${u.status}`;
       list.appendChild(card);
     });
   } else list.innerHTML = "<p>Нет пользователей</p>";
+}
+
+// --- Рассылка ---
+async function sendBroadcast() {
+  const text = document.getElementById("broadcastText").value.trim();
+  const status = document.getElementById("broadcastStatus").value;
+  const phones = document.getElementById("broadcastPhones").value.trim();
+  if (!text) return alert("Введите текст сообщения");
+  try {
+    const resp = await fetch(`${API_BASE}/api/admin/broadcast`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${adminToken()}`
+      },
+      body: JSON.stringify({ text, status, phones })
+    });
+    const data = await resp.json();
+    if (!data.ok) return alert(data.error || "Ошибка отправки");
+    alert(`✅ Сообщение отправлено (${data.count || 0} получателей)`);
+  } catch (err) {
+    alert("Ошибка сети при отправке рассылки");
+  }
 }
