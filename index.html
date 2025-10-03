@@ -157,7 +157,7 @@
     </div>
   </div>
 
-<!-- Админ-панель -->
+<!-- ================== Админ-панель ================== -->
 <div id="adminModal" class="modal" aria-hidden="true">
   <div class="modal-content animate">
     <h2>Админ-панель</h2>
@@ -178,6 +178,7 @@
           <button class="tab-btn" onclick="openTab('broadcastTab')">Рассылка</button>
         </div>
 
+        <!-- Афиши -->
         <div class="tab-content" id="bannersTab">
           <h3>Загрузить афишу</h3>
           <input type="file" id="bannerFile" accept="image/*" />
@@ -186,6 +187,7 @@
           <div id="bannersList"></div>
         </div>
 
+        <!-- Посты -->
         <div class="tab-content" id="postsTab" style="display:none;">
           <h3>Создать пост</h3>
           <input type="text" id="postTitle" placeholder="Заголовок" />
@@ -196,6 +198,7 @@
           <div id="postsList"></div>
         </div>
 
+        <!-- Пользователи -->
         <div class="tab-content" id="usersTab" style="display:none;">
           <h3>Статус пользователя</h3>
           <input type="text" id="userName" placeholder="Имя (необязательно)" />
@@ -211,17 +214,17 @@
           <div id="usersList"></div>
         </div>
 
-        <!-- Новая вкладка: Рассылка -->
+        <!-- Рассылка -->
         <div class="tab-content" id="broadcastTab" style="display:none;">
           <h3>Массовая рассылка</h3>
           <textarea id="broadcastText" placeholder="Текст сообщения" style="width:100%;height:100px;"></textarea>
           <h4>Отправить по статусу</h4>
           <select id="broadcastStatus">
             <option value="">-- не выбран --</option>
+            <option value="Default">Default</option>
             <option value="Black">Black</option>
             <option value="Silver">Silver</option>
             <option value="Gold">Gold</option>
-            <option value="Default">Default</option>
           </select>
           <h4>ИЛИ по телефонам (через запятую)</h4>
           <input type="text" id="broadcastPhones" placeholder="+79998887766, +79995554433" style="width:100%;" />
