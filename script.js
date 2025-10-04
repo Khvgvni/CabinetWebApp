@@ -127,38 +127,30 @@ async function renderCard() {
 
 // ========== Профиль ==========
 async function loadProfile() {
-  console.log("Загрузка профиля...");
-  
-  const tg = window.Telegram?.WebApp;
-  const userId = tg?.initDataUnsafe?.user?.id;
-
-  console.log("Telegram User ID:", userId);
-
-  if (!userId) {
-    console.error("Не удалось получить ID пользователя из Telegram");
-    document.getElementById("profileName").textContent = "—";
-    document.getElementById("profilePhone").textContent = "—";
-    document.getElementById("profileStatus").textContent = "Неизвестно";
-    return;
-  }
-
   try {
-    console.log("Запрос к API...");
-    const resp = await fetch(`${API_BASE}/api/user/status?id=${userId}`);
-    
-    if (!resp.ok) {
-      throw new Error(`HTTP error! status: ${resp.status}`);
-    }
-    
-    const data = await resp.json();
-    console.log("Ответ от API:", data);
-    
-if (data.ok && data.user) {
-  document.getElementById("profileInfo").innerHTML = `
-    <p><b>Имя:</b> ${data.user.name}</p>
-    <p><b>Телефон:</b> ${data.user.phone}</p>
-    <p><b>Статус:</b> ${data.user.status}</p>
-  `;
+    const tg = window.Telegram.WebApp;
+    const userId = tg.initDataUnsafe?.user?.id;
+    if (!userId) throw new Error("Не найден telegram_id");
+
+    const res = await fetch(`https://api.cabinetbot.cabinet75.ru/api/user/status?id=${userId}`);
+    const data = await res.json();
+    if (!data.ok || !data.user) throw new Error("Пользователь не найден");
+
+    const { name, phone, status } = data.user;
+
+    document.getElementById("profileName").innerText = name || "-";
+    document.getElementById("profilePhone").innerText = phone || "-";
+    document.getElementById("profileStatus").innerText = status || "Default";
+
+    // сохраняем статус в localStorage и обновляем карту
+    localStorage.setItem("userCard", status.toLowerCase());
+    renderCard();
+
+  } catch (e) {
+    console.error("Ошибка загрузки профиля:", e);
+    alert("Ошибка загрузки профиля");
+  }
+}
 
   // Записываем статус в localStorage, чтобы карты подгружались правильно
   localStorage.setItem("userCard", data.user.status.toLowerCase());
