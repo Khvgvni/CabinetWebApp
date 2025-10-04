@@ -132,7 +132,7 @@ async function loadProfile() {
     const userId = tg.initDataUnsafe?.user?.id;
     if (!userId) throw new Error("Не найден telegram_id");
 
-    const res = await fetch(`https://api.cabinetbot.cabinet75.ru/api/user/status?id=${userId}`);
+    const res = await fetch(`${API_BASE}/api/user/status?id=${userId}`);
     const data = await res.json();
     if (!data.ok || !data.user) throw new Error("Пользователь не найден");
 
@@ -142,13 +142,15 @@ async function loadProfile() {
     document.getElementById("profilePhone").innerText = phone || "-";
     document.getElementById("profileStatus").innerText = status || "Default";
 
-    // сохраняем карту по статусу
+    // сохраняем статус в localStorage (для карт)
     localStorage.setItem("userCard", (status || "default").toLowerCase());
     renderCard();
 
   } catch (e) {
     console.error("Ошибка загрузки профиля:", e);
-    alert("Ошибка загрузки профиля");
+    document.getElementById("profileName").textContent = "—";
+    document.getElementById("profilePhone").textContent = "—";
+    document.getElementById("profileStatus").textContent = "Ошибка загрузки";
   }
 }
 
