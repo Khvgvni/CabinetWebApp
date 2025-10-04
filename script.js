@@ -142,8 +142,8 @@ async function loadProfile() {
     document.getElementById("profilePhone").innerText = phone || "-";
     document.getElementById("profileStatus").innerText = status || "Default";
 
-    // сохраняем статус в localStorage и обновляем карту
-    localStorage.setItem("userCard", status.toLowerCase());
+    // сохраняем карту по статусу
+    localStorage.setItem("userCard", (status || "default").toLowerCase());
     renderCard();
 
   } catch (e) {
