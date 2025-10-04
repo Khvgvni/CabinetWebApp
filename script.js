@@ -235,7 +235,6 @@ function openTab(id) {
   if (activeBtn) activeBtn.classList.add("active");
   
   if (id === "bannersTab") loadBanners();
-  if (id === "postsTab") loadPosts();
   if (id === "usersTab") loadUsers();
 }
 
@@ -309,67 +308,6 @@ async function loadBanners() {
   } catch (error) {
     console.error("Ошибка загрузки афиш:", error);
     document.getElementById("bannersList").innerHTML = "<p>Ошибка загрузки</p>";
-  }
-}
-
-// --- Посты ---
-async function createPost() {
-  const title = document.getElementById("postTitle").value.trim();
-  const body = document.getElementById("postBody").value.trim();
-  const fileInput = document.getElementById("postImage");
-  const f = fileInput.files[0];
-  
-  if (!title) return alert("Введите заголовок");
-  
-  const fd = new FormData();
-  fd.append("title", title);
-  fd.append("body", body);
-  if (f) fd.append("image", f);
-  
-  try {
-    const resp = await fetch(`${API_BASE}/api/admin/posts`, {
-      method: "POST",
-      headers: { "Authorization": `Bearer ${adminToken()}` },
-      body: fd
-    });
-    const data = await resp.json();
-    if (!data.ok) return alert(data.error || "Ошибка публикации");
-    
-    alert("Пост опубликован!");
-    document.getElementById("postTitle").value = "";
-    document.getElementById("postBody").value = "";
-    fileInput.value = "";
-    loadPosts();
-  } catch (error) {
-    alert("Ошибка сети: " + error.message);
-  }
-}
-
-async function loadPosts() {
-  try {
-    const resp = await fetch(`${API_BASE}/api/posts`);
-    const data = await resp.json();
-    const list = document.getElementById("postsList");
-    list.innerHTML = "";
-    
-    if (data.ok && data.items && data.items.length) {
-      data.items.forEach(p => {
-        const card = document.createElement("div");
-        card.className = "post-card";
-        card.innerHTML = `
-          <h4>${p.title}</h4>
-          <p>${p.body || ""}</p>
-          ${p.image_url ? `<img src="${API_BASE}${p.image_url}" class="menu-img" />` : ""}
-          <small>${new Date(p.created_at).toLocaleString()}</small>
-        `;
-        list.appendChild(card);
-      });
-    } else {
-      list.innerHTML = "<p>Нет постов</p>";
-    }
-  } catch (error) {
-    console.error("Ошибка загрузки постов:", error);
-    document.getElementById("postsList").innerHTML = "<p>Ошибка загрузки</p>";
   }
 }
 
