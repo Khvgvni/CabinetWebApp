@@ -134,39 +134,24 @@ async function loadProfile() {
 
     const res = await fetch(`${API_BASE}/api/user/status?id=${userId}`);
     const data = await res.json();
-    if (!data.ok || !data.user) throw new Error("Пользователь не найден");
 
-    const { name, phone, status } = data.user;
+    if (data.ok && data.user) {
+      const { name, phone, status } = data.user;
 
-    document.getElementById("profileName").innerText = name || "-";
-    document.getElementById("profilePhone").innerText = phone || "-";
-    document.getElementById("profileStatus").innerText = status || "Default";
+      document.getElementById("profileName").innerText = name || "-";
+      document.getElementById("profilePhone").innerText = phone || "-";
+      document.getElementById("profileStatus").innerText = status || "Default";
 
-    // сохраняем статус в localStorage (для карт)
-    localStorage.setItem("userCard", (status || "default").toLowerCase());
-    renderCard();
+      // сохраняем статус в localStorage (для карт)
+      localStorage.setItem("userCard", (status || "default").toLowerCase());
+      renderCard();
 
-  } catch (e) {
-    console.error("Ошибка загрузки профиля:", e);
-    document.getElementById("profileName").textContent = "—";
-    document.getElementById("profilePhone").textContent = "—";
-    document.getElementById("profileStatus").textContent = "Ошибка загрузки";
-  }
-}
-
-  // Записываем статус в localStorage, чтобы карты подгружались правильно
-  localStorage.setItem("userCard", data.user.status.toLowerCase());
-  renderCard();
-} else {
-  document.getElementById("profileInfo").innerHTML = "<p>Пользователь не найден</p>";
-}
-      
       // Обновляем карту в зависимости от статуса
-      if (data.user.status === "Black") setUserCard("black");
-      else if (data.user.status === "Silver") setUserCard("silver");
-      else if (data.user.status === "Gold") setUserCard("gold");
+      if (status === "Black") setUserCard("black");
+      else if (status === "Silver") setUserCard("silver");
+      else if (status === "Gold") setUserCard("gold");
       else setUserCard("default");
-      
+
     } else {
       document.getElementById("profileName").textContent = "—";
       document.getElementById("profilePhone").textContent = "—";
