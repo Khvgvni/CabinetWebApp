@@ -15,8 +15,11 @@ function openModal(id) {
   modal.style.display = "flex";
   modal.setAttribute("aria-hidden", "false");
   document.documentElement.style.overflow = "hidden";
+
   if (id === "cardModal") renderCard();
-  if (id === "profileModal") loadProfile(); // ДОБАВЛЕНО: загружаем профиль при открытии
+  if (id === "profileModal") loadProfile(); // Загружаем профиль при открытии
+  if (id === "posterModal") loadPosters();  // 🔥 Загружаем афишу при открытии
+
   modal.classList.remove("animate");
   void modal.offsetWidth;
   modal.classList.add("animate");
