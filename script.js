@@ -437,6 +437,34 @@ async function loadUsers() {
   }
 }
 
+// Загружаем афишу
+async function loadPosters() {
+  const container = document.getElementById("posterContainer");
+  container.innerHTML = "Загрузка афиши...";
+
+  try {
+    const res = await fetch("https://api.cabinetbot.cabinet75.ru/api/banners");
+    const data = await res.json();
+
+    if (data.ok && data.items.length > 0) {
+      container.innerHTML = "";
+      data.items.forEach(banner => {
+        const img = document.createElement("img");
+        img.src = "https://api.cabinetbot.cabinet75.ru" + banner.image_url;
+        img.style.width = "100%";
+        img.style.borderRadius = "12px";
+        img.style.marginBottom = "10px";
+        container.appendChild(img);
+      });
+    } else {
+      container.innerHTML = "<p>Афиша пока пуста 📌</p>";
+    }
+  } catch (e) {
+    console.error("Ошибка загрузки афиши:", e);
+    container.innerHTML = "<p>Ошибка загрузки афиши ❌</p>";
+  }
+}
+
 // --- Рассылка ---
 async function sendBroadcast() {
   const text = document.getElementById("broadcastText").value.trim();
