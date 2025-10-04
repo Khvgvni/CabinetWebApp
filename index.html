@@ -206,7 +206,6 @@
       <div id="adminPanel" style="display:none;">
         <div class="tabs">
           <button class="tab-btn active" onclick="openTab('bannersTab')">Афиши</button>
-          <button class="tab-btn" onclick="openTab('postsTab')">Посты</button>
           <button class="tab-btn" onclick="openTab('usersTab')">Пользователи</button>
           <button class="tab-btn" onclick="openTab('broadcastTab')">Рассылка</button>
         </div>
@@ -218,17 +217,6 @@
           <button class="glass-button full" onclick="uploadBanner()">Загрузить</button>
           <h3>Список афиш</h3>
           <div id="bannersList"></div>
-        </div>
-
-        <!-- Посты -->
-        <div class="tab-content" id="postsTab" style="display:none;">
-          <h3>Создать пост</h3>
-          <input type="text" id="postTitle" placeholder="Заголовок" />
-          <textarea id="postBody" placeholder="Текст"></textarea>
-          <input type="file" id="postImage" accept="image/*" />
-          <button class="glass-button full" onclick="createPost()">Опубликовать</button>
-          <h3>Список постов</h3>
-          <div id="postsList"></div>
         </div>
 
         <!-- Пользователи -->
@@ -277,17 +265,15 @@
   <div class="modal-content animate">
     <h2 style="display:flex; justify-content:space-between; align-items:center;">
       Профиль
-      <!-- Замочек для входа в админку -->
-      <span id="adminLock" onclick="openModal('adminModal')" style="cursor:pointer;" title="Админ-панель">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12 17a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm6-7h-1V7a5 
-                   5 0 0 0-10 0v3H6a2 2 0 0 
-                   0 2 2v8a2 2 0 0 0 2 2h12a2 
-                   2 0 0 0 2-2v-8a2 2 0 0 
-                   0-2-2zm-7 0H9V7a3 3 0 0 
-                   1 6 0v3h-2z"/>
-        </svg>
-      </span>
+<!-- Замочек для входа в админку -->
+<span id="adminLock" onclick="openModal('adminModal')" style="cursor:pointer;" title="Админ-панель">
+  <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" viewBox="0 0 24 24" style="vertical-align: middle;">
+    <path d="M17 8h-1V6a4 4 0 1 0-8 0v2H7a2 2 0 0 0-2 2v10a2 
+             2 0 0 0 2 2h10a2 2 0 0 0 2-2V10a2 2 0 0 
+             0-2-2zm-5 9a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm3-9H9V6a3 
+             3 0 0 1 6 0v2z"/>
+  </svg>
+</span>
     </h2>
     <div class="modal-body">
       <p><b>ФИО:</b> <span id="profileName">—</span></p>
