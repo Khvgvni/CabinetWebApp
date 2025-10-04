@@ -146,12 +146,6 @@ async function loadProfile() {
       localStorage.setItem("userCard", (status || "default").toLowerCase());
       renderCard();
 
-      // Обновляем карту в зависимости от статуса
-      if (status === "Black") setUserCard("black");
-      else if (status === "Silver") setUserCard("silver");
-      else if (status === "Gold") setUserCard("gold");
-      else setUserCard("default");
-
     } else {
       document.getElementById("profileName").textContent = "—";
       document.getElementById("profilePhone").textContent = "—";
