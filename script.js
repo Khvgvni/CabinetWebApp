@@ -19,6 +19,7 @@ function openModal(id) {
   if (id === "cardModal") renderCard();
   if (id === "profileModal") loadProfile(); // Загружаем профиль при открытии
   if (id === "posterModal") loadPosters();  // 🔥 Загружаем афишу при открытии
+  if (id === "cardModal") loadCards();  
 
   modal.classList.remove("animate");
   void modal.offsetWidth;
@@ -92,24 +93,36 @@ async function sendMessage(message) {
 }
 
 // ========== Клубная карта ==========
-function renderCard() {
+async function renderCard() {
   const cardImg = document.getElementById("userCardImg");
   if (!cardImg) return;
-  const userCard = localStorage.getItem("userCard") || "default";
-  let cardSrc = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card.png";
-  if (userCard === "black") cardSrc = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card_black.png";
-  if (userCard === "silver") cardSrc = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card_silver.png";
-  if (userCard === "gold") cardSrc = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card_gold.png";
-  cardImg.src = cardSrc;
-}
 
-function setUserCard(type) {
-  if (["black", "silver", "gold"].includes(type)) {
-    localStorage.setItem("userCard", type);
-  } else {
-    localStorage.setItem("userCard", "default");
+  try {
+    // получаем ID пользователя из Telegram WebApp
+    const userId = window.Telegram?.WebApp?.initDataUnsafe?.user?.id;
+    if (!userId) return;
+
+    // запрос профиля
+    const resp = await fetch(`${API_BASE}/api/user/status?id=${userId}`);
+    const data = await resp.json();
+
+    if (!data.ok || !data.user) {
+      cardImg.src = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card.png"; // дефолтная карта
+      return;
+    }
+
+    const status = (data.user.status || "Default").toLowerCase();
+    let cardSrc = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card.png";
+
+    if (status === "black") cardSrc = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card_black.png";
+    if (status === "silver") cardSrc = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card_silver.png";
+    if (status === "gold") cardSrc = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card_gold.png";
+
+    cardImg.src = cardSrc;
+  } catch (e) {
+    console.error("Ошибка при загрузке клубной карты:", e);
+    cardImg.src = "https://raw.githubusercontent.com/Khvgvni/CabinetWebApp/main/card.png"; // fallback
   }
-  renderCard();
 }
 
 // ========== Профиль ==========
