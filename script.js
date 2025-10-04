@@ -153,10 +153,19 @@ async function loadProfile() {
     const data = await resp.json();
     console.log("Ответ от API:", data);
     
-    if (data.ok && data.user) {
-      document.getElementById("profileName").textContent = data.user.name || "—";
-      document.getElementById("profilePhone").textContent = data.user.phone || "—";
-      document.getElementById("profileStatus").textContent = data.user.status || "Default";
+if (data.ok && data.user) {
+  document.getElementById("profileInfo").innerHTML = `
+    <p><b>Имя:</b> ${data.user.name}</p>
+    <p><b>Телефон:</b> ${data.user.phone}</p>
+    <p><b>Статус:</b> ${data.user.status}</p>
+  `;
+
+  // Записываем статус в localStorage, чтобы карты подгружались правильно
+  localStorage.setItem("userCard", data.user.status.toLowerCase());
+  renderCard();
+} else {
+  document.getElementById("profileInfo").innerHTML = "<p>Пользователь не найден</p>";
+}
       
       // Обновляем карту в зависимости от статуса
       if (data.user.status === "Black") setUserCard("black");
