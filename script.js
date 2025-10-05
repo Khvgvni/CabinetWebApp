@@ -271,7 +271,7 @@ async function uploadBanner() {
   fd.append("image", f);
   
   try {
-    const resp = await fetch(`${API_BASE}/api/admin/banners`, {
+    const resp = await fetch(`${API_BASE}/api/admin/banners/cabinet75`, {
       method: "POST",
       headers: { "Authorization": `Bearer ${adminToken()}` },
       body: fd
@@ -289,7 +289,7 @@ async function uploadBanner() {
 
 async function loadBanners() {
   try {
-    const resp = await fetch(`${API_BASE}/api/banners`);
+    const resp = await fetch(`${API_BASE}/api/banners/cabinet75`);
     const data = await resp.json();
     const list = document.getElementById("bannersList");
     list.innerHTML = "";
@@ -379,7 +379,7 @@ async function loadPosters() {
   container.innerHTML = "Загрузка афиши...";
 
   try {
-    const res = await fetch("https://api.cabinetbot.cabinet75.ru/api/banners");
+    const res = await fetch("https://api.cabinetbot.cabinet75.ru/api/banners/cabinet75");
     const data = await res.json();
 
     if (data.ok && data.items.length > 0) {
