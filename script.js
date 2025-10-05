@@ -340,7 +340,6 @@ async function deleteBanner(id) {
   }
 }
 
-
 // --- Пользователи ---
 async function setUserStatus() {
   const name = document.getElementById("userName").value.trim();
