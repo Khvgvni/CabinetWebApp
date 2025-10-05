@@ -294,10 +294,10 @@ async function loadBanners() {
     const list = document.getElementById("bannersList");
     list.innerHTML = "";
     
-    if (data.ok && data.items && data.items.length) {
-      data.items.forEach(b => {
+    if (data.ok && data.banners && data.banners.length) {
+      data.banners.forEach(b => {
         const img = document.createElement("img");
-        img.src = `${API_BASE}${b.image_url}`;
+        img.src = b.image; // У тебя в БД хранится путь /uploads/cabinet75/xxx.jpeg
         img.className = "menu-img";
         img.loading = "lazy";
         list.appendChild(img);
