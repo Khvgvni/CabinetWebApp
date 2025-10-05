@@ -252,6 +252,38 @@ textarea{ resize: vertical; min-height: 112px; }
 }
 .tab-content { display: block; margin-top: 12px; }
 
+.banner-item {
+  display: inline-block;
+  margin: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  background: #fafafa;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.banner-item img {
+  max-width: 200px;
+  border-radius: 6px;
+  display: block;
+  margin: 0 auto 8px;
+}
+
+.banner-item button {
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.banner-item button:hover {
+  background: #c0392b;
+}
+
 /* Lists / Cards */
 #bannersList img, #postsList img {
   max-width: 100%;
