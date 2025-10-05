@@ -382,22 +382,20 @@ async function loadPosters() {
     const res = await fetch("https://api.cabinetbot.cabinet75.ru/api/banners/cabinet75");
     const data = await res.json();
 
-    if (data.ok && data.items.length > 0) {
+    if (data.ok) {
       container.innerHTML = "";
-      data.items.forEach(banner => {
-        const img = document.createElement("img");
-        img.src = "https://api.cabinetbot.cabinet75.ru" + banner.image_url;
-        img.style.width = "100%";
-        img.style.borderRadius = "12px";
-        img.style.marginBottom = "10px";
-        container.appendChild(img);
+      data.banners.forEach(b => {
+        const div = document.createElement("div");
+        div.className = "poster-item";
+        div.innerHTML = `<img src="${b.image}" alt="${b.title}" /><p>${b.title}</p>`;
+        container.appendChild(div);
       });
     } else {
-      container.innerHTML = "<p>Афиша пока пуста 📌</p>";
+      container.innerHTML = "Ошибка загрузки афиши.";
     }
   } catch (e) {
-    console.error("Ошибка загрузки афиши:", e);
-    container.innerHTML = "<p>Ошибка загрузки афиши ❌</p>";
+    console.error("Ошибка сети:", e);
+    container.innerHTML = "Ошибка сети при загрузке афиши.";
   }
 }
 
