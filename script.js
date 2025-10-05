@@ -296,11 +296,21 @@ async function loadBanners() {
     
     if (data.ok && data.banners && data.banners.length) {
       data.banners.forEach(b => {
+        const div = document.createElement("div");
+        div.className = "banner-item";
+        
         const img = document.createElement("img");
-        img.src = `${API_BASE}${b.image}`; // У тебя в БД хранится путь /uploads/cabinet75/xxx.jpeg
+        img.src = `${API_BASE}${b.image}`;
         img.className = "menu-img";
         img.loading = "lazy";
-        list.appendChild(img);
+        
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "❌ Удалить";
+        delBtn.onclick = () => deleteBanner(b.id);
+        
+        div.appendChild(img);
+        div.appendChild(delBtn);
+        list.appendChild(div);
       });
     } else {
       list.innerHTML = "<p>Нет афиш</p>";
@@ -310,6 +320,26 @@ async function loadBanners() {
     document.getElementById("bannersList").innerHTML = "<p>Ошибка загрузки</p>";
   }
 }
+
+// === новая функция ===
+async function deleteBanner(id) {
+  if (!confirm("Удалить афишу?")) return;
+
+  try {
+    const resp = await fetch(`${API_BASE}/api/admin/banners/cabinet75/${id}`, {
+      method: "DELETE",
+      headers: { "Authorization": `Bearer ${adminToken()}` }
+    });
+    const data = await resp.json();
+    if (!data.ok) return alert(data.error || "Ошибка при удалении");
+
+    alert("Афиша удалена!");
+    loadBanners(); // обновляем список
+  } catch (e) {
+    alert("Ошибка сети: " + e.message);
+  }
+}
+
 
 // --- Пользователи ---
 async function setUserStatus() {
