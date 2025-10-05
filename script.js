@@ -297,7 +297,7 @@ async function loadBanners() {
     if (data.ok && data.banners && data.banners.length) {
       data.banners.forEach(b => {
         const img = document.createElement("img");
-        img.src = b.image; // У тебя в БД хранится путь /uploads/cabinet75/xxx.jpeg
+        img.src = `${API_BASE}${b.image}`; // У тебя в БД хранится путь /uploads/cabinet75/xxx.jpeg
         img.className = "menu-img";
         img.loading = "lazy";
         list.appendChild(img);
@@ -387,7 +387,7 @@ async function loadPosters() {
       data.banners.forEach(b => {
         const div = document.createElement("div");
         div.className = "poster-item";
-        div.innerHTML = `<img src="${b.image}" alt="${b.title}" /><p>${b.title}</p>`;
+        div.innerHTML = `<img src="https://api.cabinetbot.cabinet75.ru${b.image}" alt="${b.title}" /><p>${b.title}</p>`;
         container.appendChild(div);
       });
     } else {
