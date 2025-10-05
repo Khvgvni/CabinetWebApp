@@ -163,40 +163,85 @@ async function loadProfile() {
 window.addEventListener("DOMContentLoaded", () => {
   renderMenu();
 
-  // Бронь стола
-  const bookForm = document.getElementById("bookTableForm");
-  if (bookForm) bookForm.addEventListener("submit", async e => {
-    e.preventDefault();
-    const name = document.getElementById("name")?.value || "";
-    const phone = document.getElementById("phone")?.value || "";
-    await sendMessage(`Бронь стола:\nФИО: ${name}\nТелефон: ${phone}`);
+// Бронь стола
+const bookForm = document.getElementById("bookTableForm");
+if (bookForm) bookForm.addEventListener("submit", async e => {
+  e.preventDefault();
+  const name = document.getElementById("name")?.value || "";
+  const phone = document.getElementById("phone")?.value || "";
+
+  try {
+    await fetch("https://api.cabinetbot.cabinet75.ru/api/book/table", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name,
+        phone,
+        guests: 2,        // если у тебя есть поле гостей — тоже добавь
+        app: "cabinet75"  // 👈 вот это важно!
+      })
+    });
     alert("✅ Ваша заявка принята!");
     closeModal("bookTableModal");
-  });
+  } catch (err) {
+    console.error("Ошибка при брони стола:", err);
+    alert("❌ Ошибка отправки заявки!");
+  }
+});
 
-  // Такси
-  const taxiForm = document.getElementById("taxiForm");
-  if (taxiForm) taxiForm.addEventListener("submit", async e => {
-    e.preventDefault();
-    const name = document.getElementById("taxiName")?.value || "";
-    const phone = document.getElementById("taxiPhone")?.value || "";
-    const address = document.getElementById("taxiAddress")?.value || "";
-    await sendMessage(`Такси:\nФИО: ${name}\nТелефон: ${phone}\nАдрес: ${address}`);
+// Такси
+const taxiForm = document.getElementById("taxiForm");
+if (taxiForm) taxiForm.addEventListener("submit", async e => {
+  e.preventDefault();
+  const name = document.getElementById("taxiName")?.value || "";
+  const phone = document.getElementById("taxiPhone")?.value || "";
+  const address = document.getElementById("taxiAddress")?.value || "";
+
+  try {
+    await fetch("https://api.cabinetbot.cabinet75.ru/api/book/taxi", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name,
+        phone,
+        address,
+        app: "cabinet75"   // 👈
+      })
+    });
     alert("✅ Заявка на такси принята!");
     closeModal("taxiModal");
-  });
+  } catch (err) {
+    console.error("Ошибка при заказе такси:", err);
+    alert("❌ Ошибка отправки заявки!");
+  }
+});
 
-  // Команда
-  const teamForm = document.getElementById("joinTeamForm");
-  if (teamForm) teamForm.addEventListener("submit", async e => {
-    e.preventDefault();
-    const name = document.getElementById("teamName")?.value || "";
-    const phone = document.getElementById("teamPhone")?.value || "";
-    const role = document.getElementById("teamRole")?.value || "";
-    await sendMessage(`Заявка в команду:\nФИО: ${name}\nТелефон: ${phone}\nДолжность: ${role}`);
+// Команда
+const teamForm = document.getElementById("joinTeamForm");
+if (teamForm) teamForm.addEventListener("submit", async e => {
+  e.preventDefault();
+  const name = document.getElementById("teamName")?.value || "";
+  const phone = document.getElementById("teamPhone")?.value || "";
+  const role = document.getElementById("teamRole")?.value || "";
+
+  try {
+    await fetch("https://api.cabinetbot.cabinet75.ru/api/book/team", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name,
+        phone,
+        role,
+        app: "cabinet75"   // 👈
+      })
+    });
     alert("✅ Администратор свяжется с вами в течение недели!");
     closeModal("joinTeamModal");
-  });
+  } catch (err) {
+    console.error("Ошибка при заявке в команду:", err);
+    alert("❌ Ошибка отправки заявки!");
+  }
+});
 
   // Инициализация Telegram Web App
   const tg = window.Telegram?.WebApp;
