@@ -287,38 +287,25 @@ async function uploadBanner() {
   }
 }
 
+// === Загрузка афиш ===
 async function loadBanners() {
   try {
     const resp = await fetch(`${API_BASE}/api/banners/cabinet75`);
     const data = await resp.json();
     const list = document.getElementById("bannersList");
     list.innerHTML = "";
-    
+
     if (data.ok && data.banners && data.banners.length) {
       data.banners.forEach(b => {
         const div = document.createElement("div");
         div.className = "banner-item";
-        div.style.marginBottom = "15px";
 
-        const img = document.createElement("img");
-        img.src = `${API_BASE}${b.image}`;
-        img.className = "menu-img";
-        img.loading = "lazy";
-        img.style.maxWidth = "200px";
-        img.style.display = "block";
+        div.innerHTML = `
+          <img src="${API_BASE}${b.image}" alt="${b.title || ''}" class="menu-img" loading="lazy" />
+          <p>${b.title || ''}</p>
+          <button class="delete-btn" onclick="deleteBanner(${b.id})">Удалить</button>
+        `;
 
-        const delBtn = document.createElement("button");
-        delBtn.textContent = "❌ Удалить";
-        delBtn.style.marginTop = "5px";
-        delBtn.style.background = "red";
-        delBtn.style.color = "white";
-        delBtn.style.border = "none";
-        delBtn.style.padding = "5px 10px";
-        delBtn.style.cursor = "pointer";
-        delBtn.onclick = () => deleteBanner(b.id);
-
-        div.appendChild(img);
-        div.appendChild(delBtn);
         list.appendChild(div);
       });
     } else {
@@ -330,19 +317,24 @@ async function loadBanners() {
   }
 }
 
+// === Удаление афиши ===
 async function deleteBanner(id) {
   if (!confirm("Удалить афишу?")) return;
-
   try {
     const resp = await fetch(`${API_BASE}/api/admin/banners/cabinet75/${id}`, {
       method: "DELETE",
-      headers: { "Authorization": `Bearer ${adminToken()}` }
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem("token") // если нужна авторизация
+      }
     });
-    const data = await resp.json();
-    if (!data.ok) return alert(data.error || "Ошибка при удалении");
 
-    alert("Афиша удалена!");
-    loadBanners(); // обновляем список
+    const data = await resp.json();
+    if (data.ok) {
+      alert("Афиша удалена!");
+      loadBanners(); // обновляем список
+    } else {
+      alert("Ошибка: " + data.error);
+    }
   } catch (e) {
     alert("Ошибка сети: " + e.message);
   }
