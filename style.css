@@ -298,6 +298,33 @@ textarea{ resize: vertical; min-height: 112px; }
   margin-bottom: 10px;
 }
 
+/* ====== Posters / Афиши ====== */
+#posterContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;            /* отступы между афишами */
+  overflow-y: auto;     
+  max-height: 100vh;    /* чтобы прокручивалось в окне */
+  scroll-behavior: smooth;
+  padding: 0;
+  margin: 0;
+}
+
+.poster-item {
+  width: 100%;
+  height: auto;
+  border-radius: 0;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.poster-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
 /* Приоритет модальных окон */
 #adminModal {
   z-index: 11000 !important; /* админка всегда сверху */
