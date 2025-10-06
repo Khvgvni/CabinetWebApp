@@ -298,31 +298,27 @@ textarea{ resize: vertical; min-height: 112px; }
   margin-bottom: 10px;
 }
 
-/* ====== Posters / Афиши ====== */
+/* ===== Афиши (в модальном окне) ===== */
 #posterContainer {
   display: flex;
   flex-direction: column;
-  gap: 12px;            /* отступы между афишами */
-  overflow-y: auto;     
-  max-height: 100vh;    /* чтобы прокручивалось в окне */
-  scroll-behavior: smooth;
-  padding: 0;
-  margin: 0;
+  gap: 16px;                /* отступы между афишами */
+  width: 100%;
+  overflow-y: auto;         /* вертикальная прокрутка */
+  max-height: 70vh;         /* ограничение по высоте окна */
+  padding-right: 6px;       /* чтобы скролл не наезжал на картинку */
 }
 
-.poster-item {
-  width: 100%;
-  height: auto;
-  border-radius: 0;
-  flex-shrink: 0;
-  overflow: hidden;
-}
-
-.poster-item img {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: contain;
+#posterContainer img {
+  width: 100%;              /* занимает всю ширину контейнера */
+  max-width: 500px;         /* чтобы не были слишком огромные */
+  height: auto;             /* сохраняем пропорции */
+  margin: 0 auto;           /* центрируем */
+  border-radius: 14px;      /* скругляем */
+  object-fit: contain;      /* вписываем картинку внутрь */
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+  box-shadow: var(--shadow);
 }
 
 /* Приоритет модальных окон */
