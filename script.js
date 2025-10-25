@@ -271,7 +271,7 @@ async function adminLogin() {
     const resp = await fetch(`${API_BASE}/api/admin/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password })
+      body: JSON.stringify({ password, app: "cabinet75" })
     });
     const data = await resp.json();
     if (!data.ok) return alert(data.error || "Ошибка входа");
